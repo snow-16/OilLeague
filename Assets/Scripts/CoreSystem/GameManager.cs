@@ -11,6 +11,11 @@ public class GameManager : MonoBehaviour
         {
             DontDestroyOnLoad(gameObject);
 
+            //データベースの初期設定
+            var dataBase = transform.GetChild(0);
+            dataBase.GetComponent<GeneralDataBase>().SetData();
+
+            //入力処理をストリームに設定
             SubscribeInputSystem.SubscribeInputs();
         }
         else

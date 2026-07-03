@@ -35,14 +35,14 @@ public class SubscribeInputSystem
                 //フリック取得
                 var _pointerFlick = _pointerPressing.SelectMany(latePosition => _pointerPressing
                         .First()
-                        .Select(newPosition => (newPosition - latePosition).magnitude))
-                    .Where(pointerMoveDistance => pointerMoveDistance > 5f);
+                        .Select(newPosition => newPosition - latePosition))
+                    .Where(pointerMoveVector => pointerMoveVector.magnitude > 1 / GeneralDataBase.Data.FlickSensitivity);
 
                 //フリック
                 _pointerFlick
                     .TakeUntil(_pointerRelease)
                     .Take(1)
-                    .Subscribe(pointerMoveDistance => SubscribeFlick(pointerMoveDistance));
+                    .Subscribe(pointerMoveVector => SubscribeFlick(pointerMoveVector));
 
                 //タップ
                 _pointerRelease
@@ -69,7 +69,7 @@ public class SubscribeInputSystem
         
     }
 
-    private static void SubscribeFlick(float pointerMoveDistance)
+    private static void SubscribeFlick(Vector2 pointerMoveVector)
     {
         
     }
