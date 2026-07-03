@@ -10,6 +10,11 @@ using Debug = UnityEngine.Debug;
 public class InputListLocalData
 {
     /// <summary> タップ受け取り可能なインスタンス </summary>
+    private static List<IReceivePress> _canPresses;
+    /// <summary> タップ受け取り可能なインスタンス </summary>
+    public static List<IReceivePress> CanPresses => new(_canPresses = _canPresses.Where(item => item != null).ToList());
+
+    /// <summary> タップ受け取り可能なインスタンス </summary>
     private static List<IReceiveTap> _canTaps;
     /// <summary> タップ受け取り可能なインスタンス </summary>
     public static List<IReceiveTap> CanTaps => new(_canTaps = _canTaps.Where(item => item != null).ToList());
@@ -39,6 +44,15 @@ public class InputListLocalData
 
         Debug.LogError("アクセス権限がありません。");
         return null;
+    }
+
+    /// <summary>
+    /// 押下リスト書き換え
+    /// </summary>
+    /// <param name="list">押下受け取り可能なインスタンス</param>
+    public void SetPressList(List<IReceivePress> list)
+    {
+        _canPresses = list;
     }
 
     /// <summary>

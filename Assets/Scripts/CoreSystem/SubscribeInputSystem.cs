@@ -31,18 +31,16 @@ public class SubscribeInputSystem
             .Select(_ => Pointer.current.position.ReadValue());
 
         //画面タップ時
-        _pointerPressed.Subscribe(_ =>
+        _pointerPressed.Subscribe(pressPosition =>
             {
                 //フリック取得
-                var _pointerFlick = _pointerPressing.SelectMany(latePosition => _pointerPressing
-                        .First()
-                        .Select(newPosition => newPosition - latePosition))
-                    .Where(pointerMoveVector => pointerMoveVector.magnitude > 1 / GeneralDataBase.Data.FlickSensitivity);
+                var _pointerFlick = _pointerPressing.Pairwise()
+                        .Select(positions => positions.Current - positions.Previous)
+                        .Where(pointerMoveVector => pointerMoveVector.magnitude > 1 / GeneralDataBase.Data.FlickSensitivity);
 
                 //フリック
                 _pointerFlick
                     .TakeUntil(_pointerRelease)
-                    .TakeUntil(_pointerFlick)
                     .Take(1)
                     .Subscribe(pointerMoveVector => SubscribeFlick(pointerMoveVector));
 
@@ -57,8 +55,16 @@ public class SubscribeInputSystem
                     .TakeUntil(_pointerFlick)
                     .TakeUntil(_pointerRelease)
                     .Subscribe(_ => SubscribeHold());
+
+                //押下
+                SubscribePress(pressPosition);
             }
         );
+    }
+
+    private static void SubscribePress(Vector2 pressPosition)
+    {
+        InputListLocalData.CanPresses.ForEach(receivePress => receivePress.OnPress(pressPosition));
     }
 
     private static void SubscribeHold()
