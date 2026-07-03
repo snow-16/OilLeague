@@ -26,6 +26,12 @@ public class GeneralDataBase : MonoBehaviour
     /// <summary> フリック感度 </summary>
     [SerializeField]
     private float _flickSensitivity;
+    /// <summary> カメラ追従速度 </summary>
+    [SerializeField]
+    private float _cameraFollowSpeed;
+    /// <summary> カメラ追従初速 </summary>
+    [SerializeField]
+    private float _cameraFollowInitialVelocity;
 
     /// <summary> ゲームフィールドの半径 </summary>
     public float FieldRadius { get => _fieldRadius; }
@@ -41,6 +47,10 @@ public class GeneralDataBase : MonoBehaviour
     public int MaxConnectablePlayerCount { get => _maxConnectablePlayerCount; }
     /// <summary> フリック感度 </summary>
     public float FlickSensitivity { get => _flickSensitivity; }
+    /// <summary> カメラ追従速度 </summary>
+    public float CameraFollowSpeed { get => _cameraFollowSpeed; }
+    /// <summary> カメラ追従初速 </summary>
+    public float CameraFollowInitialVelocity { get => _cameraFollowInitialVelocity; }
 
     /// <summary> データのインスタンス </summary>
     public static GeneralDataBase Data { get; private set; }

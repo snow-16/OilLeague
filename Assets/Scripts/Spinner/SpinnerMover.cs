@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class SpinnerMover : MonoBehaviour, IReceiveTap, IReceiveFlick, IReceiveHold
 {
+    private Vector2 _velocity = Vector2.zero;
+
     void Awake()
     {
         var dataWriter = InputListDataWriter.Access();
@@ -12,7 +14,7 @@ public class SpinnerMover : MonoBehaviour, IReceiveTap, IReceiveFlick, IReceiveH
 
     void FixedUpdate()
     {
-        
+        transform.Translate(_velocity);
     }
 
     public void OnTap(Vector2 tapPosition)
@@ -23,6 +25,7 @@ public class SpinnerMover : MonoBehaviour, IReceiveTap, IReceiveFlick, IReceiveH
     public void OnFlick(Vector2 pointerMoveVector)
     {
         Debug.Log("フリック");
+        _velocity = pointerMoveVector.normalized * 0.5f;
     }
 
     public void OnHold()

@@ -42,6 +42,7 @@ public class SubscribeInputSystem
                 //フリック
                 _pointerFlick
                     .TakeUntil(_pointerRelease)
+                    .TakeUntil(_pointerFlick)
                     .Take(1)
                     .Subscribe(pointerMoveVector => SubscribeFlick(pointerMoveVector));
 
