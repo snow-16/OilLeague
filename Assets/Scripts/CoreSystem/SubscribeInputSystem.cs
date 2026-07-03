@@ -2,6 +2,7 @@ using UniRx;
 using UnityEngine.InputSystem;
 using UnityEngine;
 using System;
+using System.Linq;
 
 /// <summary>
 /// UniRxストリーム設定用クラス
@@ -48,29 +49,29 @@ public class SubscribeInputSystem
                 _pointerRelease
                     .TakeUntil(_pointerFlick)
                     .Take(1)
-                    .Subscribe(_ => SubscribeTap());
+                    .Subscribe(tapPosition => SubscribeTap(tapPosition));
 
                 //長押し
                 Observable.EveryFixedUpdate()
                     .TakeUntil(_pointerFlick)
                     .TakeUntil(_pointerRelease)
-                    .Subscribe(_ => SubscribeCharge());
+                    .Subscribe(_ => SubscribeHold());
             }
         );
     }
 
-    private static void SubscribeCharge()
+    private static void SubscribeHold()
     {
-        
+        InputListLocalData.CanHolds.ForEach(receiveHold => receiveHold.OnHold());
     }
 
-    private static void SubscribeTap()
+    private static void SubscribeTap(Vector2 tapPosition)
     {
-        
+        InputListLocalData.CanTaps.ForEach(receiveTap => receiveTap.OnTap(tapPosition));
     }
 
     private static void SubscribeFlick(Vector2 pointerMoveVector)
     {
-        
+        InputListLocalData.CanFlicks.ForEach(receiveFlick => receiveFlick.OnFlick(pointerMoveVector));
     }
 }
