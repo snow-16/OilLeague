@@ -40,6 +40,8 @@ public class SpinnerDataWriter
         Data.SetTorque(0);
         Data.SetChargeTorque(0);
         Data.SetTurnCount(0);
+        Data.SetPosition(Vector2.zero);
+        Data.SetForword(0);
     }
 
     /// <summary>
@@ -91,5 +93,18 @@ public class SpinnerDataWriter
         {
             Reset();
         }
+    }
+
+    public void Stop()
+    {
+        Data.SetTorque(0);
+        Data.SetChargeTorque(0);
+        Data.SetTurnCount(0);
+    }
+
+    public void SaveTransform(Transform spinnerTransform)
+    {
+        Data.SetPosition(spinnerTransform.position);
+        Data.SetForword(spinnerTransform.eulerAngles.z);
     }
 }

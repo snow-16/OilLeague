@@ -1,5 +1,5 @@
 using System.Diagnostics;
-
+using UnityEngine;
 using Debug = UnityEngine.Debug;
 
 /// <summary>
@@ -21,6 +21,16 @@ public class SpinnerLocalData
     private static int _turnCount;
     /// <summary> スピン中の旋回回数 </summary>
     public static int TurnCount => _turnCount;
+
+    /// <summary> 現在位置 </summary>
+    private static Vector2 _position;
+    /// <summary> 現在位置 </summary>
+    public static Vector2 Position => _position;
+
+    /// <summary> 正面方向 </summary>
+    private static float _forword;
+    /// <summary> 正面方向 </summary>
+    public static float Forword => _forword;
 
     /// <summary>
     /// インスタンスの取得。
@@ -64,5 +74,23 @@ public class SpinnerLocalData
     public void SetTurnCount(int value)
     {
         _turnCount = value;
+    }
+
+    /// <summary>
+    /// 現在位置書き換え
+    /// </summary>
+    /// <param name="value">位置</param>
+    public void SetPosition(Vector2 value)
+    {
+        _position = value;
+    }
+
+    /// <summary>
+    /// 前方方向書き換え
+    /// </summary>
+    /// <param name="value">角度</param>
+    public void SetForword(float value)
+    {
+        _forword = value;
     }
 }

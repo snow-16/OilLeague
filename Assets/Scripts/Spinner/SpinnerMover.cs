@@ -23,7 +23,7 @@ public class SpinnerMover : MonoBehaviour, IWriteSpinnerLocal, IReceivePress, IR
         {
             _spinnerDataWriter.DampingTorque();
             transform.Translate(SpinnerLocalData.Torque * SpinnerParameterDataBase.Data.SpeedTorqueMultiplier * _velocity);
-            // Debug.Log(SpinnerLocalData.Torque);
+            _spinnerDataWriter.SaveTransform(transform);
         }
     }
 
