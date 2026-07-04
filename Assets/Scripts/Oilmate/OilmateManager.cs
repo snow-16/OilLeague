@@ -1,7 +1,11 @@
 using UnityEngine;
 
+/// <summary>
+/// オイルメイト生成クラス
+/// </summary>
 public class OilmateManager : MonoBehaviour, IReceiveFlick
 {
+    /// <summary> 基本オイルメイトのプレハブ </summary>
     [SerializeField]
     private GameObject _oilmatePrefab;
 
@@ -12,6 +16,7 @@ public class OilmateManager : MonoBehaviour, IReceiveFlick
 
     public void OnFlick(Vector2 pointerMoveVector)
     {
-        Instantiate(_oilmatePrefab, SpinnerLocalData.Position, Quaternion.identity);
+        var controller = Instantiate(_oilmatePrefab, SpinnerLocalData.Position, Quaternion.identity).GetComponent<OilmateController>();
+        controller.SetSettings(OilmateType.Drop, SpinnerType.Red);
     }
 }

@@ -7,6 +7,11 @@ using Debug = UnityEngine.Debug;
 /// </summary>
 public class SpinnerLocalData
 {
+    /// <summary> 自分のスピナータイプ </summary>
+    private static SpinnerType _type;
+    /// <summary> 自分のスピナータイプ </summary>
+    public static SpinnerType Type => _type;
+
     /// <summary> 現在の保持トルク </summary>
     private static float _torque;
     /// <summary> 現在の保持トルク </summary>
@@ -47,6 +52,15 @@ public class SpinnerLocalData
 
         Debug.LogError("アクセス権限がありません。");
         return null;
+    }
+
+    /// <summary>
+    /// スピナータイプ書き換え
+    /// </summary>
+    /// <param name="value">スピナータイプ</param>
+    public void SetType(SpinnerType value)
+    {
+        _type = value;
     }
 
     /// <summary>

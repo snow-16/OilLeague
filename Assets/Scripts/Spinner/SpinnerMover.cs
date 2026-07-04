@@ -2,8 +2,10 @@ using UnityEngine;
 
 public class SpinnerMover : MonoBehaviour, IWriteSpinnerLocal, IReceivePress, IReceiveTap, IReceiveFlick, IReceiveHold
 {
+    /// <summary> スピナーデータアクセス用 </summary>
     private SpinnerDataWriter _spinnerDataWriter;
 
+    /// <summary> 移動ベクトル </summary>
     private Vector2 _velocity = Vector2.zero;
 
     void Awake()
@@ -15,6 +17,8 @@ public class SpinnerMover : MonoBehaviour, IWriteSpinnerLocal, IReceivePress, IR
         inputListDataWriter.AddHoldList(this);
 
         _spinnerDataWriter = SpinnerDataWriter.Access();
+        _spinnerDataWriter.SetType(SpinnerType.Red);
+        _spinnerDataWriter.SaveTransform(transform);
     }
 
     void FixedUpdate()
@@ -35,7 +39,7 @@ public class SpinnerMover : MonoBehaviour, IWriteSpinnerLocal, IReceivePress, IR
 
     public void OnTap(Vector2 tapPosition)
     {
-        _spinnerDataWriter.Reset();
+        _spinnerDataWriter.Stop();
     }
 
     public void OnFlick(Vector2 pointerMoveVector)

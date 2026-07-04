@@ -45,6 +45,15 @@ public class SpinnerDataWriter
     }
 
     /// <summary>
+    /// スピナータイプ決定
+    /// </summary>
+    /// <param name="type">スピナータイプ</param>
+    public void SetType(SpinnerType type)
+    {
+        Data.SetType(type);
+    }
+
+    /// <summary>
     /// トルクのチャージ
     /// </summary>
     public void ChargeTorque()
@@ -95,6 +104,9 @@ public class SpinnerDataWriter
         }
     }
 
+    /// <summary>
+    /// スピン停止
+    /// </summary>
     public void Stop()
     {
         Data.SetTorque(0);
@@ -102,6 +114,10 @@ public class SpinnerDataWriter
         Data.SetTurnCount(0);
     }
 
+    /// <summary>
+    /// 自身のトランスフォームを保存
+    /// </summary>
+    /// <param name="spinnerTransform">自分のトランスフォーム</param>
     public void SaveTransform(Transform spinnerTransform)
     {
         Data.SetPosition(spinnerTransform.position);
