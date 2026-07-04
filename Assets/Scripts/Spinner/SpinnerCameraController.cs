@@ -1,6 +1,9 @@
 using Unity.Cinemachine;
 using UnityEngine;
 
+/// <summary>
+/// カメラの後追いを操作するクラス
+/// </summary>
 public class SpinnerCameraController : MonoBehaviour, IReceiveFlick
 {
     private CinemachineFollow _cinemachineCamera;
