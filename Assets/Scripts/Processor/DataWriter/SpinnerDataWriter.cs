@@ -41,7 +41,6 @@ public class SpinnerDataWriter
         Data.SetChargeTorque(0);
         Data.SetTurnCount(0);
         Data.SetPosition(Vector2.zero);
-        Data.SetForword(0);
     }
 
     /// <summary>
@@ -115,12 +114,11 @@ public class SpinnerDataWriter
     }
 
     /// <summary>
-    /// 自身のトランスフォームを保存
+    /// 自身の位置を保存
     /// </summary>
-    /// <param name="spinnerTransform">自分のトランスフォーム</param>
-    public void SaveTransform(Transform spinnerTransform)
+    /// <param name="spinnerTransform">現在位置</param>
+    public void SavePosition(Transform spinnerTransform)
     {
         Data.SetPosition(spinnerTransform.position);
-        Data.SetForword(spinnerTransform.eulerAngles.z);
     }
 }

@@ -32,11 +32,6 @@ public class SpinnerLocalData
     /// <summary> 現在位置 </summary>
     public static Vector2 Position => _position;
 
-    /// <summary> 正面方向 </summary>
-    private static float _forword;
-    /// <summary> 正面方向 </summary>
-    public static float Forword => _forword;
-
     /// <summary>
     /// インスタンスの取得。
     /// ライタークラスからのみアクセス可能
@@ -97,14 +92,5 @@ public class SpinnerLocalData
     public void SetPosition(Vector2 value)
     {
         _position = value;
-    }
-
-    /// <summary>
-    /// 前方方向書き換え
-    /// </summary>
-    /// <param name="value">角度</param>
-    public void SetForword(float value)
-    {
-        _forword = value;
     }
 }

@@ -18,7 +18,7 @@ public class SpinnerMover : MonoBehaviour, IWriteSpinnerLocal, IReceivePress, IR
 
         _spinnerDataWriter = SpinnerDataWriter.Access();
         _spinnerDataWriter.SetType(SpinnerType.Red);
-        _spinnerDataWriter.SaveTransform(transform);
+        _spinnerDataWriter.SavePosition(transform);
     }
 
     void FixedUpdate()
@@ -26,8 +26,8 @@ public class SpinnerMover : MonoBehaviour, IWriteSpinnerLocal, IReceivePress, IR
         if(SpinnerLocalData.Torque > 0)
         {
             _spinnerDataWriter.DampingTorque();
-            transform.Translate(SpinnerLocalData.Torque * SpinnerParameterDataBase.Data.SpeedTorqueMultiplier * _velocity);
-            _spinnerDataWriter.SaveTransform(transform);
+            transform.Translate(SpinnerLocalData.Torque * SpinnerParameterDataBase.Data.SpeedTorqueMultiplier * _velocity, Space.World);
+            _spinnerDataWriter.SavePosition(transform);
         }
     }
 
@@ -46,6 +46,7 @@ public class SpinnerMover : MonoBehaviour, IWriteSpinnerLocal, IReceivePress, IR
     {
         _spinnerDataWriter.Turn();
         _velocity = pointerMoveVector.normalized * SpinnerParameterDataBase.Data.BaseSpeed;
+        transform.rotation = Quaternion.FromToRotation(Vector2.up, pointerMoveVector);
     }
 
     public void OnHold()
