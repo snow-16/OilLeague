@@ -41,11 +41,13 @@ public class SpinnerMover : MonoBehaviour, IWriteSpinnerLocal, IReceivePress, IR
 
     public void OnTap(Vector2 tapPosition)
     {
+        SpinnerImpacter.FireImpact(transform.up, false);
         _spinnerDataWriter.Stop();
     }
 
     public void OnFlick(Vector2 pointerMoveVector)
     {
+        //素早くフリックしたらベクトル置き換えではなく加算にする
         if(_progressBrakeTime <= SpinnerParameterDataBase.Data.QuickTurnTimeLimit && _velocity.magnitude > 0)
         {
             _velocity = ((Vector2)transform.up + pointerMoveVector.normalized).normalized * SpinnerParameterDataBase.Data.BaseSpeed;
@@ -59,6 +61,7 @@ public class SpinnerMover : MonoBehaviour, IWriteSpinnerLocal, IReceivePress, IR
 
         _spinnerDataWriter.Turn();
         transform.rotation = Quaternion.FromToRotation(Vector2.up, _velocity);
+        SpinnerImpacter.FireImpact(-transform.up, true);
     }
 
     public void OnHold()

@@ -53,9 +53,12 @@ public class SpinnerParameterDataBase : MonoBehaviour
     /// <summary> 主衝撃波の弧の長さ </summary>
     [SerializeField]
     private float _impactArc;
-    /// <summary> 周囲衝撃波の半径 </summary>
+    /// <summary> 旋回時の衝撃波威力 </summary>
     [SerializeField]
-    private float _impactAroundRadius;
+    private float _turnImpactPower;
+    /// <summary> 衝撃波用レイの射出数 </summary>
+    [SerializeField]
+    private float _impactRayCount;
 
     /// <summary> スタン時間 </summary>
     [SerializeField]
@@ -95,8 +98,10 @@ public class SpinnerParameterDataBase : MonoBehaviour
     public float ImpactTorqueMultiplier { get => _impactTorqueMultiplier; }
     /// <summary> 主衝撃波の弧の長さ </summary>
     public float ImpactArc { get => _impactArc; }
-    /// <summary> 周囲衝撃波の半径 </summary>
-    public float ImpactAroundRadius { get => _impactAroundRadius; }
+    /// <summary> 旋回時の衝撃波威力 </summary>
+    public float TurnImpactPower { get => _turnImpactPower; }
+    /// <summary> 衝撃波用レイの射出数 </summary>
+    public float ImpactRayCount { get => _impactRayCount; }
 
     /// <summary> スタン時間 </summary>
     public float StanTime { get => _stanTime; }
