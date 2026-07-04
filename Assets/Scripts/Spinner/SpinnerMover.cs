@@ -7,6 +7,8 @@ public class SpinnerMover : MonoBehaviour, IWriteSpinnerLocal, IReceivePress, IR
 
     /// <summary> 移動ベクトル </summary>
     private Vector2 _velocity = Vector2.zero;
+    /// <summary> ブレーキ中の経過時間 </summary>
+    private float _progressBrakeTime = 0;
 
     void Awake()
     {
@@ -44,13 +46,28 @@ public class SpinnerMover : MonoBehaviour, IWriteSpinnerLocal, IReceivePress, IR
 
     public void OnFlick(Vector2 pointerMoveVector)
     {
+        if(_progressBrakeTime <= SpinnerParameterDataBase.Data.QuickTurnTimeLimit && _velocity.magnitude > 0)
+        {
+            _velocity = ((Vector2)transform.up + pointerMoveVector.normalized).normalized * SpinnerParameterDataBase.Data.BaseSpeed;
+        }
+        else
+        {
+            _velocity = pointerMoveVector.normalized * SpinnerParameterDataBase.Data.BaseSpeed;
+        }
+
+        _progressBrakeTime = 0;
+
         _spinnerDataWriter.Turn();
-        _velocity = pointerMoveVector.normalized * SpinnerParameterDataBase.Data.BaseSpeed;
-        transform.rotation = Quaternion.FromToRotation(Vector2.up, pointerMoveVector);
+        transform.rotation = Quaternion.FromToRotation(Vector2.up, _velocity);
     }
 
     public void OnHold()
     {
         _spinnerDataWriter.ChargeTorque();
+
+        if(_progressBrakeTime < SpinnerParameterDataBase.Data.QuickTurnTimeLimit)
+        {
+            _progressBrakeTime += Time.deltaTime;
+        }
     }
 }

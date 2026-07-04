@@ -2317,6 +2317,7 @@ MonoBehaviour:
   _baseSpeed: 0.1
   _speedTorqueMultiplier: 0.1
   _speedInBrake: 0.05
+  _quickTurnTimeLimit: 0.1
   _baseAttack: 0
   _attackTorqueMultiplier: 0
   _strikePower: 0

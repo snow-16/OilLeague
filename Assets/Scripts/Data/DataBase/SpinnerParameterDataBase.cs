@@ -30,6 +30,9 @@ public class SpinnerParameterDataBase : MonoBehaviour
     /// <summary> ブレーキ中の速度定数 </summary>
     [SerializeField]
     private float _speedInBrake;
+    /// <summary> 不完全ターンができる時間制限 </summary>
+    [SerializeField]
+    private float _quickTurnTimeLimit;
 
     /// <summary> 攻撃力の基底値 </summary>
     [SerializeField]
@@ -76,6 +79,8 @@ public class SpinnerParameterDataBase : MonoBehaviour
     public float SpeedTorqueMultiplier { get => _speedTorqueMultiplier; }
     /// <summary> ブレーキ中の速度定数 </summary>
     public float SpeedInBrake { get => _speedInBrake; }
+    /// <summary> 不完全ターンができる時間制限 </summary>
+    public float QuickTurnTimeLimit { get => _quickTurnTimeLimit; }
 
     /// <summary> 攻撃力の基底値 </summary>
     public float BaseAttack { get => _baseAttack; }
