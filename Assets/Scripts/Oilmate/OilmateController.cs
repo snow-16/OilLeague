@@ -3,11 +3,12 @@ using UnityEngine;
 /// <summary>
 /// オイルメイト管理クラス
 /// </summary>
-public class OilmateController : MonoBehaviour
+public class OilmateController : MonoBehaviour, IDamageable
 {
     /// <summary> 成長段階 </summary>
     private OilmateType _oilmateType;
     /// <summary> 生成元のスピナー </summary>
+    [SerializeField]
     private SpinnerType _parentSpinner;
 
     /// <summary>
@@ -19,5 +20,12 @@ public class OilmateController : MonoBehaviour
     {
         _oilmateType = type;
         _parentSpinner = parent;
+    }
+
+    public SpinnerType GetCamp() => _parentSpinner;
+
+    public void ReceiveDamage(float damage, Vector2 attackerPosition, float pushPower)
+    {
+        
     }
 }
