@@ -8,29 +8,30 @@ using Debug = UnityEngine.Debug;
 public class SpinnerLocalData
 {
     /// <summary> 自分のスピナータイプ </summary>
-    private static SpinnerType _type;
-    /// <summary> 自分のスピナータイプ </summary>
-    public static SpinnerType Type => _type;
+    public static SpinnerType Type { get; private set; }
+
+    /// <summary> 現在の自分の状態 </summary>
+    public static SpinnerState State { get; private set; }
 
     /// <summary> 現在の保持トルク </summary>
-    private static float _torque;
-    /// <summary> 現在の保持トルク </summary>
-    public static float Torque => _torque;
+    public static float Torque { get; private set; }
 
     /// <summary> チャージ中のトルク </summary>
-    private static float _chargeTorque;
-    /// <summary> チャージ中のトルク </summary>
-    public static float ChargeTorque => _chargeTorque;
+    public static float ChargeTorque { get; private set; }
 
     /// <summary> スピン中の旋回回数 </summary>
-    private static int _turnCount;
-    /// <summary> スピン中の旋回回数 </summary>
-    public static int TurnCount => _turnCount;
+    public static int TurnCount { get; private set; }
 
     /// <summary> 現在位置 </summary>
-    private static Vector2 _position;
-    /// <summary> 現在位置 </summary>
-    public static Vector2 Position => _position;
+    public static Vector2 Position { get; private set; }
+
+    /// <summary> 移動方向 </summary>
+    public static Vector2 Forword { get; private set; }
+
+    private SpinnerLocalData()
+    {
+        
+    }
 
     /// <summary>
     /// インスタンスの取得。
@@ -55,7 +56,16 @@ public class SpinnerLocalData
     /// <param name="value">スピナータイプ</param>
     public void SetType(SpinnerType value)
     {
-        _type = value;
+        Type = value;
+    }
+
+    /// <summary>
+    /// 状態書き換え
+    /// </summary>
+    /// <param name="value">状態</param>
+    public void SetState(SpinnerState value)
+    {
+        State = value;
     }
 
     /// <summary>
@@ -64,7 +74,7 @@ public class SpinnerLocalData
     /// <param name="value">トルク量</param>
     public void SetTorque(float value)
     {
-        _torque = value;
+        Torque = value;
     }
 
     /// <summary>
@@ -73,7 +83,7 @@ public class SpinnerLocalData
     /// <param name="value">トルク量</param>
     public void SetChargeTorque(float value)
     {
-        _chargeTorque = value;
+        ChargeTorque = value;
     }
 
     /// <summary>
@@ -82,7 +92,7 @@ public class SpinnerLocalData
     /// <param name="value">旋回数</param>
     public void SetTurnCount(int value)
     {
-        _turnCount = value;
+        TurnCount = value;
     }
 
     /// <summary>
@@ -91,6 +101,15 @@ public class SpinnerLocalData
     /// <param name="value">位置</param>
     public void SetPosition(Vector2 value)
     {
-        _position = value;
+        Position = value;
+    }
+
+    /// <summary>
+    /// 移動方向書き換え
+    /// </summary>
+    /// <param name="value">移動ベクトル</param>
+    public void SetForword(Vector2 value)
+    {
+        Forword = value;
     }
 }

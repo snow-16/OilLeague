@@ -41,6 +41,8 @@ public class SpinnerDataWriter
         Data.SetChargeTorque(0);
         Data.SetTurnCount(0);
         Data.SetPosition(Vector2.zero);
+        Data.SetForword(Vector2.zero);
+        Data.SetState(SpinnerState.Stop);
     }
 
     /// <summary>
@@ -71,6 +73,7 @@ public class SpinnerDataWriter
         }
 
         Data.SetChargeTorque(0);
+        Data.SetState(SpinnerState.Spin);
     }
 
     /// <summary>
@@ -79,6 +82,7 @@ public class SpinnerDataWriter
     public void Brake()
     {
         Data.SetTorque(SpinnerLocalData.Torque * (1 - SpinnerParameterDataBase.Data.TorqueDampingBrake));
+        Data.SetState(SpinnerState.Brake);
     }
 
     /// <summary>
@@ -111,6 +115,7 @@ public class SpinnerDataWriter
         Data.SetTorque(0);
         Data.SetChargeTorque(0);
         Data.SetTurnCount(0);
+        Data.SetState(SpinnerState.Stop);
     }
 
     /// <summary>
@@ -120,5 +125,14 @@ public class SpinnerDataWriter
     public void SavePosition(Transform spinnerTransform)
     {
         Data.SetPosition(spinnerTransform.position);
+    }
+
+    /// <summary>
+    /// 移動方向を更新
+    /// </summary>
+    /// <param name="vector">角度</param>
+    public void UpdateForword(Vector2 vector)
+    {
+        Data.SetForword(vector);
     }
 }

@@ -5,8 +5,6 @@ public class SpinnerMover : MonoBehaviour, IWriteSpinnerLocal, IReceivePress, IR
     /// <summary> スピナーデータアクセス用 </summary>
     private SpinnerDataWriter _spinnerDataWriter;
 
-    /// <summary> 移動ベクトル </summary>
-    private Vector2 _velocity = Vector2.zero;
     /// <summary> ブレーキ中の経過時間 </summary>
     private float _progressBrakeTime = 0;
 
@@ -27,40 +25,42 @@ public class SpinnerMover : MonoBehaviour, IWriteSpinnerLocal, IReceivePress, IR
     {
         if(SpinnerLocalData.Torque > 0)
         {
-            _spinnerDataWriter.DampingTorque();
-            transform.Translate(SpinnerLocalData.Torque * SpinnerParameterDataBase.Data.SpeedTorqueMultiplier * _velocity, Space.World);
+            var baseSpeed = SpinnerParameterDataBase.Data.BaseSpeed * SpinnerLocalData.Torque * SpinnerParameterDataBase.Data.SpeedTorqueMultiplier;
+            transform.Translate((SpinnerLocalData.State.Equals(SpinnerState.Brake) ? SpinnerParameterDataBase.Data.SpeedInBrake : baseSpeed) * SpinnerLocalData.Forword, Space.World);
             _spinnerDataWriter.SavePosition(transform);
+            _spinnerDataWriter.DampingTorque();
         }
     }
 
     public void OnPress(Vector2 pressPosition)
     {
         _spinnerDataWriter.Brake();
-        _velocity = _velocity.normalized * SpinnerParameterDataBase.Data.SpeedInBrake;
     }
 
     public void OnTap(Vector2 tapPosition)
     {
-        SpinnerImpacter.FireImpact(transform.up, false);
-        _spinnerDataWriter.Stop();
+        if(SpinnerLocalData.Torque > 0)
+        {
+            SpinnerImpacter.FireImpact(transform.up, false);
+            _spinnerDataWriter.Stop();
+        }
     }
 
     public void OnFlick(Vector2 pointerMoveVector)
     {
+        var turnVelocity = pointerMoveVector.normalized;
+
         //素早くフリックしたらベクトル置き換えではなく加算にする
-        if(_progressBrakeTime <= SpinnerParameterDataBase.Data.QuickTurnTimeLimit && _velocity.magnitude > 0)
+        if(_progressBrakeTime <= SpinnerParameterDataBase.Data.QuickTurnTimeLimit && SpinnerLocalData.Torque > 0)
         {
-            _velocity = ((Vector2)transform.up + pointerMoveVector.normalized).normalized * SpinnerParameterDataBase.Data.BaseSpeed;
-        }
-        else
-        {
-            _velocity = pointerMoveVector.normalized * SpinnerParameterDataBase.Data.BaseSpeed;
+            turnVelocity = (turnVelocity + (Vector2)transform.up).normalized;
         }
 
         _progressBrakeTime = 0;
 
         _spinnerDataWriter.Turn();
-        transform.rotation = Quaternion.FromToRotation(Vector2.up, _velocity);
+        transform.rotation = Quaternion.FromToRotation(Vector2.up, turnVelocity);
+        _spinnerDataWriter.UpdateForword(transform.up);
         SpinnerImpacter.FireImpact(-transform.up, true);
     }
 

@@ -24,7 +24,7 @@ public class SpinnerImpacter
 
             if(rayAngle <= baseRayAngle + SpinnerParameterDataBase.Data.ImpactArc)
             {
-                rayLength *= isTurn ? SpinnerParameterDataBase.Data.TurnImpactPower : SpinnerLocalData.Torque * SpinnerParameterDataBase.Data.ImpactTorqueMultiplier;
+                rayLength += isTurn ? SpinnerParameterDataBase.Data.TurnImpactPower : SpinnerLocalData.Torque * SpinnerParameterDataBase.Data.ImpactTorqueMultiplier;
             }
 
             hited.AddRange(Physics2D.RaycastAll(SpinnerLocalData.Position, new Vector3(0, 0, rayAngle), rayLength).Select(hit => hit.collider.gameObject));

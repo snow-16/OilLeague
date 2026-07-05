@@ -2093,6 +2093,7 @@ GameObject:
   - component: {fileID: 1911149413}
   - component: {fileID: 1911149412}
   - component: {fileID: 1911149414}
+  - component: {fileID: 1911149415}
   m_Layer: 0
   m_Name: Spinner
   m_TagString: Untagged
@@ -2183,6 +2184,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3820c1b1eea7340f3a2d3a3013f82f68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+--- !u!114 &1911149415
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1911149411}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62b0bc11de99e4df68afe2ccd72e0a42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
 --- !u!1 &1944421442

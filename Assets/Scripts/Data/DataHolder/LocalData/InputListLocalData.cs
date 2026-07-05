@@ -29,6 +29,11 @@ public class InputListLocalData
     /// <summary> 長押し受け取り可能なインスタンス </summary>
     public static List<IReceiveHold> CanHolds => new(_canHolds = _canHolds.Where(item => item != null).ToList());
 
+    private InputListLocalData()
+    {
+        
+    }
+
     /// <summary>
     /// インスタンスの取得。
     /// ライタークラスからのみアクセス可能
