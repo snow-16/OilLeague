@@ -26,6 +26,6 @@ public class OilmateController : MonoBehaviour, IDamageable
 
     public void ReceiveDamage(float damage, Vector2 attackerPosition, float pushPower)
     {
-        
+        Destroy(gameObject);
     }
 }

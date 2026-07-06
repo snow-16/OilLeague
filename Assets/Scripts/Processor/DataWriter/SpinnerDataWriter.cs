@@ -37,6 +37,8 @@ public class SpinnerDataWriter
     /// </summary>
     public void Reset()
     {
+        Data.SetType(SpinnerType.Red);
+        
         Data.SetTorque(0);
         Data.SetChargeTorque(0);
         Data.SetTurnCount(0);
