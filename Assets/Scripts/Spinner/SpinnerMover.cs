@@ -21,6 +21,11 @@ public class SpinnerMover : MonoBehaviour, IWriteSpinnerLocal
             transform.Translate((SpinnerLocalData.State.Equals(SpinnerState.Brake) ? SpinnerParameterDataBase.Data.SpeedInBrake : baseSpeed) * SpinnerLocalData.Forword, Space.World);
             _spinnerDataWriter.SavePosition(transform);
             _spinnerDataWriter.DampingTorque();
+
+            if(SpinnerLocalData.State == SpinnerState.Stan && SpinnerLocalData.Torque <= SpinnerParameterDataBase.Data.MaxTorque)
+            {
+                _spinnerDataWriter.Data.SetState(SpinnerState.Spin);
+            }
         }
     }
 }

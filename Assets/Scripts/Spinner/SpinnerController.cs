@@ -7,16 +7,17 @@ public class SpinnerController : MonoBehaviour, IWriteSpinnerLocal, IReceivePres
 {
     /// <summary> スピナーデータアクセス用 </summary>
     private SpinnerDataWriter _spinnerDataWriter;
-
-    /// <summary> スピナーの陣営 </summary>
-    [SerializeField]
-    private SpinnerType _type;
+    /// <summary> スピナーインスタンスデータ閲覧用 </summary>
+    private SpinnerInstanceData _spinnerInstanceData;
+    
     /// <summary> ブレーキ中の経過時間 </summary>
     private float _progressBrakeTime = 0;
 
     void Awake()
     {
-        if(SpinnerLocalData.Type == _type)
+        _spinnerInstanceData = GetComponent<SpinnerInstanceData>();
+
+        if(SpinnerLocalData.Type == _spinnerInstanceData.Type)
         {
             var inputListDataWriter = InputListDataWriter.Access();
             inputListDataWriter.AddPressList(this);

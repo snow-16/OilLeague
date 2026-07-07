@@ -149,4 +149,16 @@ public class SpinnerDataWriter
         Data.SetState(SpinnerState.Stan);
         Observable.Timer(TimeSpan.FromSeconds(SpinnerParameterDataBase.Data.StanTime)).Subscribe(_ => Data.SetState(SpinnerState.Stop));
     }
+
+    /// <summary>
+    /// ストライクされた処理
+    /// </summary>
+    /// <param name="strikeVector">飛ばされる方角</param>
+    public void Strike(Vector2 strikeVector)
+    {
+        Stop();
+        Data.SetState(SpinnerState.Stan);
+        Data.SetTorque(SpinnerParameterDataBase.Data.StrikePower);
+        Data.SetForword(strikeVector);
+    }
 }
