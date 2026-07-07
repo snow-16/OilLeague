@@ -16,7 +16,10 @@ public class OilmateManager : MonoBehaviour, IReceiveFlick
 
     public void OnFlick(Vector2 pointerMoveVector)
     {
-        var controller = Instantiate(_oilmatePrefab, SpinnerLocalData.Position, Quaternion.identity).GetComponent<OilmateController>();
-        controller.SetSettings(OilmateType.Drop, SpinnerType.Red);
+        if(SpinnerLocalData.State != SpinnerState.Stan)
+        {
+            var controller = Instantiate(_oilmatePrefab, SpinnerLocalData.Position, Quaternion.identity).GetComponent<OilmateController>();
+            controller.SetSettings(OilmateType.Drop, SpinnerType.Red);
+        }
     }
 }

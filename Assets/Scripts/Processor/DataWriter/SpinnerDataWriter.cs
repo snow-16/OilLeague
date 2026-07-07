@@ -1,4 +1,6 @@
+using System;
 using System.Diagnostics;
+using UniRx;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
 
@@ -118,6 +120,7 @@ public class SpinnerDataWriter
         Data.SetChargeTorque(0);
         Data.SetTurnCount(0);
         Data.SetState(SpinnerState.Stop);
+        Stan();
     }
 
     /// <summary>
@@ -136,5 +139,14 @@ public class SpinnerDataWriter
     public void UpdateForword(Vector2 vector)
     {
         Data.SetForword(vector);
+    }
+
+    /// <summary>
+    /// スタン状態へ移行
+    /// </summary>
+    public void Stan()
+    {
+        Data.SetState(SpinnerState.Stan);
+        Observable.Timer(TimeSpan.FromSeconds(SpinnerParameterDataBase.Data.StanTime)).Subscribe(_ => Data.SetState(SpinnerState.Stop));
     }
 }

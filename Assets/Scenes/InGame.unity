@@ -2405,7 +2405,7 @@ MonoBehaviour:
   _impactArc: 90
   _turnImpactPower: 3
   _impactRayCount: 180
-  _stanTime: 0
+  _stanTime: 1
 --- !u!1 &2019369790
 GameObject:
   m_ObjectHideFlags: 0

@@ -31,12 +31,15 @@ public class SpinnerController : MonoBehaviour, IWriteSpinnerLocal, IReceivePres
 
     public void OnPress(Vector2 pressPosition)
     {
-        _spinnerDataWriter.Brake();
+        if(SpinnerLocalData.State != SpinnerState.Stan)
+        {
+            _spinnerDataWriter.Brake();
+        }
     }
 
     public void OnTap(Vector2 tapPosition)
     {
-        if(SpinnerLocalData.Torque > 0)
+        if(SpinnerLocalData.State == SpinnerState.Brake)
         {
             SpinnerImpacter.FireImpact(transform.up, false);
             _spinnerDataWriter.Stop();
@@ -45,29 +48,35 @@ public class SpinnerController : MonoBehaviour, IWriteSpinnerLocal, IReceivePres
 
     public void OnFlick(Vector2 pointerMoveVector)
     {
-        var turnVelocity = pointerMoveVector.normalized;
-
-        //素早くフリックしたらベクトル置き換えではなく加算にする
-        if(_progressBrakeTime <= SpinnerParameterDataBase.Data.QuickTurnTimeLimit && SpinnerLocalData.Torque > 0)
+        if(SpinnerLocalData.State == SpinnerState.Brake)
         {
-            turnVelocity = (turnVelocity + (Vector2)transform.up).normalized;
+            var turnVelocity = pointerMoveVector.normalized;
+
+            //素早くフリックしたらベクトル置き換えではなく加算にする
+            if(_progressBrakeTime <= SpinnerParameterDataBase.Data.QuickTurnTimeLimit && SpinnerLocalData.Torque > 0)
+            {
+                turnVelocity = (turnVelocity + (Vector2)transform.up).normalized;
+            }
+
+            _progressBrakeTime = 0;
+
+            _spinnerDataWriter.Turn();
+            transform.rotation = Quaternion.FromToRotation(Vector2.up, turnVelocity);
+            _spinnerDataWriter.UpdateForword(transform.up);
+            SpinnerImpacter.FireImpact(-transform.up, true);
         }
-
-        _progressBrakeTime = 0;
-
-        _spinnerDataWriter.Turn();
-        transform.rotation = Quaternion.FromToRotation(Vector2.up, turnVelocity);
-        _spinnerDataWriter.UpdateForword(transform.up);
-        SpinnerImpacter.FireImpact(-transform.up, true);
     }
 
     public void OnHold()
     {
-        _spinnerDataWriter.ChargeTorque();
-
-        if(_progressBrakeTime < SpinnerParameterDataBase.Data.QuickTurnTimeLimit)
+        if(SpinnerLocalData.State == SpinnerState.Brake)
         {
-            _progressBrakeTime += Time.deltaTime;
+            _spinnerDataWriter.ChargeTorque();
+
+            if(_progressBrakeTime < SpinnerParameterDataBase.Data.QuickTurnTimeLimit)
+            {
+                _progressBrakeTime += Time.deltaTime;
+            }
         }
     }
 }
