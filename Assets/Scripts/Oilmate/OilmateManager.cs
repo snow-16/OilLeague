@@ -16,7 +16,7 @@ public class OilmateManager : MonoBehaviour, IReceiveFlick
 
     public void OnFlick(Vector2 pointerMoveVector)
     {
-        if(SpinnerLocalData.State != SpinnerState.Stan)
+        if(SpinnerLocalData.State == SpinnerState.Brake)
         {
             var controller = Instantiate(_oilmatePrefab, SpinnerLocalData.Position, Quaternion.identity).GetComponent<OilmateController>();
             controller.SetSettings(OilmateType.Drop, SpinnerType.Red);

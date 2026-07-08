@@ -103,9 +103,16 @@ public class SpinnerDataWriter
     /// </summary>
     public void DampingTorque()
     {
-        Data.SetTorque(SpinnerLocalData.Torque * SpinnerParameterDataBase.Data.TorqueDampingSpin);
+        var dampingValue = SpinnerParameterDataBase.Data.TorqueDampingSpin;
         
-        if(SpinnerLocalData.Torque < 0.1f)
+        if(SpinnerLocalData.Torque < SpinnerParameterDataBase.Data.DoubleDampingBorder)
+        {
+            dampingValue *= dampingValue;
+        }
+
+        Data.SetTorque(SpinnerLocalData.Torque * dampingValue);
+        
+        if(SpinnerLocalData.Torque < 1)
         {
             Reset();
         }

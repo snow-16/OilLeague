@@ -7,24 +7,40 @@ public class SpinnerMover : MonoBehaviour, IWriteSpinnerLocal
 {
     /// <summary> スピナーデータアクセス用 </summary>
     private SpinnerDataWriter _spinnerDataWriter;
+    /// <summary> スピナーインスタンスデータ閲覧用 </summary>
+    private SpinnerInstanceData _spinnerInstanceData;
 
     void Awake()
     {
         _spinnerDataWriter = SpinnerDataWriter.Access();
+        _spinnerInstanceData = GetComponent<SpinnerInstanceData>();
     }
 
     void FixedUpdate()
     {
-        if(SpinnerLocalData.Torque > 0)
+        if(_spinnerInstanceData.Type == SpinnerLocalData.Type)
         {
-            var baseSpeed = SpinnerParameterDataBase.Data.BaseSpeed * SpinnerLocalData.Torque * SpinnerParameterDataBase.Data.SpeedTorqueMultiplier;
-            transform.Translate((SpinnerLocalData.State.Equals(SpinnerState.Brake) ? SpinnerParameterDataBase.Data.SpeedInBrake : baseSpeed) * SpinnerLocalData.Forword, Space.World);
-            _spinnerDataWriter.SavePosition(transform);
-            _spinnerDataWriter.DampingTorque();
-
-            if(SpinnerLocalData.State == SpinnerState.Stan && SpinnerLocalData.Torque <= SpinnerParameterDataBase.Data.MaxTorque)
+            if(SpinnerLocalData.Torque > 0)
             {
-                _spinnerDataWriter.Data.SetState(SpinnerState.Spin);
+                var baseSpeed = SpinnerParameterDataBase.Data.BaseSpeed * SpinnerLocalData.Torque * SpinnerParameterDataBase.Data.SpeedTorqueMultiplier;
+                transform.Translate(((SpinnerLocalData.State.Equals(SpinnerState.Brake) && baseSpeed > SpinnerParameterDataBase.Data.SpeedInBrake) ? SpinnerParameterDataBase.Data.SpeedInBrake : baseSpeed) * SpinnerLocalData.Forword, Space.World);
+                _spinnerDataWriter.SavePosition(transform);
+
+                if(transform.position.magnitude > GeneralDataBase.Data.FieldRadius - transform.localScale.x / 2)
+                {
+                    transform.up = Vector2.Reflect(SpinnerLocalData.Forword, transform.position.normalized);
+                    transform.position = transform.position.normalized * (GeneralDataBase.Data.FieldRadius - transform.localScale.x / 2);
+                    _spinnerDataWriter.UpdateForword(transform.up);
+                    _spinnerDataWriter.SavePosition(transform);
+                    SpinnerImpacter.FireImpact(-transform.position.normalized, true);
+                }
+
+                _spinnerDataWriter.DampingTorque();
+
+                if(SpinnerLocalData.State == SpinnerState.Stan && SpinnerLocalData.Torque <= SpinnerParameterDataBase.Data.MaxTorque)
+                {
+                    _spinnerDataWriter.Data.SetState(SpinnerState.Spin);
+                }
             }
         }
     }

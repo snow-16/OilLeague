@@ -17,6 +17,7 @@ public class SpinnerDamager : MonoBehaviour, IWriteSpinnerLocal, IDamageable
 
     public void ReceiveDamage(float damage, Vector2 attackerPosition, float pushPower)
     {
+        Debug.Log("do");
         if(SpinnerLocalData.State == SpinnerState.Stan || SpinnerLocalData.State == SpinnerState.Stop)
         {
             _spinnerDataWriter.Strike(((Vector2)transform.position - attackerPosition).normalized);

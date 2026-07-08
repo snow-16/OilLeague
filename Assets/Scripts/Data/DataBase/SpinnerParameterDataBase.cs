@@ -14,6 +14,9 @@ public class SpinnerParameterDataBase : MonoBehaviour
     /// <summary> スピン中のトルク減衰量 </summary>
     [SerializeField]
     private float _torqueDampingSpin;
+    /// <summary> トルク減衰が加速し始めるトルク量 </summary>
+    [SerializeField]
+    private int _doubleDampingBorder;
     /// <summary> ブレーキ時のトルク減少率 </summary>
     [SerializeField]
     private float _torqueDampingBrake;
@@ -73,6 +76,8 @@ public class SpinnerParameterDataBase : MonoBehaviour
     public float TorqueDampingSpin { get => _torqueDampingSpin; }
     /// <summary> ブレーキ時のトルク減少率 </summary>
     public float TorqueDampingBrake { get => _torqueDampingBrake; }
+    /// <summary> トルク減衰が加速し始めるトルク量 </summary>
+    public int DoubleDampingBorder { get => _doubleDampingBorder; }
     /// <summary> トルクのチャージ速度 </summary>
     public float TorqueChargeSpeed { get => _torqueChargeSpeed; }
 
