@@ -10,7 +10,7 @@ public class InputListDataWriter
     /// <summary> データクラスのインスタンス </summary>
     public InputListLocalData Data { get; }
 
-    public InputListDataWriter()
+    private InputListDataWriter()
     {
         Data = InputListLocalData.Access();
     }

@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
             //データホルダーの初期化
             InputListDataWriter.Access().Reset();
             SpinnerDataWriter.Access().Reset();
+            NetworkingDataWriter.Access().Reset();
 
             //入力処理をストリームに設定
             SubscribeInputSystem.SubscribeInputs();

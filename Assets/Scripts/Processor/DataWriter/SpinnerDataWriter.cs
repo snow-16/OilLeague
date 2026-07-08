@@ -12,7 +12,7 @@ public class SpinnerDataWriter
     /// <summary> データクラスのインスタンス </summary>
     public SpinnerLocalData Data { get; }
 
-    public SpinnerDataWriter()
+    private SpinnerDataWriter()
     {
         Data = SpinnerLocalData.Access();
     }
