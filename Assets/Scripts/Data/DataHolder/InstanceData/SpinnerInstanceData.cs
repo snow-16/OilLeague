@@ -1,24 +1,17 @@
 using System.Linq;
-using UnityEngine;
+using Fusion;
 
-public class SpinnerInstanceData : MonoBehaviour
+public class SpinnerInstanceData : NetworkBehaviour
 {
-    [SerializeField]
-    private SpinnerType _type;
-    public SpinnerType Type => _type;
+    public SpinnerType Type { get; private set; }
 
     void Awake()
     {
-        GetComponents<IWriteSpinnerInstance>().ToList().ForEach(writeable => writeable.GiveWriter(new SpinnerInstanceWriter(ref _type)));
+        GetComponents<IWriteSpinnerInstance>().ToList().ForEach(writeable => writeable.GiveWriter(new()));
     }
-
-    public class SpinnerInstanceWriter
+    
+    public void SetType(SpinnerType type)
     {
-        public SpinnerType Type { get; set; }
-
-        public SpinnerInstanceWriter(ref SpinnerType type)
-        {
-            Type = type;
-        }
+        Type = type;
     }
 }

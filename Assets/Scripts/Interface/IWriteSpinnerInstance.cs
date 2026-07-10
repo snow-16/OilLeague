@@ -3,5 +3,5 @@
 /// </summary>
 public interface IWriteSpinnerInstance
 {
-    void GiveWriter(SpinnerInstanceData.SpinnerInstanceWriter writer);
+    void GiveWriter(SpinnerInstanceData writer);
 }

@@ -28,16 +28,16 @@ public class SpinnerMover : MonoBehaviour, IWriteSpinnerLocal
 
                 if(transform.position.magnitude > GeneralDataBase.Data.FieldRadius - transform.localScale.x / 2)
                 {
-                    transform.up = Vector2.Reflect(SpinnerLocalData.Forword, transform.position.normalized);
+                    var reflectVector = Vector2.Reflect(SpinnerLocalData.Forword, transform.position.normalized);
                     transform.position = transform.position.normalized * (GeneralDataBase.Data.FieldRadius - transform.localScale.x / 2);
-                    _spinnerDataWriter.UpdateForword(transform.up);
+                    _spinnerDataWriter.UpdateForword(reflectVector);
                     _spinnerDataWriter.SavePosition(transform);
                     SpinnerImpacter.FireImpact(-transform.position.normalized, true);
                 }
 
                 _spinnerDataWriter.DampingTorque();
 
-                if(SpinnerLocalData.State == SpinnerState.Stan && SpinnerLocalData.Torque <= SpinnerParameterDataBase.Data.MaxTorque)
+                if(SpinnerLocalData.State == SpinnerState.Strike && SpinnerLocalData.Torque <= SpinnerParameterDataBase.Data.MaxTorque)
                 {
                     _spinnerDataWriter.Data.SetState(SpinnerState.Spin);
                 }

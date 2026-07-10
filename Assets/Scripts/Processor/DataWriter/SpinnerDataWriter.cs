@@ -85,7 +85,7 @@ public class SpinnerDataWriter
     /// </summary>
     public void Brake()
     {
-        Data.SetTorque(SpinnerLocalData.Torque * (1 - SpinnerParameterDataBase.Data.TorqueDampingBrake));
+        Data.SetTorque(SpinnerLocalData.Torque - (SpinnerParameterDataBase.Data.MaxTorque * SpinnerParameterDataBase.Data.TorqueDampingBrakeRatio));
         Data.SetState(SpinnerState.Brake);
     }
 
@@ -103,18 +103,11 @@ public class SpinnerDataWriter
     /// </summary>
     public void DampingTorque()
     {
-        var dampingValue = SpinnerParameterDataBase.Data.TorqueDampingSpin;
-        
-        if(SpinnerLocalData.Torque < SpinnerParameterDataBase.Data.DoubleDampingBorder)
-        {
-            dampingValue *= dampingValue;
-        }
-
-        Data.SetTorque(SpinnerLocalData.Torque * dampingValue);
+        Data.SetTorque(SpinnerLocalData.Torque - SpinnerParameterDataBase.Data.TorqueDampingSpin);
         
         if(SpinnerLocalData.Torque < 1)
         {
-            Reset();
+            Stop();
         }
     }
 
@@ -164,8 +157,8 @@ public class SpinnerDataWriter
     public void Strike(Vector2 strikeVector)
     {
         Stop();
-        Data.SetState(SpinnerState.Stan);
+        Data.SetState(SpinnerState.Strike);
         Data.SetTorque(SpinnerParameterDataBase.Data.StrikePower);
-        Data.SetForword(strikeVector);
+        UpdateForword(strikeVector);
     }
 }

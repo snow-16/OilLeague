@@ -6,5 +6,6 @@ public enum SpinnerState
     Stop,
     Spin,
     Brake,
-    Stan
+    Stan,
+    Strike
 }
