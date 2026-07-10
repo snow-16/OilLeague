@@ -24,7 +24,7 @@ public class OilmateController : MonoBehaviour, IDamageable
 
     public SpinnerType GetCamp() => _parentSpinner;
 
-    public void ReceiveDamage(float damage, Vector2 attackerPosition, float pushPower)
+    public void RPC_ReceiveDamage(float damage, Vector2 attackerPosition, float pushPower)
     {
         Destroy(gameObject);
     }

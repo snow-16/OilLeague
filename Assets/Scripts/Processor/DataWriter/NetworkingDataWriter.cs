@@ -1,5 +1,4 @@
 using System.Diagnostics;
-using Fusion;
 using Debug = UnityEngine.Debug;
 
 /// <summary>
@@ -38,5 +37,13 @@ public class NetworkingDataWriter
     public void Reset()
     {
         Data.SetRunner(null);
+    }
+
+    /// <summary>
+    /// プレイヤー番号の割り当て
+    /// </summary>
+    public void AssignPlayerNumber()
+    {
+        Data.SetPlayerNumber(NetworkingLocalData.NetworkRunner.SessionInfo.PlayerCount);
     }
 }

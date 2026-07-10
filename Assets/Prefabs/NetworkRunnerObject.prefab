@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2427951629412789690}
   - component: {fileID: 562910910565693271}
   - component: {fileID: -198994469813009521}
+  - component: {fileID: 8363527109206361122}
   m_Layer: 0
   m_Name: NetworkRunnerObject
   m_TagString: Untagged
@@ -57,3 +58,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8edbe7108d8a43ab838cf8b8d9453df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Fusion.Unity::Fusion.RunnerEnableVisibility
+--- !u!114 &8363527109206361122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5763866096887942709}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: baba7cb7729a849ee820e0905705688c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::NetworkCallbacksReceiver

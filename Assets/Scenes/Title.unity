@@ -301,9 +301,160 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   _networkRunnerPrefab: {fileID: 5763866096887942709, guid: 5dd46d69aa5a3429d8e50f26a485aa3f, type: 3}
+--- !u!1 &1590299898
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1590299899}
+  - component: {fileID: 1590299901}
+  - component: {fileID: 1590299900}
+  - component: {fileID: 1590299902}
+  m_Layer: 0
+  m_Name: DataBaseContainer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1590299899
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1590299898}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.26263, y: 0.338, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2068380555}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1590299900
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1590299898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca6663767a20e4aa58cd7e878d2b17e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SpinnerParameterDataBase
+  _maxTorque: 100
+  _torqueCriticalLimit: 120
+  _torqueDampingSpin: 0.2
+  _doubleDampingBorder: 20
+  _torqueDampingBrakeRatio: 0.05
+  _torqueChargeSpeed: 1.5
+  _baseSpeed: 0.1
+  _speedTorqueMultiplier: 0.1
+  _speedInBrake: 0.05
+  _quickTurnTimeLimit: 0.1
+  _baseAttack: 0
+  _attackTorqueMultiplier: 0
+  _strikePower: 0
+  _baseImpact: 1.5
+  _impactTorqueMultiplier: 0.1
+  _impactArc: 90
+  _turnImpactPower: 3
+  _impactRayCount: 180
+  _stanTime: 1
+--- !u!114 &1590299901
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1590299898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 838ee37bfd3364152ba301e79ecee30e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GeneralDataBase
+  _fieldRadius: 50
+  _defaultTimeLimit: 0
+  _maxTimeLimit: 0
+  _timeLimitsUnit: 0
+  _maxNoticeCount: 0
+  _maxConnectablePlayerCount: 18
+  _flickSensitivity: 0.05
+  _cameraFollowSpeed: 1.03
+  _cameraFollowInitialVelocity: 0.7
+--- !u!114 &1590299902
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1590299898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a3f6f9b119cf498888b19cb0b55f40a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SpinnerTypeDataBase
+  _spinnerPrefab: {fileID: 8712236114664895349, guid: ffdb59309df614fd3b6bc92e56677f6b, type: 3}
+  _allTypesData:
+  - type: 0
+    name: Red
+    sprites:
+    - {fileID: 21300000, guid: f2f4da2d5c11048aaa5c3da1afff4a47, type: 3}
+    - {fileID: 21300000, guid: 5c963f6bece1845d7882a4b148a4b6c9, type: 3}
+--- !u!1 &2068380553
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2068380555}
+  - component: {fileID: 2068380554}
+  m_Layer: 0
+  m_Name: GameCore
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2068380554
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2068380553}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ac6d0791539942168bc1ce9694ad22c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+--- !u!4 &2068380555
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2068380553}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1590299899}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 602986061}
   - {fileID: 1346683030}
+  - {fileID: 2068380555}

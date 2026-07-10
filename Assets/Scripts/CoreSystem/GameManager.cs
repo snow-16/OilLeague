@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
             var dataBase = transform.GetChild(0);
             dataBase.GetComponent<GeneralDataBase>().SetData();
             dataBase.GetComponent<SpinnerParameterDataBase>().SetData();
+            dataBase.GetComponent<SpinnerTypeDataBase>().SetData();
 
             //データホルダーの初期化
             InputListDataWriter.Access().Reset();

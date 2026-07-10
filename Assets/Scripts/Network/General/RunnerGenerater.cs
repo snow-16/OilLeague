@@ -17,7 +17,6 @@ public class RunnerGenerater : MonoBehaviour, IWriteNetworkingLocal
 
     private async void StartGame()
     {
-        await NetworkingProcessor.StartSession("Lobby");
-        NetworkingDataWriter.Access().Data.SetPlayerNumber(NetworkingLocalData.NetworkRunner.SessionInfo.PlayerCount);
+        await NetworkingProcessor.GetSessionList();
     }
 }

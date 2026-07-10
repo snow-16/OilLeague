@@ -1,9 +1,11 @@
+using Fusion;
+using Unity.Cinemachine;
 using UnityEngine;
 
 /// <summary>
 /// スピナーへの入力処理クラス
 /// </summary>
-public class SpinnerController : MonoBehaviour, IWriteSpinnerLocal, IReceivePress, IReceiveTap, IReceiveFlick, IReceiveHold
+public class SpinnerController : NetworkBehaviour, IWriteSpinnerLocal, IReceivePress, IReceiveTap, IReceiveFlick, IReceiveHold
 {
     /// <summary> スピナーデータアクセス用 </summary>
     private SpinnerDataWriter _spinnerDataWriter;
@@ -13,7 +15,7 @@ public class SpinnerController : MonoBehaviour, IWriteSpinnerLocal, IReceivePres
     /// <summary> ブレーキ中の経過時間 </summary>
     private float _progressBrakeTime = 0;
 
-    void Awake()
+    public override void Spawned()
     {
         _spinnerInstanceData = GetComponent<SpinnerInstanceData>();
 
@@ -27,12 +29,13 @@ public class SpinnerController : MonoBehaviour, IWriteSpinnerLocal, IReceivePres
 
             _spinnerDataWriter = SpinnerDataWriter.Access();
             _spinnerDataWriter.SavePosition(transform);
+            FindAnyObjectByType<CinemachineCamera>().Target.TrackingTarget = transform;
         }
     }
 
     public void OnPress(Vector2 pressPosition)
     {
-        if(SpinnerLocalData.State != SpinnerState.Stan)
+        if(SpinnerLocalData.State != SpinnerState.Stan && SpinnerLocalData.State != SpinnerState.Strike)
         {
             _spinnerDataWriter.Brake();
         }
@@ -56,15 +59,14 @@ public class SpinnerController : MonoBehaviour, IWriteSpinnerLocal, IReceivePres
             //素早くフリックしたらベクトル置き換えではなく加算にする
             if(_progressBrakeTime <= SpinnerParameterDataBase.Data.QuickTurnTimeLimit && SpinnerLocalData.Torque > 0)
             {
-                turnVelocity = (turnVelocity + (Vector2)transform.up).normalized;
+                turnVelocity = (turnVelocity + SpinnerLocalData.Forword).normalized;
             }
 
             _progressBrakeTime = 0;
 
             _spinnerDataWriter.Turn();
-            transform.rotation = Quaternion.FromToRotation(Vector2.up, turnVelocity);
-            _spinnerDataWriter.UpdateForword(transform.up);
-            SpinnerImpacter.FireImpact(-transform.up, true);
+            _spinnerDataWriter.UpdateForword(turnVelocity);
+            SpinnerImpacter.FireImpact(-turnVelocity, true);
         }
     }
 

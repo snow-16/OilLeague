@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Diagnostics;
 using Fusion;
 using Debug = UnityEngine.Debug;
@@ -9,6 +10,8 @@ public class NetworkingLocalData
 {
     /// <summary> ネットワークランナーインスタンス </summary>
     public static NetworkRunner NetworkRunner { get; private set; }
+    /// <summary> 現在立っている部屋リストのキャッシュ </summary>
+    public static List<SessionInfo> AllSessions { get; private set; }
     /// <summary> プレイヤー番号 </summary>
     public static int PlayerNumber { get; private set; }
 
@@ -41,6 +44,15 @@ public class NetworkingLocalData
     public void SetRunner(NetworkRunner value)
     {
         NetworkRunner = value;
+    }
+
+    /// <summary>
+    /// セッションリスト書き換え
+    /// </summary>
+    /// <param name="value">ネットワークランナーインスタンス</param>
+    public void SetAllSessions(List<SessionInfo> value)
+    {
+        AllSessions = value;
     }
 
     /// <summary>

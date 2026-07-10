@@ -3,8 +3,8 @@
 /// </summary>
 public class InGameLoadedAnker : SceneLoadedAnker
 {
-    public override void Spawned()
+    protected override async void WhenLoaded()
     {
-        base.Spawned();
+        await NetworkingProcessor.SpawnObject(SpinnerTypeDataBase.Data.SpinnerPrefab, (runner, obj) => obj.GetComponent<SpinnerInstanceData>().SetType(SpinnerLocalData.Type));
     }
 }

@@ -1,6 +1,7 @@
+using Fusion;
 using UnityEngine;
 
-public class SpinnerDamager : MonoBehaviour, IWriteSpinnerLocal, IDamageable
+public class SpinnerDamager : NetworkBehaviour, IWriteSpinnerLocal, IDamageable
 {
     /// <summary> スピナーデータアクセス用 </summary>
     private SpinnerDataWriter _spinnerDataWriter;
@@ -15,9 +16,9 @@ public class SpinnerDamager : MonoBehaviour, IWriteSpinnerLocal, IDamageable
 
     public SpinnerType GetCamp() => _spinnerInstanceData.Type;
 
-    public void ReceiveDamage(float damage, Vector2 attackerPosition, float pushPower)
+    [Rpc(RpcSources.All, RpcTargets.StateAuthority)]
+    public void RPC_ReceiveDamage(float damage, Vector2 attackerPosition, float pushPower)
     {
-        Debug.Log("do");
         if(SpinnerLocalData.State == SpinnerState.Stan || SpinnerLocalData.State == SpinnerState.Stop)
         {
             _spinnerDataWriter.Strike(((Vector2)transform.position - attackerPosition).normalized);

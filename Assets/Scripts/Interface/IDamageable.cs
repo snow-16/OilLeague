@@ -17,5 +17,5 @@ public interface IDamageable
     /// <param name="damage">ダメージ量</param>
     /// <param name="attackerPosition">攻撃者の座標</param>
     /// <param name="pushPower">攻撃で押し飛ばされる距離</param>
-    void ReceiveDamage(float damage, Vector2 attackerPosition, float pushPower);
+    void RPC_ReceiveDamage(float damage, Vector2 attackerPosition, float pushPower);
 }
