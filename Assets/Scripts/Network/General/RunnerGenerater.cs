@@ -11,12 +11,5 @@ public class RunnerGenerater : MonoBehaviour, IWriteNetworkingLocal
         var networkRunnerInstance = Instantiate(_networkRunnerPrefab);
         DontDestroyOnLoad(networkRunnerInstance);
         NetworkingDataWriter.Access().Data.SetRunner(networkRunnerInstance.GetComponent<NetworkRunner>());
-
-        StartGame();
-    }
-
-    private async void StartGame()
-    {
-        await NetworkingProcessor.GetSessionList();
     }
 }

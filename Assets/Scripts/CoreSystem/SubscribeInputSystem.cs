@@ -3,6 +3,7 @@ using UnityEngine.InputSystem;
 using UnityEngine;
 using System;
 using System.Linq;
+using UnityEngine.EventSystems;
 
 /// <summary>
 /// UniRxストリーム設定用クラス
@@ -33,31 +34,34 @@ public class SubscribeInputSystem
         //画面タップ時
         _pointerPressed.Subscribe(pressPosition =>
             {
-                //フリック取得
-                var _pointerFlick = _pointerPressing.Pairwise()
-                        .Select(positions => positions.Current - positions.Previous)
-                        .Where(pointerMoveVector => pointerMoveVector.magnitude > 1 / GeneralDataBase.Data.FlickSensitivity);
+                if(!EventSystem.current.IsPointerOverGameObject())
+                {
+                    //フリック取得
+                    var _pointerFlick = _pointerPressing.Pairwise()
+                            .Select(positions => positions.Current - positions.Previous)
+                            .Where(pointerMoveVector => pointerMoveVector.magnitude > 1 / GeneralDataBase.Data.FlickSensitivity);
 
-                //フリック
-                _pointerFlick
-                    .TakeUntil(_pointerRelease)
-                    .Take(1)
-                    .Subscribe(pointerMoveVector => SubscribeFlick(pointerMoveVector));
+                    //フリック
+                    _pointerFlick
+                        .TakeUntil(_pointerRelease)
+                        .Take(1)
+                        .Subscribe(pointerMoveVector => SubscribeFlick(pointerMoveVector));
 
-                //タップ
-                _pointerRelease
-                    .TakeUntil(_pointerFlick)
-                    .Take(1)
-                    .Subscribe(tapPosition => SubscribeTap(tapPosition));
+                    //タップ
+                    _pointerRelease
+                        .TakeUntil(_pointerFlick)
+                        .Take(1)
+                        .Subscribe(tapPosition => SubscribeTap(tapPosition));
 
-                //長押し
-                Observable.EveryFixedUpdate()
-                    .TakeUntil(_pointerFlick)
-                    .TakeUntil(_pointerRelease)
-                    .Subscribe(_ => SubscribeHold());
+                    //長押し
+                    Observable.EveryFixedUpdate()
+                        .TakeUntil(_pointerFlick)
+                        .TakeUntil(_pointerRelease)
+                        .Subscribe(_ => SubscribeHold());
 
-                //押下
-                SubscribePress(pressPosition);
+                    //押下
+                    SubscribePress(pressPosition);
+                }
             }
         );
     }
