@@ -1,4 +1,5 @@
 using Fusion;
+using UniRx;
 using Unity.Cinemachine;
 using UnityEngine;
 
@@ -30,6 +31,20 @@ public class SpinnerController : NetworkBehaviour, IWriteSpinnerLocal, IReceiveP
             _spinnerDataWriter = SpinnerDataWriter.Access();
             _spinnerDataWriter.SavePosition(transform);
             FindAnyObjectByType<CinemachineCamera>().Target.TrackingTarget = transform;
+
+            _spinnerInstanceData.RPC_SetState(SpinnerLocalData.State);
+            this.ObserveEveryValueChanged(_ => SpinnerLocalData.State).Subscribe(state =>
+                {
+                    _spinnerInstanceData.RPC_SetState(state);
+                }
+            );
+
+            _spinnerInstanceData.RPC_SetForword(SpinnerLocalData.Forword);
+            this.ObserveEveryValueChanged(_ => SpinnerLocalData.Forword).Subscribe(forword =>
+                {
+                    _spinnerInstanceData.RPC_SetForword(forword);
+                }
+            );
         }
     }
 

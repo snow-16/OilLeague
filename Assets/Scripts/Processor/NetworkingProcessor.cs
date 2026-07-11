@@ -6,6 +6,16 @@ using UnityEngine.SceneManagement;
 
 public class NetworkingProcessor : IWriteNetworkingLocal
 {
+    public static void CreateNetworkRunner()
+    {
+        if(NetworkingLocalData.NetworkRunner != null)
+        {
+            ObjectSpawner.Instance.DestroySpawned(NetworkingLocalData.NetworkRunner.gameObject);
+        }
+
+        NetworkingDataWriter.Access().Data.SetRunner(ObjectSpawner.Instance.SpawnDontDestroy(GeneralDataBase.Data.NetworkRunnerPrefab).GetComponent<NetworkRunner>());
+    }
+
     private static async Task StartSession(string sessionCode)
     {
         await NetworkingLocalData.NetworkRunner.StartGame(new StartGameArgs
@@ -20,6 +30,7 @@ public class NetworkingProcessor : IWriteNetworkingLocal
 
     public static async Task GetSessionList()
     {
+        CreateNetworkRunner();
         await NetworkingLocalData.NetworkRunner.JoinSessionLobby(SessionLobby.Shared);
         SceneManager.LoadScene("Lobby");
     }
@@ -37,7 +48,9 @@ public class NetworkingProcessor : IWriteNetworkingLocal
 
     public static async Task CreateRoom(string sessionCode)
     {
-        await StartSession(sessionCode);
+        await NetworkingLocalData.NetworkRunner.Shutdown();
+        CreateNetworkRunner();  
+        await StartSession($"Close:{sessionCode}:NewRoom:Wait");
         new NetworkingProcessor().SetPlayerNumber();
         await NetworkingLocalData.NetworkRunner.LoadScene("InGame");
     }

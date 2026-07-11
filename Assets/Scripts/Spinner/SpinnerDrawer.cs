@@ -8,6 +8,8 @@ public class SpinnerDrawer : MonoBehaviour
 {
     /// <summary> スピナーのスプライトレンダラ </summary>
     private SpriteRenderer _spinnerRenderer;
+    /// <summary> スピン中スピナーのマフラーのスプライトレンダラ </summary>
+    private SpriteRenderer _coreRenderer;
     /// <summary> スピナーインスタンスデータ閲覧用 </summary>
     private SpinnerInstanceData _spinnerInstanceData;
 
@@ -15,31 +17,40 @@ public class SpinnerDrawer : MonoBehaviour
     {
         _spinnerRenderer = GetComponent<SpriteRenderer>();
         _spinnerInstanceData = GetComponent<SpinnerInstanceData>();
+        _coreRenderer = transform.GetChild(0).GetComponent<SpriteRenderer>();
     }
 
     void FixedUpdate()
     {
-        //回転
-        if(SpinnerLocalData.Torque > 0 && SpinnerLocalData.State != SpinnerState.Brake)
+        if(_spinnerInstanceData.Type == SpinnerLocalData.Type)
         {
-            transform.eulerAngles += new Vector3(0, 0, SpinnerLocalData.Torque);
-        }
-        else if(transform.eulerAngles != Vector3.zero)
-        {
-            transform.eulerAngles = Vector3.zero;
+            //回転
+            if(SpinnerLocalData.Torque > 0 && SpinnerLocalData.State != SpinnerState.Brake)
+            {
+                transform.eulerAngles += new Vector3(0, 0, SpinnerLocalData.Torque);
+                _coreRenderer.gameObject.SetActive(true);
+                _coreRenderer.transform.eulerAngles = Vector3.zero;
+            }
+            else if(transform.eulerAngles != Vector3.zero)
+            {
+                transform.eulerAngles = Vector3.zero;
+                _coreRenderer.gameObject.SetActive(false);
+            }
         }
 
         //方向
-        if(SpinnerLocalData.Forword.x < 0)
+        if(_spinnerInstanceData.Forword.x < 0)
         {
             _spinnerRenderer.flipX = false;
+            _coreRenderer.flipX = false;
         }
         else
         {
             _spinnerRenderer.flipX = true;
+            _coreRenderer.flipX = true;
         }
 
-        this.ObserveEveryValueChanged(_ => SpinnerLocalData.State).Subscribe(state =>
+        this.ObserveEveryValueChanged(_ => _spinnerInstanceData.State).Subscribe(state =>
             {
                 if(state == SpinnerState.Strike)
                 {

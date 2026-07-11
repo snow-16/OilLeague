@@ -358,51 +358,6 @@ MonoBehaviour:
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
   m_Version: 2
---- !u!1 &1346683029
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1346683030}
-  - component: {fileID: 1346683031}
-  m_Layer: 0
-  m_Name: NetworkStarter
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1346683030
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1346683029}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1346683031
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1346683029}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d584ec59926614aab82359c10a179fb0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
-  _networkRunnerPrefab: {fileID: 5763866096887942709, guid: 5dd46d69aa5a3429d8e50f26a485aa3f, type: 3}
 --- !u!1 &1490157538
 GameObject:
   m_ObjectHideFlags: 0
@@ -578,10 +533,11 @@ MonoBehaviour:
   _maxTimeLimit: 0
   _timeLimitsUnit: 0
   _maxNoticeCount: 0
-  _maxConnectablePlayerCount: 18
   _flickSensitivity: 0.05
   _cameraFollowSpeed: 1.03
   _cameraFollowInitialVelocity: 0.7
+  _maxConnectablePlayerCount: 18
+  _networkRunnerPrefab: {fileID: 5763866096887942709, guid: 5dd46d69aa5a3429d8e50f26a485aa3f, type: 3}
 --- !u!114 &1590299902
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -594,13 +550,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a3f6f9b119cf498888b19cb0b55f40a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpinnerTypeDataBase
-  _spinnerPrefab: {fileID: 8712236114664895349, guid: ffdb59309df614fd3b6bc92e56677f6b, type: 3}
+  _spinnerPrefab: {fileID: 7427618220221976330, guid: c50965ebf80b04f1f9c8fcefcabc6e96, type: 3}
   _allTypesData:
   - type: 0
     name: Red
     sprites:
     - {fileID: 21300000, guid: f2f4da2d5c11048aaa5c3da1afff4a47, type: 3}
-    - {fileID: 21300000, guid: 5c963f6bece1845d7882a4b148a4b6c9, type: 3}
+    - {fileID: 21300000, guid: cd180b17a0a424b83a5f0982bd95f078, type: 3}
+    - {fileID: 21300000, guid: 519700424957243c288b4b95afa58b6c, type: 3}
+    - {fileID: 21300000, guid: 519700424957243c288b4b95afa58b6c, type: 3}
+    - {fileID: 21300000, guid: 519700424957243c288b4b95afa58b6c, type: 3}
+    - {fileID: 21300000, guid: 8516bb81236de4705ad5f9b1e74fd06b, type: 3}
 --- !u!1 &1641165034
 GameObject:
   m_ObjectHideFlags: 0
@@ -826,6 +786,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2068380555}
   - component: {fileID: 2068380554}
+  - component: {fileID: 2068380556}
   m_Layer: 0
   m_Name: GameCore
   m_TagString: Untagged
@@ -861,12 +822,23 @@ Transform:
   - {fileID: 1590299899}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2068380556
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2068380553}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d84eeb37990554784ac15b4e7b0322a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 602986061}
-  - {fileID: 1346683030}
   - {fileID: 2068380555}
   - {fileID: 499885478}
   - {fileID: 1892650396}
