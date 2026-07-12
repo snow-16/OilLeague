@@ -54,13 +54,13 @@ public class NetworkingProcessor : IWriteNetworkingLocal
         new NetworkingProcessor().SetPlayerNumber();
         if(NetworkingLocalData.PlayerNumber == 1)
         {
-            await NetworkingLocalData.NetworkRunner.LoadScene("WaitingRoom");
+            await SceneProcessor.TransitionToRoom();
         }
     }
 
     public static async Task StartGame()
     {
-        await NetworkingLocalData.NetworkRunner.LoadScene("InGame");
+        await SceneProcessor.TransitionToInGame();
     }
 
     public static async Task SpawnObject(GameObject prefab)

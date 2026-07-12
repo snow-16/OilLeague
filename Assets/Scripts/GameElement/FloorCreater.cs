@@ -4,6 +4,7 @@ public class FloorCreater : MonoBehaviour
 {
     void Awake()
     {
-        transform.localScale = transform.GetChild(0).localScale = GeneralDataBase.Data.FieldRadius * 2 * Vector3.one;
+        GetComponent<SpriteRenderer>().size = GeneralDataBase.Data.FieldRadius * Vector2.one / 10;
+        transform.GetChild(0).localScale = GeneralDataBase.Data.FieldRadius * Vector3.one / 10;
     }
 }

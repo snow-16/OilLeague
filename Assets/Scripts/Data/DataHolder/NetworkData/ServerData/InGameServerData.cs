@@ -40,9 +40,20 @@ public class InGameServerData : NetworkBehaviour
     public void RPC_StartTimer(int timeLimit)
     {
         ProgressTime = timeLimit;
-        Observable.EveryFixedUpdate().TakeUntil(Observable.EveryUpdate().Where(_ => ProgressTime <= 0)).Subscribe(_ =>
+        var catchTimeOver = Observable.EveryUpdate().Where(_ => ProgressTime <= 0);
+        Observable.EveryFixedUpdate().TakeUntil(catchTimeOver).Subscribe(_ =>
             {
                 ProgressTime -= Time.deltaTime;
+            }
+        );
+        catchTimeOver.First().Subscribe(_ =>
+            {
+                RPC_SaveData();
+                this.ObserveEveryValueChanged(_ => Instance).Where(_ => Instance == null).Subscribe(async _ => 
+                    {
+                        await SceneProcessor.TransitionToResult();
+                    }
+                );
             }
         );
     }
@@ -50,6 +61,7 @@ public class InGameServerData : NetworkBehaviour
     [Rpc(RpcSources.All, RpcTargets.All)]
     public void RPC_SaveData()
     {
+        OilResultClientData.ReceiveFromServer(OilTanks.ToList());
         Instance = null;
     }
 
