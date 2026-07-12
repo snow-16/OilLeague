@@ -41,7 +41,7 @@ public class InGameServerData : NetworkBehaviour
     {
         ProgressTime = timeLimit;
         var catchTimeOver = Observable.EveryUpdate().Where(_ => ProgressTime <= 0);
-        Observable.EveryFixedUpdate().TakeUntil(catchTimeOver).Subscribe(_ =>
+        Observable.EveryUpdate().TakeUntil(catchTimeOver).Subscribe(_ =>
             {
                 ProgressTime -= Time.deltaTime;
             }

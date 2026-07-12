@@ -793,7 +793,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GeneralDataBase
   _sceneTransitionSpeed: 0.03
   _fieldRadius: 100
-  _defaultTimeLimit: 20
+  _defaultTimeLimit: 60
   _maxTimeLimit: 0
   _timeLimitsUnit: 0
   _maxNoticeCount: 0
