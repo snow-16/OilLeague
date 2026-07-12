@@ -67,7 +67,16 @@ public class SpinnerParameterDataBase : MonoBehaviour
     private float _turnImpactPower;
     /// <summary> 衝撃波用レイの射出数 </summary>
     [SerializeField]
-    private float _impactRayCount;
+    private int _impactRayCount;
+    /// <summary> 衝撃波の速度 </summary>
+    [SerializeField]
+    private float _impactWaveSpeed;
+    /// <summary> レイの数に対する衝撃波生成数の比率 </summary>
+    [SerializeField]
+    private float _impactWaveRatio;
+    /// <summary> 衝撃波のプレハブ </summary>
+    [SerializeField]
+    private GameObject _impactWavePrefab;
 
     /// <summary> スタン時間 </summary>
     [SerializeField]
@@ -116,7 +125,13 @@ public class SpinnerParameterDataBase : MonoBehaviour
     /// <summary> 旋回時の衝撃波威力 </summary>
     public float TurnImpactPower { get => _turnImpactPower; }
     /// <summary> 衝撃波用レイの射出数 </summary>
-    public float ImpactRayCount { get => _impactRayCount; }
+    public int ImpactRayCount { get => _impactRayCount; }
+    /// <summary> 衝撃波の速度 </summary>
+    public float ImpactWaveSpeed { get => _impactWaveSpeed; }
+    /// <summary> レイの数に対する衝撃波生成数の比率 </summary>
+    public float ImpactWaveRatio { get => _impactWaveRatio; }
+    /// <summary> 衝撃波のプレハブ </summary>
+    public GameObject ImpactWavePrefab { get => _impactWavePrefab; }
 
     /// <summary> スタン時間 </summary>
     public float StanTime { get => _stanTime; }

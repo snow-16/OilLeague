@@ -16,6 +16,7 @@ public class SpinnerImpacter
         List<(GameObject obj, float length)> hited = new();
         var fireAngle = Quaternion.FromToRotation(Vector2.up, fireVector).eulerAngles.z;
         var baseRayAngle = fireAngle - SpinnerParameterDataBase.Data.ImpactArc / 2;
+        var waveSpawnInterval = SpinnerParameterDataBase.Data.ImpactRayCount / Mathf.FloorToInt(SpinnerParameterDataBase.Data.ImpactRayCount * SpinnerParameterDataBase.Data.ImpactWaveRatio);
 
         for(int i = 0; i < SpinnerParameterDataBase.Data.ImpactRayCount; i++)
         {
@@ -30,6 +31,14 @@ public class SpinnerImpacter
             var rayVector = Quaternion.Euler(new Vector3(0, 0, rayAngle)) * Vector2.up;
             hited.AddRange(Physics2D.RaycastAll(SpinnerLocalData.Position, rayVector, rayLength).Select(hit => (hit.collider.gameObject, rayLength)));
             Debug.DrawRay(SpinnerLocalData.Position, rayVector * rayLength, Color.red, 2);
+
+            if((i + 1) % waveSpawnInterval == 0)
+            {
+                var wave = ObjectSpawner.Instance.DefaultSpawn(SpinnerParameterDataBase.Data.ImpactWavePrefab);
+                wave.transform.position = SpinnerLocalData.Position;
+                wave.transform.up = rayVector;
+                wave.GetComponent<ImpactWaveController>().SetWave(rayLength);
+            }
         }
 
         var attackPower = SpinnerParameterDataBase.Data.BaseAttack * SpinnerParameterDataBase.Data.AttackTorqueMultiplier * SpinnerLocalData.Torque;

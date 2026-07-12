@@ -60,7 +60,7 @@ public class SpinnerController : NetworkBehaviour, IWriteSpinnerLocal, IReceiveP
 
     public void OnTap(Vector2 tapPosition)
     {
-        if(SpinnerLocalData.State == SpinnerState.Brake)
+        if(SpinnerLocalData.State == SpinnerState.Brake && SpinnerLocalData.Torque > 0)
         {
             SpinnerImpacter.FireImpact(SpinnerLocalData.Forword, false);
             _spinnerDataWriter.Stop();
