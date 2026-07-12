@@ -32,6 +32,9 @@ public class GeneralDataBase : MonoBehaviour
     /// <summary> 最大サーバー接続可能プレイヤー数 </summary>
     [SerializeField]
     private int _maxConnectablePlayerCount;
+    /// <summary> 部屋の最大人数 </summary>
+    [SerializeField]
+    private int _roomCapacity;
     /// <summary> ネットワークランナーのプレハブ </summary>
     [SerializeField]
     private GameObject _networkRunnerPrefab;
@@ -54,6 +57,8 @@ public class GeneralDataBase : MonoBehaviour
     public float CameraFollowInitialVelocity { get => _cameraFollowInitialVelocity; }
     /// <summary> 最大サーバー接続可能プレイヤー数 </summary>
     public int MaxConnectablePlayerCount { get => _maxConnectablePlayerCount; }
+    /// <summary> 部屋の最大人数 </summary>
+    public int RoomCapacity { get => _roomCapacity; }
     /// <summary> ネットワークランナーのプレハブ </summary>
     public GameObject NetworkRunnerPrefab { get => _networkRunnerPrefab; }
 

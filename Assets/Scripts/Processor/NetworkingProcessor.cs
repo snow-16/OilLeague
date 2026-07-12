@@ -16,13 +16,13 @@ public class NetworkingProcessor : IWriteNetworkingLocal, IWriteSpinnerLocal
         new NetworkingProcessor().SetRunner();
     }
 
-    private static async Task StartSession(string sessionCode)
+    private static async Task StartSession(string sessionCode, int playerCount)
     {
         await NetworkingLocalData.NetworkRunner.StartGame(new StartGameArgs
             {
                 GameMode = GameMode.Shared,
                 SessionName = sessionCode,
-                PlayerCount = 6,
+                PlayerCount = playerCount,
                 Scene = SceneRef.FromIndex(SceneManager.GetSceneByName("Lobby").buildIndex)
             }
         );
@@ -43,14 +43,14 @@ public class NetworkingProcessor : IWriteNetworkingLocal, IWriteSpinnerLocal
             return;
         }
 
-        await StartSession("Lobby");
+        await StartSession("Lobby", GeneralDataBase.Data.MaxConnectablePlayerCount);
     }
 
     public static async Task CreateRoom(string sessionCode)
     {
         await NetworkingLocalData.NetworkRunner.Shutdown();
         CreateNetworkRunner();  
-        await StartSession($"Close:{sessionCode}:NewRoom:Wait");
+        await StartSession($"Close:{sessionCode}:NewRoom:Wait", GeneralDataBase.Data.RoomCapacity);
         new NetworkingProcessor().SetPlayerNumber();
         if(NetworkingLocalData.PlayerNumber == 1)
         {

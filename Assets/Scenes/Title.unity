@@ -539,6 +539,7 @@ MonoBehaviour:
   _cameraFollowSpeed: 1.03
   _cameraFollowInitialVelocity: 0.7
   _maxConnectablePlayerCount: 18
+  _roomCapacity: 5
   _networkRunnerPrefab: {fileID: 5763866096887942709, guid: 5dd46d69aa5a3429d8e50f26a485aa3f, type: 3}
 --- !u!114 &1590299902
 MonoBehaviour:
