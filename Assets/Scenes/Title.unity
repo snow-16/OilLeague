@@ -510,6 +510,8 @@ MonoBehaviour:
   _baseAttack: 0
   _attackTorqueMultiplier: 0
   _strikePower: 300
+  _strikeDampingMultiplier: 5
+  _strikeSpeed: 6
   _baseImpact: 1.5
   _impactTorqueMultiplier: 0.1
   _impactArc: 90

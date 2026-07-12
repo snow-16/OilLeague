@@ -60,7 +60,7 @@ public class SpinnerController : NetworkBehaviour, IWriteSpinnerLocal, IReceiveP
     {
         if(SpinnerLocalData.State == SpinnerState.Brake)
         {
-            SpinnerImpacter.FireImpact(transform.up, false);
+            SpinnerImpacter.FireImpact(SpinnerLocalData.Forword, false);
             _spinnerDataWriter.Stop();
         }
     }

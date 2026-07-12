@@ -22,8 +22,27 @@ public class SpinnerMover : MonoBehaviour, IWriteSpinnerLocal
         {
             if(SpinnerLocalData.Torque > 0)
             {
-                var baseSpeed = SpinnerParameterDataBase.Data.BaseSpeed * SpinnerLocalData.Torque * SpinnerParameterDataBase.Data.SpeedTorqueMultiplier;
-                transform.Translate(((SpinnerLocalData.State.Equals(SpinnerState.Brake) && baseSpeed > SpinnerParameterDataBase.Data.SpeedInBrake) ? SpinnerParameterDataBase.Data.SpeedInBrake : baseSpeed) * SpinnerLocalData.Forword, Space.World);
+                float spinSpeed;
+                switch(SpinnerLocalData.State)
+                {
+                    case SpinnerState.Brake: 
+                    {
+                        spinSpeed = SpinnerParameterDataBase.Data.SpeedInBrake;
+                        break;
+                    }
+                    case SpinnerState.Strike: 
+                    {
+                        spinSpeed = SpinnerParameterDataBase.Data.StrikeSpeed;
+                        break;
+                    }
+                    default :
+                    {
+                        spinSpeed = SpinnerParameterDataBase.Data.BaseSpeed * SpinnerLocalData.Torque * SpinnerParameterDataBase.Data.SpeedTorqueMultiplier;
+                        break;  
+                    }
+                };
+
+                transform.Translate(spinSpeed * SpinnerLocalData.Forword, Space.World);
                 _spinnerDataWriter.SavePosition(transform);
 
                 if(transform.position.magnitude > GeneralDataBase.Data.FieldRadius - transform.localScale.x / 2)

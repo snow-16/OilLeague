@@ -1,31 +1,38 @@
+using Fusion;
+using UniRx;
 using UnityEngine;
 
 /// <summary>
 /// オイルメイト管理クラス
 /// </summary>
-public class OilmateController : MonoBehaviour, IDamageable
+public class OilmateController : NetworkBehaviour, IDamageable, IWriteOilmateInstance
 {
-    /// <summary> 成長段階 </summary>
-    private OilmateType _oilmateType;
-    /// <summary> 生成元のスピナー </summary>
-    [SerializeField]
-    private SpinnerType _parentSpinner;
-
+    OilmateInstanceData _oilmateInstanceData;
     /// <summary>
     /// 初期設定
     /// </summary>
     /// <param name="type">成長段階</param>
     /// <param name="parent">生成元のスピナー</param>
-    public void SetSettings(OilmateType type, SpinnerType parent)
+    public void SetSettings(OilmateType level, SpinnerType parent)
     {
-        _oilmateType = type;
-        _parentSpinner = parent;
+        this.ObserveEveryValueChanged(_ => _oilmateInstanceData).Where(data => data != null).First().Subscribe(data =>
+            {
+                data.RPC_SetLevel(level);
+                data.RPC_SetParent(parent);
+            }
+        );
     }
 
-    public SpinnerType GetCamp() => _parentSpinner;
+    public SpinnerType GetCamp() => _oilmateInstanceData.Parent;
 
+    [Rpc(RpcSources.All, RpcTargets.StateAuthority)]
     public void RPC_ReceiveDamage(float damage, Vector2 attackerPosition, float pushPower)
     {
         Destroy(gameObject);
+    }
+
+    public void GiveWriter(OilmateInstanceData writer)
+    {
+        _oilmateInstanceData = writer;
     }
 }

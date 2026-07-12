@@ -22,20 +22,25 @@ public class SpinnerDrawer : MonoBehaviour
 
     void FixedUpdate()
     {
-        if(_spinnerInstanceData.Type == SpinnerLocalData.Type)
+        //回転
+        if(SpinnerLocalData.Torque > 0 && SpinnerLocalData.State != SpinnerState.Brake)
         {
-            //回転
-            if(SpinnerLocalData.Torque > 0 && SpinnerLocalData.State != SpinnerState.Brake)
+            if(_spinnerInstanceData.Type == SpinnerLocalData.Type)
             {
                 transform.eulerAngles += new Vector3(0, 0, SpinnerLocalData.Torque);
-                _coreRenderer.gameObject.SetActive(true);
-                _coreRenderer.transform.eulerAngles = Vector3.zero;
             }
-            else if(transform.eulerAngles != Vector3.zero)
+
+            _coreRenderer.gameObject.SetActive(true);
+            _coreRenderer.transform.eulerAngles = Vector3.zero;
+        }
+        else if(transform.eulerAngles != Vector3.zero)
+        {
+            if(_spinnerInstanceData.Type == SpinnerLocalData.Type)
             {
                 transform.eulerAngles = Vector3.zero;
-                _coreRenderer.gameObject.SetActive(false);
             }
+
+            _coreRenderer.gameObject.SetActive(false);
         }
 
         //方向

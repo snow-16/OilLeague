@@ -43,9 +43,15 @@ public class SpinnerParameterDataBase : MonoBehaviour
     /// <summary> トルクの攻撃力倍率 </summary>
     [SerializeField]
     private float _attackTorqueMultiplier;
-    /// <summary> ストライク時に与える初期速度 </summary>
+    /// <summary> ストライク時に与える初期トルク </summary>
     [SerializeField]
     private float _strikePower;
+    /// <summary> ストライク時の速度減衰倍率 </summary>
+    [SerializeField]
+    private float _strikeDampingMultiplier;
+    /// <summary> ストライク中の速度定数 </summary>
+    [SerializeField]
+    private float _strikeSpeed;
 
     /// <summary> 主衝撃波の基底距離 </summary>
     [SerializeField]
@@ -94,8 +100,12 @@ public class SpinnerParameterDataBase : MonoBehaviour
     public float BaseAttack { get => _baseAttack; }
     /// <summary> トルクの攻撃力倍率 </summary>
     public float AttackTorqueMultiplier { get => _attackTorqueMultiplier; }
-    /// <summary> ストライク時に与える初期速度 </summary>
+    /// <summary> ストライク時に与える初期トルク </summary>
     public float StrikePower { get => _strikePower; }
+    /// <summary> ストライク時の速度減衰倍率 </summary>
+    public float StrikeDampingMultiplier { get => _strikeDampingMultiplier; }
+    /// <summary> ストライク中の速度定数 </summary>
+    public float StrikeSpeed { get => _strikeSpeed; }
 
     /// <summary> 主衝撃波の基底距離 </summary>
     public float BaseImpact { get => _baseImpact; }

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: -1909084998888840071}
   - component: {fileID: 4807046229440474431}
   - component: {fileID: 1915507285352617887}
+  - component: {fileID: 6117528275440635736}
   m_Layer: 0
   m_Name: Oilmate
   m_TagString: Untagged
@@ -142,7 +143,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0dcd8c78d667845d793a8fe4f8419d9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  _parentSpinner: 0
 --- !u!114 &4807046229440474431
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -177,5 +177,21 @@ MonoBehaviour:
   Flags: 262145
   NestedObjects: []
   NetworkedBehaviours:
+  - {fileID: -1909084998888840071}
   - {fileID: 4807046229440474431}
+  - {fileID: 6117528275440635736}
   ForceRemoteRenderTimeframe: 0
+--- !u!114 &6117528275440635736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1057803999592222665}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67dc1fe48d3d84e70960a50e3d8765d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OilmateInstanceData
+  _Level: 0
+  _Parent: 0

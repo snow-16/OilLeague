@@ -13,7 +13,7 @@ public class SpinnerInstanceData : NetworkBehaviour
 
     void Awake()
     {
-        GetComponents<IWriteSpinnerInstance>().ToList().ForEach(writeable => writeable.GiveWriter(new()));
+        GetComponents<IWriteSpinnerInstance>().ToList().ForEach(writeable => writeable.GiveWriter(this));
     }
 
     [Rpc(RpcSources.All, RpcTargets.StateAuthority)]

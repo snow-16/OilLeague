@@ -102,7 +102,7 @@ public class SpinnerDataWriter
     /// </summary>
     public void DampingTorque()
     {
-        Data.SetTorque(SpinnerLocalData.Torque - SpinnerParameterDataBase.Data.TorqueDampingSpin);
+        Data.SetTorque(SpinnerLocalData.Torque - SpinnerParameterDataBase.Data.TorqueDampingSpin * (SpinnerLocalData.State == SpinnerState.Strike ? SpinnerParameterDataBase.Data.StrikeDampingMultiplier : 1));
         
         if(SpinnerLocalData.Torque < 1)
         {
@@ -154,7 +154,9 @@ public class SpinnerDataWriter
     /// <param name="strikeVector">飛ばされる方角</param>
     public void Strike(Vector2 strikeVector)
     {
-        Stop();
+        Data.SetTorque(0);
+        Data.SetChargeTorque(0);
+        Data.SetTurnCount(0);
         Data.SetState(SpinnerState.Strike);
         Data.SetTorque(SpinnerParameterDataBase.Data.StrikePower);
         UpdateForword(strikeVector);
