@@ -10,13 +10,13 @@ public class GeneralDataBase : MonoBehaviour
     private float _fieldRadius;
     /// <summary> 制限時間の規定値 〜分 </summary>
     [SerializeField]
-    private float _defaultTimeLimit;
+    private int _defaultTimeLimit;
     /// <summary> 制限時間の最大値 〜分 </summary>
     [SerializeField]
-    private float _maxTimeLimit;
+    private int _maxTimeLimit;
     /// <summary> 制限時間の設定間隔 </summary>
     [SerializeField]
-    private float _timeLimitsUnit;
+    private int _timeLimitsUnit;
     /// <summary> アナウンスの最大掲示数 </summary>
     [SerializeField]
     private int _maxNoticeCount;
@@ -42,11 +42,11 @@ public class GeneralDataBase : MonoBehaviour
     /// <summary> ゲームフィールドの半径 </summary>
     public float FieldRadius { get => _fieldRadius; }
     /// <summary> 制限時間の規定値 〜分 </summary>
-    public float DefaultTimeLimit { get => _defaultTimeLimit; }
+    public int DefaultTimeLimit { get => _defaultTimeLimit; }
     /// <summary> 制限時間の最大値 〜分 </summary>
-    public float MaxTimeLimit { get => _maxTimeLimit; }
+    public int MaxTimeLimit { get => _maxTimeLimit; }
     /// <summary> 制限時間の設定間隔 </summary>
-    public float TimeLimitsUnit { get => _timeLimitsUnit; }
+    public int TimeLimitsUnit { get => _timeLimitsUnit; }
     /// <summary> アナウンスの最大掲示数 </summary>
     public int MaxNoticeCount { get => _maxNoticeCount; }
     /// <summary> フリック感度 </summary>

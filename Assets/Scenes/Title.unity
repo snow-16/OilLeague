@@ -531,7 +531,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GeneralDataBase
   _fieldRadius: 100
-  _defaultTimeLimit: 0
+  _defaultTimeLimit: 20
   _maxTimeLimit: 0
   _timeLimitsUnit: 0
   _maxNoticeCount: 0

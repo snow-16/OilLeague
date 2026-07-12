@@ -1,5 +1,7 @@
 using System.Linq;
 using Fusion;
+using UniRx;
+using UnityEngine;
 
 public class InGameServerData : NetworkBehaviour
 {
@@ -7,6 +9,8 @@ public class InGameServerData : NetworkBehaviour
 
     [Networked, Capacity(5)]
     public NetworkArray<OilTank> OilTanks => default;
+    [Networked]
+    public float ProgressTime { get; private set; }
 
     public override void Spawned()
     {
@@ -30,6 +34,17 @@ public class InGameServerData : NetworkBehaviour
         var copyFromTanks = OilTanks[index];
         copyFromTanks.oilAmount += amount;
         OilTanks.Set(index, copyFromTanks);
+    }
+
+    [Rpc(RpcSources.All, RpcTargets.StateAuthority)]
+    public void RPC_StartTimer(int timeLimit)
+    {
+        ProgressTime = timeLimit;
+        Observable.EveryFixedUpdate().TakeUntil(Observable.EveryUpdate().Where(_ => ProgressTime <= 0)).Subscribe(_ =>
+            {
+                ProgressTime -= Time.deltaTime;
+            }
+        );
     }
 
     [Rpc(RpcSources.All, RpcTargets.All)]
