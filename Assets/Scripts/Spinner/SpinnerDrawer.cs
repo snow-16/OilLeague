@@ -61,6 +61,10 @@ public class SpinnerDrawer : MonoBehaviour
                 {
                     _spinnerRenderer.sprite = SpinnerTypeDataBase.Data.AllTypesData[_spinnerInstanceData.Type].sprites[(int)SpinnerState.Spin];
                 }
+                else if(state == SpinnerState.Brake && SpinnerLocalData.Torque == 0)
+                {
+                    _spinnerRenderer.sprite = SpinnerTypeDataBase.Data.AllTypesData[_spinnerInstanceData.Type].sprites[4];
+                }
                 else
                 {
                     _spinnerRenderer.sprite = SpinnerTypeDataBase.Data.AllTypesData[_spinnerInstanceData.Type].sprites[(int)state];

@@ -93,7 +93,7 @@ public class SpinnerDataWriter
     /// </summary>
     public void Brake()
     {
-        Data.SetTorque(SpinnerLocalData.Torque - (SpinnerParameterDataBase.Data.MaxTorque * SpinnerParameterDataBase.Data.TorqueDampingBrakeRatio));
+        Data.SetTorque(Mathf.Max(SpinnerLocalData.Torque - (SpinnerParameterDataBase.Data.MaxTorque * SpinnerParameterDataBase.Data.TorqueDampingBrakeRatio), 0));
         Data.SetState(SpinnerState.Brake);
     }
 

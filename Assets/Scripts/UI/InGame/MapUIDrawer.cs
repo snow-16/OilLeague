@@ -15,7 +15,6 @@ public class MapUIDrawer : MonoBehaviour
     {
         Instatnce = this;
         _mapRadiusRatio = transform.GetChild(0).localPosition.y / GeneralDataBase.Data.FieldRadius;
-        Debug.Log(_mapRadiusRatio);
     }
 
     private void CreateMarker(GameObject prefab, Transform targetTransform, Color markerColor, float markerSize)
