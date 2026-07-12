@@ -1,6 +1,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Fusion;
+using UniRx;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -28,11 +29,15 @@ public class NetworkingProcessor : IWriteNetworkingLocal
         );
     }
 
-    public static async Task GetSessionList()
+    public static void GetSessionList()
     {
-        CreateNetworkRunner();
-        await NetworkingLocalData.NetworkRunner.JoinSessionLobby(SessionLobby.Shared);
-        SceneManager.LoadScene("Lobby");
+        SceneProcessor.TransitionToLobby();
+        Observable.EveryUpdate().Where(_ => SceneProcessor.State == SceneState.Loading).First().Subscribe(async _ =>
+            {
+                CreateNetworkRunner();
+                await NetworkingLocalData.NetworkRunner.JoinSessionLobby(SessionLobby.Shared);
+            }
+        );
     }
 
     public static async Task JoinLobby()

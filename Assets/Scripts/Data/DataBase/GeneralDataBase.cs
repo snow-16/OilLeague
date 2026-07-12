@@ -5,6 +5,9 @@ using UnityEngine;
 /// </summary>
 public class GeneralDataBase : MonoBehaviour
 {
+    /// <summary> シーン遷移の速度 </summary>
+    [SerializeField]
+    private float _sceneTransitionSpeed;
     /// <summary> ゲームフィールドの半径 </summary>
     [SerializeField]
     private float _fieldRadius;
@@ -39,6 +42,8 @@ public class GeneralDataBase : MonoBehaviour
     [SerializeField]
     private GameObject _networkRunnerPrefab;
 
+    /// <summary> シーン遷移の速度 </summary>
+    public float SceneTransitionSpeed { get => _sceneTransitionSpeed; }
     /// <summary> ゲームフィールドの半径 </summary>
     public float FieldRadius { get => _fieldRadius; }
     /// <summary> 制限時間の規定値 〜分 </summary>

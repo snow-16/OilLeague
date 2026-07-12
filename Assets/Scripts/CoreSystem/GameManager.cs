@@ -28,6 +28,8 @@ public class GameManager : MonoBehaviour
 
             //入力処理をストリームに設定
             SubscribeInputSystem.SubscribeInputs();
+
+            SceneProcessor.ChangeState(SceneState.Exist);
         }
         else
         {

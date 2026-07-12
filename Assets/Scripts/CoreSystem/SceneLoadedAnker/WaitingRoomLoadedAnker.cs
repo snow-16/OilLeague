@@ -1,5 +1,5 @@
 /// <summary>
-/// インゲームシーンが読み込まれたことを検知するクラス
+/// ルームシーンが読み込まれたことを検知するクラス
 /// </summary>
 public class WaitingRoomLoadedAnker : SceneLoadedAnker
 {

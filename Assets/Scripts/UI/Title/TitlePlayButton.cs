@@ -1,8 +1,7 @@
 public class TitlePlayButton : BasicButton
 {
-    protected override async void ClickAction()
+    protected override void ClickAction()
     {
-        Destroy(gameObject);
-        await NetworkingProcessor.GetSessionList();
+        NetworkingProcessor.GetSessionList();
     }
 }
