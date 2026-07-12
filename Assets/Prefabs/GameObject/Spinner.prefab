@@ -147,6 +147,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70654661bd2fc424db99130b3c0678c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpinnerInstanceData
+  _Type: 0
+  _State: 0
+  _Forword: {x: 0, y: 0}
 --- !u!114 &3792323045756950814
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -216,6 +219,7 @@ MonoBehaviour:
   - {fileID: 1588360680509137901}
   - {fileID: 2603553331627329094}
   - {fileID: 2808762169494204218}
+  - {fileID: 5419725522074109414}
   ForceRemoteRenderTimeframe: 0
 --- !u!114 &2808762169494204218
 MonoBehaviour:
@@ -244,6 +248,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3501065433893270070}
   - component: {fileID: 746137934980214357}
+  - component: {fileID: 5419725522074109414}
   m_Layer: 0
   m_Name: SpinnerCore
   m_TagString: Untagged
@@ -324,3 +329,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &5419725522074109414
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8345571498479677657}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 158639473, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Fusion.Runtime.dll::Fusion.NetworkTransform
+  _stateAuthorityChangeErrorCorrectionDelta: 0
+  SyncScale: 0
+  SyncParent: 0
+  _autoAOIOverride: 1
+  DisableSharedModeInterpolation: 1

@@ -12,7 +12,7 @@ public class InputListDataWriter
 
     private InputListDataWriter()
     {
-        Data = InputListLocalData.Access();
+        Data = InputListLocalData.Access(this);
     }
 
     /// <summary>
@@ -20,15 +20,14 @@ public class InputListDataWriter
     /// ゲームマネージャー・入力受け取りクラスからのみアクセス可能
     /// </summary>
     /// <returns>インスタンス</returns>
-    public static InputListDataWriter Access()
+    public static InputListDataWriter Access(object accessed)
     {
-        var accessedClass = new StackFrame(1).GetMethod()?.ReflectedType;
-        if(typeof(IReceivePress).IsAssignableFrom(accessedClass) || typeof(IReceiveTap).IsAssignableFrom(accessedClass) || typeof(IReceiveFlick).IsAssignableFrom(accessedClass) || typeof(IReceiveHold).IsAssignableFrom(accessedClass) || accessedClass == typeof(GameManager))
+        if(accessed is IReceivePress || accessed is IReceiveTap || accessed is IReceiveFlick || accessed is IReceiveHold || accessed is GameManager)
         {
             return new InputListDataWriter();
         }
 
-        Debug.LogError("アクセス権限がありません。");
+        Debug.LogError($"{nameof(InputListDataWriter)}へのアクセス権限がありません。");
         return null;
     }
 

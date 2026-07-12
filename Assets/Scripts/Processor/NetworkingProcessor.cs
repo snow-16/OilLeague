@@ -4,7 +4,7 @@ using Fusion;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class NetworkingProcessor : IWriteNetworkingLocal
+public class NetworkingProcessor : IWriteNetworkingLocal, IWriteSpinnerLocal
 {
     public static void CreateNetworkRunner()
     {
@@ -13,7 +13,7 @@ public class NetworkingProcessor : IWriteNetworkingLocal
             ObjectSpawner.Instance.DestroySpawned(NetworkingLocalData.NetworkRunner.gameObject);
         }
 
-        NetworkingDataWriter.Access().Data.SetRunner(ObjectSpawner.Instance.SpawnDontDestroy(GeneralDataBase.Data.NetworkRunnerPrefab).GetComponent<NetworkRunner>());
+        new NetworkingProcessor().SetRunner();
     }
 
     private static async Task StartSession(string sessionCode)
@@ -52,7 +52,10 @@ public class NetworkingProcessor : IWriteNetworkingLocal
         CreateNetworkRunner();  
         await StartSession($"Close:{sessionCode}:NewRoom:Wait");
         new NetworkingProcessor().SetPlayerNumber();
-        await NetworkingLocalData.NetworkRunner.LoadScene("InGame");
+        if(NetworkingLocalData.PlayerNumber == 1)
+        {
+            await NetworkingLocalData.NetworkRunner.LoadScene("InGame");
+        }
     }
 
     public static async Task SpawnObject(GameObject prefab)
@@ -65,8 +68,14 @@ public class NetworkingProcessor : IWriteNetworkingLocal
         await NetworkingLocalData.NetworkRunner.SpawnAsync(prefab, prefab.transform.position, prefab.transform.rotation, PlayerRef.None, initialSetting);
     }
 
+    private void SetRunner()
+    {
+        NetworkingDataWriter.Access(this).Data.SetRunner(ObjectSpawner.Instance.SpawnDontDestroy(GeneralDataBase.Data.NetworkRunnerPrefab).GetComponent<NetworkRunner>());
+    }
+
     private void SetPlayerNumber()
     {
-        NetworkingDataWriter.Access().AssignPlayerNumber();
+        NetworkingDataWriter.Access(this).AssignPlayerNumber();
+        SpinnerDataWriter.Access(this).SetType((SpinnerType)NetworkingLocalData.PlayerNumber);
     }
 }

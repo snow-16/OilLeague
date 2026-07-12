@@ -11,7 +11,7 @@ public class SpinnerCameraController : MonoBehaviour, IReceiveFlick
     void Awake()
     {
         _cinemachineCamera = GetComponent<CinemachineFollow>();
-        InputListDataWriter.Access().AddFlickList(this);
+        InputListDataWriter.Access(this).AddFlickList(this);
     }
 
     void FixedUpdate()

@@ -12,7 +12,7 @@ public class SpinnerMover : MonoBehaviour, IWriteSpinnerLocal
 
     void Awake()
     {
-        _spinnerDataWriter = SpinnerDataWriter.Access();
+        _spinnerDataWriter = SpinnerDataWriter.Access(this);
         _spinnerInstanceData = GetComponent<SpinnerInstanceData>();
     }
 

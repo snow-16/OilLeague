@@ -10,7 +10,7 @@ public class SpinnerDamager : NetworkBehaviour, IWriteSpinnerLocal, IDamageable
 
     void Awake()
     {
-        _spinnerDataWriter = SpinnerDataWriter.Access();
+        _spinnerDataWriter = SpinnerDataWriter.Access(this);
         _spinnerInstanceData = GetComponent<SpinnerInstanceData>();
     }
 

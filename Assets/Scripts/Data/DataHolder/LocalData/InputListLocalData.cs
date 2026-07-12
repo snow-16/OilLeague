@@ -39,15 +39,14 @@ public class InputListLocalData
     /// ライタークラスからのみアクセス可能
     /// </summary>
     /// <returns>インスタンス</returns>
-    public static InputListLocalData Access()
+    public static InputListLocalData Access(object accessed)
     {
-        var accessedClass = new StackFrame(1).GetMethod()?.ReflectedType;
-        if(accessedClass == typeof(InputListDataWriter))
+        if(accessed is InputListDataWriter)
         {
             return new InputListLocalData();
         }
 
-        Debug.LogError("アクセス権限がありません。");
+        Debug.LogError($"{nameof(InputListLocalData)}へのアクセス権限がありません。");
         return null;
     }
 

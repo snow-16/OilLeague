@@ -22,13 +22,13 @@ public class SpinnerController : NetworkBehaviour, IWriteSpinnerLocal, IReceiveP
 
         if(SpinnerLocalData.Type == _spinnerInstanceData.Type)
         {
-            var inputListDataWriter = InputListDataWriter.Access();
+            var inputListDataWriter = InputListDataWriter.Access(this);
             inputListDataWriter.AddPressList(this);
             inputListDataWriter.AddTapList(this);
             inputListDataWriter.AddFlickList(this);
             inputListDataWriter.AddHoldList(this);
 
-            _spinnerDataWriter = SpinnerDataWriter.Access();
+            _spinnerDataWriter = SpinnerDataWriter.Access(this);
             _spinnerDataWriter.SavePosition(transform);
             FindAnyObjectByType<CinemachineCamera>().Target.TrackingTarget = transform;
 
@@ -37,14 +37,14 @@ public class SpinnerController : NetworkBehaviour, IWriteSpinnerLocal, IReceiveP
                 {
                     _spinnerInstanceData.RPC_SetState(state);
                 }
-            );
+            ).AddTo(this);
 
             _spinnerInstanceData.RPC_SetForword(SpinnerLocalData.Forword);
             this.ObserveEveryValueChanged(_ => SpinnerLocalData.Forword).Subscribe(forword =>
                 {
                     _spinnerInstanceData.RPC_SetForword(forword);
                 }
-            );
+            ).AddTo(this);
         }
     }
 

@@ -1,3 +1,5 @@
+using System;
+using UniRx;
 using UnityEngine;
 
 /// <summary>
@@ -6,15 +8,12 @@ using UnityEngine;
 [DefaultExecutionOrder(-100)]
 public class GameManager : MonoBehaviour
 {
+    public static GameManager Instance { get; private set; }
     void Awake() {
         if(FindObjectsByType<GameManager>(FindObjectsSortMode.None).Length == 1)
         {
-            if(Application.isMobilePlatform)
-            {
-                Screen.orientation = ScreenOrientation.LandscapeLeft;
-            }
-            
             DontDestroyOnLoad(gameObject);
+            Instance = this;
 
             //データベースの初期化
             var dataBase = transform.GetChild(0);
@@ -23,9 +22,9 @@ public class GameManager : MonoBehaviour
             dataBase.GetComponent<SpinnerTypeDataBase>().SetData();
 
             //データホルダーの初期化
-            InputListDataWriter.Access().Reset();
-            SpinnerDataWriter.Access().Reset();
-            NetworkingDataWriter.Access().Reset();
+            InputListDataWriter.Access(this).Reset();
+            SpinnerDataWriter.Access(this).Reset();
+            NetworkingDataWriter.Access(this).Reset();
 
             //入力処理をストリームに設定
             SubscribeInputSystem.SubscribeInputs();
@@ -34,5 +33,10 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    public void SetTimer(float time, Action timeUpAction)
+    {
+        Observable.Timer(TimeSpan.FromSeconds(time), Scheduler.MainThreadIgnoreTimeScale).Subscribe(_ => timeUpAction()).AddTo(this);
     }
 }

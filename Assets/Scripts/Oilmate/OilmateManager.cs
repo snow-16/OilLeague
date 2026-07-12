@@ -1,9 +1,10 @@
+using UniRx;
 using UnityEngine;
 
 /// <summary>
 /// オイルメイト生成クラス
 /// </summary>
-public class OilmateManager : MonoBehaviour, IReceiveFlick
+public class OilmateManager : MonoBehaviour
 {
     /// <summary> 基本オイルメイトのプレハブ </summary>
     [SerializeField]
@@ -11,15 +12,15 @@ public class OilmateManager : MonoBehaviour, IReceiveFlick
 
     void Awake()
     {
-        InputListDataWriter.Access().AddFlickList(this);
-    }
-
-    public void OnFlick(Vector2 pointerMoveVector)
-    {
-        if(SpinnerLocalData.State == SpinnerState.Brake)
-        {
-            var controller = Instantiate(_oilmatePrefab, SpinnerLocalData.Position, Quaternion.identity).GetComponent<OilmateController>();
-            controller.SetSettings(OilmateType.Drop, SpinnerType.Red);
-        }
+        this.ObserveEveryValueChanged(_ => SpinnerLocalData.State).Where(state => state == SpinnerState.Spin).Subscribe(state =>
+            {
+                var controller = ObjectSpawner.Instance.SpawnNetwork(_oilmatePrefab, (runner, oilmate) => 
+                    {
+                        oilmate.transform.position = SpinnerLocalData.Position;
+                        oilmate.GetComponent<OilmateController>().SetSettings(OilmateType.Drop, SpinnerLocalData.Type);
+                    }
+                );
+            }
+        );
     }
 }

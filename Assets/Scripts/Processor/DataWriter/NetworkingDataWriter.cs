@@ -11,7 +11,7 @@ public class NetworkingDataWriter
 
     private NetworkingDataWriter()
     {
-        Data = NetworkingLocalData.Access();
+        Data = NetworkingLocalData.Access(this);
     }
 
     /// <summary>
@@ -19,15 +19,14 @@ public class NetworkingDataWriter
     /// ゲームマネージャー・入力受け取りクラスからのみアクセス可能
     /// </summary>
     /// <returns>インスタンス</returns>
-    public static NetworkingDataWriter Access()
+    public static NetworkingDataWriter Access(object accessed)
     {
-        var accessedClass = new StackFrame(1).GetMethod()?.ReflectedType;
-        if(typeof(IWriteNetworkingLocal).IsAssignableFrom(accessedClass) || accessedClass == typeof(GameManager))
+        if(accessed is IWriteNetworkingLocal || accessed is GameManager)
         {
             return new NetworkingDataWriter();
         }
 
-        Debug.LogError("アクセス権限がありません。");
+        Debug.LogError($"{nameof(NetworkingDataWriter)}へのアクセス権限がありません。");
         return null;
     }
 

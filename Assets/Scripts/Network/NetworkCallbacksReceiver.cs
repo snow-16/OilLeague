@@ -10,7 +10,7 @@ public class NetworkCallbacksReceiver : MonoBehaviour, INetworkRunnerCallbacks, 
 
     void Awake()
     {
-        _networkingDataWriter = NetworkingDataWriter.Access();
+        _networkingDataWriter = NetworkingDataWriter.Access(this);
     }
 
     public async void OnSessionListUpdated(NetworkRunner runner, List<SessionInfo> sessionList)

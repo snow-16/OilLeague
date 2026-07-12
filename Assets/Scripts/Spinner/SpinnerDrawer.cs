@@ -61,6 +61,6 @@ public class SpinnerDrawer : MonoBehaviour
                     _spinnerRenderer.sprite = SpinnerTypeDataBase.Data.AllTypesData[_spinnerInstanceData.Type].sprites[(int)state];
                 }
             }
-        );
+        ).AddTo(this);
     }
 }

@@ -167,10 +167,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.CanvasScaler
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1800, y: 900}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -386,8 +386,8 @@ RectTransform:
   m_GameObject: {fileID: 1490157538}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 5, y: 5, z: 5}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1641165035}
   m_Father: {fileID: 499885478}
@@ -509,7 +509,7 @@ MonoBehaviour:
   _quickTurnTimeLimit: 0.1
   _baseAttack: 0
   _attackTorqueMultiplier: 0
-  _strikePower: 0
+  _strikePower: 300
   _baseImpact: 1.5
   _impactTorqueMultiplier: 0.1
   _impactArc: 90
@@ -553,6 +553,24 @@ MonoBehaviour:
   _spinnerPrefab: {fileID: 7427618220221976330, guid: c50965ebf80b04f1f9c8fcefcabc6e96, type: 3}
   _allTypesData:
   - type: 0
+    name: Red
+    sprites:
+    - {fileID: 21300000, guid: f2f4da2d5c11048aaa5c3da1afff4a47, type: 3}
+    - {fileID: 21300000, guid: cd180b17a0a424b83a5f0982bd95f078, type: 3}
+    - {fileID: 21300000, guid: 519700424957243c288b4b95afa58b6c, type: 3}
+    - {fileID: 21300000, guid: 519700424957243c288b4b95afa58b6c, type: 3}
+    - {fileID: 21300000, guid: 519700424957243c288b4b95afa58b6c, type: 3}
+    - {fileID: 21300000, guid: 8516bb81236de4705ad5f9b1e74fd06b, type: 3}
+  - type: 1
+    name: Red
+    sprites:
+    - {fileID: 21300000, guid: f2f4da2d5c11048aaa5c3da1afff4a47, type: 3}
+    - {fileID: 21300000, guid: cd180b17a0a424b83a5f0982bd95f078, type: 3}
+    - {fileID: 21300000, guid: 519700424957243c288b4b95afa58b6c, type: 3}
+    - {fileID: 21300000, guid: 519700424957243c288b4b95afa58b6c, type: 3}
+    - {fileID: 21300000, guid: 519700424957243c288b4b95afa58b6c, type: 3}
+    - {fileID: 21300000, guid: 8516bb81236de4705ad5f9b1e74fd06b, type: 3}
+  - type: 2
     name: Red
     sprites:
     - {fileID: 21300000, guid: f2f4da2d5c11048aaa5c3da1afff4a47, type: 3}

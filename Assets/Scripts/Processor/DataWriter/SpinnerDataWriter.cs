@@ -14,7 +14,7 @@ public class SpinnerDataWriter
 
     private SpinnerDataWriter()
     {
-        Data = SpinnerLocalData.Access();
+        Data = SpinnerLocalData.Access(this);
     }
 
     /// <summary>
@@ -22,15 +22,14 @@ public class SpinnerDataWriter
     /// ゲームマネージャー・入力受け取りクラスからのみアクセス可能
     /// </summary>
     /// <returns>インスタンス</returns>
-    public static SpinnerDataWriter Access()
+    public static SpinnerDataWriter Access(object accessed)
     {
-        var accessedClass = new StackFrame(1).GetMethod()?.ReflectedType;
-        if(typeof(IWriteSpinnerLocal).IsAssignableFrom(accessedClass) || accessedClass == typeof(GameManager))
+        if(accessed is IWriteSpinnerLocal || accessed is GameManager)
         {
             return new SpinnerDataWriter();
         }
 
-        Debug.LogError("アクセス権限がありません。");
+        Debug.LogError($"{nameof(SpinnerDataWriter)}へのアクセス権限がありません。");
         return null;
     }
 
@@ -119,7 +118,6 @@ public class SpinnerDataWriter
         Data.SetTorque(0);
         Data.SetChargeTorque(0);
         Data.SetTurnCount(0);
-        Data.SetState(SpinnerState.Stop);
         Stan();
     }
 
@@ -147,7 +145,7 @@ public class SpinnerDataWriter
     public void Stan()
     {
         Data.SetState(SpinnerState.Stan);
-        Observable.Timer(TimeSpan.FromSeconds(SpinnerParameterDataBase.Data.StanTime)).Subscribe(_ => Data.SetState(SpinnerState.Stop));
+        GameManager.Instance.SetTimer(1, () => Data.SetState(SpinnerState.Stop));
     }
 
     /// <summary>

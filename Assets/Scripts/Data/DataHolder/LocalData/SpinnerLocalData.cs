@@ -38,15 +38,14 @@ public class SpinnerLocalData
     /// ライタークラスからのみアクセス可能
     /// </summary>
     /// <returns>インスタンス</returns>
-    public static SpinnerLocalData Access()
+    public static SpinnerLocalData Access(object accessed)
     {
-        var accessedClass = new StackFrame(1).GetMethod()?.ReflectedType;
-        if(accessedClass == typeof(SpinnerDataWriter))
+        if(accessed is SpinnerDataWriter)
         {
             return new SpinnerLocalData();
         }
 
-        Debug.LogError("アクセス権限がありません。");
+        Debug.LogError($"{nameof(SpinnerLocalData)}へのアクセス権限がありません。");
         return null;
     }
 

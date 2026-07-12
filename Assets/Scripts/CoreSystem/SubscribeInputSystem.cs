@@ -63,7 +63,7 @@ public class SubscribeInputSystem
                     SubscribePress(pressPosition);
                 }
             }
-        );
+        ).AddTo(GameManager.Instance);
     }
 
     private static void SubscribePress(Vector2 pressPosition)

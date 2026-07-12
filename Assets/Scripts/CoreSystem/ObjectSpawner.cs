@@ -1,3 +1,5 @@
+using System.Threading.Tasks;
+using Fusion;
 using UnityEngine;
 
 /// <summary>
@@ -33,6 +35,16 @@ public class ObjectSpawner : MonoBehaviour
         var spawned = DefaultSpawn(spawnObject);
         DontDestroyOnLoad(spawned);
         return spawned;
+    }
+
+    /// <summary>
+    /// 通常の生成処理
+    /// </summary>
+    /// <param name="spawnObject">プレハブ</param>
+    /// <returns></returns>
+    public async Task<NetworkObject> SpawnNetwork(GameObject spawnObject, NetworkRunner.OnBeforeSpawned initializeSetting)
+    {
+        return await NetworkingLocalData.NetworkRunner.SpawnAsync(spawnObject, spawnObject.transform.position, spawnObject.transform.rotation, PlayerRef.None, initializeSetting);
     }
 
     /// <summary>

@@ -25,15 +25,14 @@ public class NetworkingLocalData
     /// ライタークラスからのみアクセス可能
     /// </summary>
     /// <returns>インスタンス</returns>
-    public static NetworkingLocalData Access()
+    public static NetworkingLocalData Access(object accessed)
     {
-        var accessedClass = new StackFrame(1).GetMethod()?.ReflectedType;
-        if(accessedClass == typeof(NetworkingDataWriter))
+        if(accessed is NetworkingDataWriter)
         {
             return new NetworkingLocalData();
         }
 
-        Debug.LogError("アクセス権限がありません。");
+        Debug.LogError($"{nameof(NetworkingLocalData)}へのアクセス権限がありません。");
         return null;
     }
 
