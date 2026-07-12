@@ -62,7 +62,16 @@ public class SpinnerDataWriter
     /// </summary>
     public void ChargeTorque()
     {
-        Data.SetChargeTorque(Mathf.Min(SpinnerLocalData.ChargeTorque + SpinnerParameterDataBase.Data.TorqueChargeSpeed, SpinnerParameterDataBase.Data.TorqueCriticalLimit));
+        var chargedTorque = SpinnerLocalData.ChargeTorque + SpinnerParameterDataBase.Data.TorqueChargeSpeed;
+
+        if(chargedTorque > SpinnerParameterDataBase.Data.TorqueCriticalLimit)
+        {
+            Stop();
+        }
+        else
+        {
+            Data.SetChargeTorque(chargedTorque);
+        }
     }
 
     /// <summary>

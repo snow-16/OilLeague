@@ -33,6 +33,7 @@ public class SpinnerTypeDataBase : MonoBehaviour
     {
         public SpinnerType type;
         public string name;
+        public Color color;
         public List<Sprite> sprites;
     }
 }

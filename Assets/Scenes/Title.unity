@@ -498,7 +498,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SpinnerParameterDataBase
   _maxTorque: 100
-  _torqueCriticalLimit: 120
+  _torqueCriticalLimit: 180
   _torqueDampingSpin: 0.2
   _doubleDampingBorder: 20
   _torqueDampingBrakeRatio: 0.05
@@ -530,7 +530,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 838ee37bfd3364152ba301e79ecee30e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GeneralDataBase
-  _fieldRadius: 50
+  _fieldRadius: 100
   _defaultTimeLimit: 0
   _maxTimeLimit: 0
   _timeLimitsUnit: 0
@@ -556,6 +556,7 @@ MonoBehaviour:
   _allTypesData:
   - type: 0
     name: Red
+    color: {r: 1, g: 0, b: 0, a: 1}
     sprites:
     - {fileID: 21300000, guid: f2f4da2d5c11048aaa5c3da1afff4a47, type: 3}
     - {fileID: 21300000, guid: cd180b17a0a424b83a5f0982bd95f078, type: 3}
@@ -565,6 +566,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 8516bb81236de4705ad5f9b1e74fd06b, type: 3}
   - type: 1
     name: Red
+    color: {r: 0, g: 0.4864049, b: 1, a: 1}
     sprites:
     - {fileID: 21300000, guid: f2f4da2d5c11048aaa5c3da1afff4a47, type: 3}
     - {fileID: 21300000, guid: cd180b17a0a424b83a5f0982bd95f078, type: 3}
@@ -574,6 +576,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 8516bb81236de4705ad5f9b1e74fd06b, type: 3}
   - type: 2
     name: Red
+    color: {r: 0.9056604, g: 0.82669216, b: 0, a: 1}
     sprites:
     - {fileID: 21300000, guid: f2f4da2d5c11048aaa5c3da1afff4a47, type: 3}
     - {fileID: 21300000, guid: cd180b17a0a424b83a5f0982bd95f078, type: 3}

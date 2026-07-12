@@ -7,7 +7,14 @@ using UnityEngine;
 /// </summary>
 public class OilmateController : NetworkBehaviour, IDamageable, IWriteOilmateInstance
 {
-    OilmateInstanceData _oilmateInstanceData;
+    /// <summary> インスタンスデータアクセス用 </summary>
+    private OilmateInstanceData _oilmateInstanceData;
+
+    public override void Spawned()
+    {
+        MapUIDrawer.CreateOilmateMarker(transform, _oilmateInstanceData.Parent);
+    }
+
     /// <summary>
     /// 初期設定
     /// </summary>

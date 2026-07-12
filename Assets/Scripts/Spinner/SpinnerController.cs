@@ -46,6 +46,8 @@ public class SpinnerController : NetworkBehaviour, IWriteSpinnerLocal, IReceiveP
                 }
             ).AddTo(this);
         }
+
+        MapUIDrawer.CreateSpinnerMarker(transform, _spinnerInstanceData.Type);
     }
 
     public void OnPress(Vector2 pressPosition)
