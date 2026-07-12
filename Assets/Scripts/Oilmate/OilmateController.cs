@@ -33,8 +33,9 @@ public class OilmateController : NetworkBehaviour, IDamageable, IWriteOilmateIns
     public SpinnerType GetCamp() => _oilmateInstanceData.Parent;
 
     [Rpc(RpcSources.All, RpcTargets.StateAuthority)]
-    public void RPC_ReceiveDamage(float damage, Vector2 attackerPosition, float pushPower)
+    public void RPC_ReceiveDamage(SpinnerType attackSource, float damage, Vector2 attackerPosition, float pushPower)
     {
+        InGameServerData.Instance.RPC_AddAmount(attackSource, 100);
         Destroy(gameObject);
     }
 

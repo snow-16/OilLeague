@@ -13,10 +13,13 @@ public abstract class ButtonBase : MonoBehaviour, IPointerClickHandler, IPointer
     protected bool _isPressing = false;
     /// <summary> 現在マウスオーバーされているか </summary>
     protected bool _isTargeting = false;
+    /// <summary> 初期地点 </summary>
+    protected Vector2 _basePos;
 
     protected virtual void Awake()
     {
         _buttonImage = GetComponent<Image>();
+        _basePos = ((RectTransform)transform).anchoredPosition;
     }
 
     public void OnPointerClick(PointerEventData eventData)

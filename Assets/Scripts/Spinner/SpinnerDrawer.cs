@@ -22,25 +22,25 @@ public class SpinnerDrawer : MonoBehaviour
 
     void FixedUpdate()
     {
-        //回転
-        if(SpinnerLocalData.Torque > 0 && SpinnerLocalData.State != SpinnerState.Brake)
+        if(_spinnerInstanceData.Type == SpinnerLocalData.Type)
         {
-            if(_spinnerInstanceData.Type == SpinnerLocalData.Type)
+            //回転
+            if(SpinnerLocalData.Torque > 0 && SpinnerLocalData.State != SpinnerState.Brake)
             {
-                transform.eulerAngles += new Vector3(0, 0, SpinnerLocalData.Torque);
-            }
+                if(_spinnerInstanceData.Type == SpinnerLocalData.Type)
+                {
+                    transform.eulerAngles += new Vector3(0, 0, SpinnerLocalData.Torque);
+                }
 
-            _coreRenderer.gameObject.SetActive(true);
-            _coreRenderer.transform.eulerAngles = Vector3.zero;
-        }
-        else if(transform.eulerAngles != Vector3.zero)
-        {
-            if(_spinnerInstanceData.Type == SpinnerLocalData.Type)
+                _coreRenderer.transform.eulerAngles = Vector3.zero;
+            }
+            else if(transform.eulerAngles != Vector3.zero)
             {
-                transform.eulerAngles = Vector3.zero;
+                if(_spinnerInstanceData.Type == SpinnerLocalData.Type)
+                {
+                    transform.eulerAngles = Vector3.zero;
+                }
             }
-
-            _coreRenderer.gameObject.SetActive(false);
         }
 
         //方向
@@ -68,6 +68,15 @@ public class SpinnerDrawer : MonoBehaviour
                 else
                 {
                     _spinnerRenderer.sprite = SpinnerTypeDataBase.Data.AllTypesData[_spinnerInstanceData.Type].sprites[(int)state];
+                }
+
+                if(state == SpinnerState.Spin || state == SpinnerState.Strike)
+                {
+                    _coreRenderer.gameObject.SetActive(true);
+                }
+                else
+                {
+                    _coreRenderer.gameObject.SetActive(false);
                 }
             }
         ).AddTo(this);

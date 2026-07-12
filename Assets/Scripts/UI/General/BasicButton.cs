@@ -17,7 +17,7 @@ public abstract class BasicButton : ButtonBase
 
         this.ObserveEveryValueChanged(_ => _isPressing).Subscribe(isPressing =>
             {
-                transform.localPosition += (Vector3)(pressingOffset * (isPressing ? -1 : 1));
+                ((RectTransform)transform).anchoredPosition = _basePos + (isPressing ? pressingOffset : Vector2.zero);
             }
         );
 

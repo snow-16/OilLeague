@@ -17,7 +17,7 @@ public class SpinnerDamager : NetworkBehaviour, IWriteSpinnerLocal, IDamageable
     public SpinnerType GetCamp() => _spinnerInstanceData.Type;
 
     [Rpc(RpcSources.All, RpcTargets.StateAuthority)]
-    public void RPC_ReceiveDamage(float damage, Vector2 attackerPosition, float pushPower)
+    public void RPC_ReceiveDamage(SpinnerType attackSource, float damage, Vector2 attackerPosition, float pushPower)
     {
         if(SpinnerLocalData.State == SpinnerState.Stan || SpinnerLocalData.State == SpinnerState.Stop)
         {

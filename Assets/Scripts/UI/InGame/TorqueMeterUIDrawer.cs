@@ -28,11 +28,14 @@ public class TorqueMeterUIDrawer : MonoBehaviour
 
         if(dangerProgress > 0)
         {
-            transform.localPosition = Vector2.zero + new Vector2(dangerProgress * Random.Range(-1.00f, 1.01f) * 5, dangerProgress * Random.Range(-1.00f, 1.01f) * 5);
+            ((RectTransform)transform).anchoredPosition = Vector2.zero + new Vector2(dangerProgress * Random.Range(-1.00f, 1.01f) * 5, dangerProgress * Random.Range(-1.00f, 1.01f) * 5);
         }
-        else if(transform.localPosition != Vector3.zero)
+        else if(((RectTransform)transform).anchoredPosition != Vector2.zero)
         {
-            transform.localPosition = Vector2.zero;
+            ((RectTransform)transform).anchoredPosition = Vector2.zero;
         }
+
+        _storeText.text = SpinnerLocalData.Torque.ToString("000");
+        _chargeText.text = SpinnerLocalData.ChargeTorque.ToString("000");
     }
 }

@@ -3,6 +3,7 @@
 /// </summary>
 public enum SpinnerType
 {
+    None,
     Red,
     Blue,
     Yellow,

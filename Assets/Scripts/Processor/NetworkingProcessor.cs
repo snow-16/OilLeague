@@ -4,7 +4,7 @@ using Fusion;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class NetworkingProcessor : IWriteNetworkingLocal, IWriteSpinnerLocal
+public class NetworkingProcessor : IWriteNetworkingLocal
 {
     public static void CreateNetworkRunner()
     {
@@ -54,8 +54,13 @@ public class NetworkingProcessor : IWriteNetworkingLocal, IWriteSpinnerLocal
         new NetworkingProcessor().SetPlayerNumber();
         if(NetworkingLocalData.PlayerNumber == 1)
         {
-            await NetworkingLocalData.NetworkRunner.LoadScene("InGame");
+            await NetworkingLocalData.NetworkRunner.LoadScene("WaitingRoom");
         }
+    }
+
+    public static async Task StartGame()
+    {
+        await NetworkingLocalData.NetworkRunner.LoadScene("InGame");
     }
 
     public static async Task SpawnObject(GameObject prefab)
@@ -76,6 +81,5 @@ public class NetworkingProcessor : IWriteNetworkingLocal, IWriteSpinnerLocal
     private void SetPlayerNumber()
     {
         NetworkingDataWriter.Access(this).AssignPlayerNumber();
-        SpinnerDataWriter.Access(this).SetType((SpinnerType)NetworkingLocalData.PlayerNumber);
     }
 }
