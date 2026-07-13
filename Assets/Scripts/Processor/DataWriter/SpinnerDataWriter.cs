@@ -66,7 +66,7 @@ public class SpinnerDataWriter
 
         if(chargedTorque > SpinnerParameterDataBase.Data.TorqueCriticalLimit)
         {
-            Stop();
+            Stan();
         }
         else
         {
@@ -115,7 +115,7 @@ public class SpinnerDataWriter
         
         if(SpinnerLocalData.Torque < 1)
         {
-            Stop();
+            Stan();
         }
     }
 
@@ -127,7 +127,6 @@ public class SpinnerDataWriter
         Data.SetTorque(0);
         Data.SetChargeTorque(0);
         Data.SetTurnCount(0);
-        Stan();
     }
 
     /// <summary>
@@ -153,6 +152,7 @@ public class SpinnerDataWriter
     /// </summary>
     public void Stan()
     {
+        Stop();
         Data.SetState(SpinnerState.Stan);
         GameManager.Instance.SetTimer(1, () => Data.SetState(SpinnerState.Stop));
     }
@@ -163,9 +163,7 @@ public class SpinnerDataWriter
     /// <param name="strikeVector">飛ばされる方角</param>
     public void Strike(Vector2 strikeVector)
     {
-        Data.SetTorque(0);
-        Data.SetChargeTorque(0);
-        Data.SetTurnCount(0);
+        Stop();
         Data.SetState(SpinnerState.Strike);
         Data.SetTorque(SpinnerParameterDataBase.Data.StrikePower);
         UpdateForword(strikeVector);

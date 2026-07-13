@@ -64,6 +64,10 @@ public class SpinnerController : NetworkBehaviour, IWriteSpinnerLocal, IReceiveP
         if(SpinnerLocalData.State == SpinnerState.Brake && SpinnerLocalData.Torque > 0)
         {
             SpinnerImpacter.FireImpact(SpinnerLocalData.Forword, false);
+            _spinnerDataWriter.Stan();
+        }
+        else
+        {
             _spinnerDataWriter.Stop();
         }
     }
