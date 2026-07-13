@@ -21,7 +21,7 @@ public class SpinnerDamager : NetworkBehaviour, IWriteSpinnerLocal, IDamageable
     {
         if(SpinnerLocalData.State == SpinnerState.Stan || SpinnerLocalData.State == SpinnerState.Stop)
         {
-            _spinnerDataWriter.Strike(((Vector2)transform.position - attackerPosition).normalized);
+            _spinnerDataWriter.Strike(((Vector2)transform.position - attackerPosition).normalized, attackSource);
         }
     }
 }

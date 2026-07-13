@@ -46,6 +46,6 @@ public class SpinnerImpacter
             .Where(hitData => hitData.obj.TryGetComponent(out IDamageable damageable) && damageable.GetCamp() != SpinnerLocalData.Type)
             .Select(hitData => (hitData.obj.GetComponent<IDamageable>(), hitData.length))
         .ToList<(IDamageable damageable, float length)>()
-        .ForEach(hitData => hitData.damageable.RPC_ReceiveDamage(SpinnerLocalData.Type, attackPower, SpinnerLocalData.Position, hitData.length));
+        .ForEach(hitData => hitData.damageable.RPC_ReceiveDamage(SpinnerLocalData.State == SpinnerState.Strike ? SpinnerLocalData.StrikeFrom : SpinnerLocalData.Type, attackPower, SpinnerLocalData.Position, hitData.length));
     }
 }

@@ -28,6 +28,9 @@ public class SpinnerLocalData
     /// <summary> 移動方向 </summary>
     public static Vector2 Forword { get; private set; }
 
+    /// <summary> 誰にストライクされたか </summary>
+    public static SpinnerType StrikeFrom { get; private set; }
+
     private SpinnerLocalData()
     {
         
@@ -110,5 +113,14 @@ public class SpinnerLocalData
     public void SetForword(Vector2 value)
     {
         Forword = value;
+    }
+
+    /// <summary>
+    /// ストライクしたスピナー書き換え
+    /// </summary>
+    /// <param name="value">ストライクしたスピナー</param>
+    public void SetStrikeFrom(SpinnerType value)
+    {
+        StrikeFrom = value;
     }
 }

@@ -161,11 +161,12 @@ public class SpinnerDataWriter
     /// ストライクされた処理
     /// </summary>
     /// <param name="strikeVector">飛ばされる方角</param>
-    public void Strike(Vector2 strikeVector)
+    public void Strike(Vector2 strikeVector, SpinnerType strikeFrom)
     {
         Stop();
         Data.SetState(SpinnerState.Strike);
         Data.SetTorque(SpinnerParameterDataBase.Data.StrikePower);
+        Data.SetStrikeFrom(strikeFrom);
         UpdateForword(strikeVector);
     }
 }
