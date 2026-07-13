@@ -1,4 +1,5 @@
 using UniRx;
+using UnityEngine;
 
 
 /// <summary>
@@ -8,7 +9,7 @@ public class InGameLoadedAnker : SceneLoadedAnker
 {
     protected override async void WhenLoaded()
     {
-        await NetworkingProcessor.SpawnObject(SpinnerTypeDataBase.Data.SpinnerPrefab, (runner, obj) => obj.GetComponent<SpinnerInstanceData>().RPC_SetType(SpinnerLocalData.Type));
+        await NetworkingProcessor.SpawnObjectAtPosition(SpinnerTypeDataBase.Data.SpinnerPrefab, Quaternion.Euler(0, 0, 360 / NetworkingLocalData.PlayerNumber / NetworkingLocalData.NetworkRunner.SessionInfo.PlayerCount) * Vector2.up * GeneralDataBase.Data.FieldRadius * 0.8f, (runner, obj) => obj.GetComponent<SpinnerInstanceData>().RPC_SetType(SpinnerLocalData.Type));
 
         Observable.EveryUpdate().Where(_ => Generated == _networkedPrefabs.Count + NetworkingLocalData.NetworkRunner.SessionInfo.PlayerCount).First().Subscribe(_ =>
             {

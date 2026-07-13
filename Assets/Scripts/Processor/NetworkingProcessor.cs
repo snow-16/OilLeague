@@ -78,6 +78,11 @@ public class NetworkingProcessor : IWriteNetworkingLocal
         await NetworkingLocalData.NetworkRunner.SpawnAsync(prefab, prefab.transform.position, prefab.transform.rotation, PlayerRef.None, initialSetting);
     }
 
+    public static async Task SpawnObjectAtPosition(GameObject prefab, Vector2 position, NetworkRunner.OnBeforeSpawned initialSetting)
+    {
+        await NetworkingLocalData.NetworkRunner.SpawnAsync(prefab, position, prefab.transform.rotation, PlayerRef.None, initialSetting);
+    }
+
     private void SetRunner()
     {
         NetworkingDataWriter.Access(this).Data.SetRunner(ObjectSpawner.Instance.SpawnDontDestroy(GeneralDataBase.Data.NetworkRunnerPrefab).GetComponent<NetworkRunner>());
