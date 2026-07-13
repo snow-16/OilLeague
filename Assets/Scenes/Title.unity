@@ -398,8 +398,8 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1490157539}
   - {fileID: 1274067281}
+  - {fileID: 1490157539}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -797,6 +797,7 @@ GameObject:
   - component: {fileID: 1590299901}
   - component: {fileID: 1590299900}
   - component: {fileID: 1590299902}
+  - component: {fileID: 1590299903}
   m_Layer: 0
   m_Name: DataBaseContainer
   m_TagString: Untagged
@@ -893,33 +894,140 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SpinnerTypeDataBase
   _spinnerPrefab: {fileID: 7427618220221976330, guid: c50965ebf80b04f1f9c8fcefcabc6e96, type: 3}
   _allTypesData:
-  - type: 0
+  - type: 1
     name: Red
     color: {r: 1, g: 0, b: 0, a: 1}
     sprites:
-    - {fileID: 21300000, guid: f2f4da2d5c11048aaa5c3da1afff4a47, type: 3}
-    - {fileID: 21300000, guid: cd180b17a0a424b83a5f0982bd95f078, type: 3}
-    - {fileID: 21300000, guid: c55c483f12f6244c5a87768a03d0d3b6, type: 3}
-    - {fileID: 21300000, guid: 00fff0550687d44cd8341f5f611d362c, type: 3}
-    - {fileID: 21300000, guid: 519700424957243c288b4b95afa58b6c, type: 3}
-  - type: 1
+    - {fileID: 21300000, guid: 3398a8ece41a14826a2f90eb5b28cd37, type: 3}
+    - {fileID: 21300000, guid: cba6e8c5c3db84629b27d28f42e6704f, type: 3}
+    - {fileID: 21300000, guid: ca62cd3fc635d4897bcd1909407277cb, type: 3}
+    - {fileID: 21300000, guid: aa698bb7731e04ee6a677e31a1c90fd1, type: 3}
+    - {fileID: 21300000, guid: 9a4d97a7eca94489295a06057dd6c446, type: 3}
+  - type: 2
     name: Red
     color: {r: 0, g: 0.4864049, b: 1, a: 1}
     sprites:
-    - {fileID: 21300000, guid: f2f4da2d5c11048aaa5c3da1afff4a47, type: 3}
-    - {fileID: 21300000, guid: cd180b17a0a424b83a5f0982bd95f078, type: 3}
-    - {fileID: 21300000, guid: c55c483f12f6244c5a87768a03d0d3b6, type: 3}
-    - {fileID: 21300000, guid: 00fff0550687d44cd8341f5f611d362c, type: 3}
-    - {fileID: 21300000, guid: 519700424957243c288b4b95afa58b6c, type: 3}
-  - type: 2
+    - {fileID: 21300000, guid: 5a8997f7c7f2d4081b72eceee9258539, type: 3}
+    - {fileID: 21300000, guid: 47b810fdce42b4fa581478a7eb9201fe, type: 3}
+    - {fileID: 21300000, guid: 1975c9623d1694203a7737729d3209be, type: 3}
+    - {fileID: 21300000, guid: 657eb13a42b9d4ba9ace49bbc7d72ce3, type: 3}
+    - {fileID: 21300000, guid: bf259d2dcdc814ba29bc2f28e3204b87, type: 3}
+  - type: 3
     name: Red
     color: {r: 0.9056604, g: 0.82669216, b: 0, a: 1}
     sprites:
-    - {fileID: 21300000, guid: f2f4da2d5c11048aaa5c3da1afff4a47, type: 3}
-    - {fileID: 21300000, guid: cd180b17a0a424b83a5f0982bd95f078, type: 3}
-    - {fileID: 21300000, guid: c55c483f12f6244c5a87768a03d0d3b6, type: 3}
-    - {fileID: 21300000, guid: 00fff0550687d44cd8341f5f611d362c, type: 3}
-    - {fileID: 21300000, guid: 519700424957243c288b4b95afa58b6c, type: 3}
+    - {fileID: 21300000, guid: 819b52a814ee84bce9350051d3b7b971, type: 3}
+    - {fileID: 21300000, guid: 5efdf7972f2f74905a4f3a4430300905, type: 3}
+    - {fileID: 21300000, guid: 5417f38c6536c42829d7c9813a43a11c, type: 3}
+    - {fileID: 21300000, guid: f45a86300312d4cc38ad916a6361248b, type: 3}
+    - {fileID: 21300000, guid: fc1ada5dd59df4f4aae156f6ff6fe730, type: 3}
+  - type: 4
+    name: Red
+    color: {r: 0.14819245, g: 0.7169812, b: 0.1251335, a: 1}
+    sprites:
+    - {fileID: 21300000, guid: 94fa393327fec4f71999cca892d7531a, type: 3}
+    - {fileID: 21300000, guid: 5226c9d5ee1a54bc58077e3bfc24b25c, type: 3}
+    - {fileID: 21300000, guid: f7ccbbcf3f04c4c93bac5e87e050902c, type: 3}
+    - {fileID: 21300000, guid: a4b523ae62a064727a8049f9714d149c, type: 3}
+    - {fileID: 21300000, guid: beeab6ff084a7465bb4ec28ea8c4efb3, type: 3}
+  - type: 5
+    name: Red
+    color: {r: 1, g: 0.36320752, b: 0.9046921, a: 1}
+    sprites:
+    - {fileID: 21300000, guid: 19164e646a3164d779a71c7e83db5fdc, type: 3}
+    - {fileID: 21300000, guid: 22a96cd6a9247492d98aceb8aaec696d, type: 3}
+    - {fileID: 21300000, guid: f4cc18d75a07e40ea84503b756039b59, type: 3}
+    - {fileID: 21300000, guid: 964a0a68e9a1944c0837cee2b521fe8a, type: 3}
+    - {fileID: 21300000, guid: 0b7729bd7a0af4606bf80b296d2d2db8, type: 3}
+  - type: 6
+    name: Red
+    color: {r: 0.493346, g: 0.14159843, b: 0.6981132, a: 1}
+    sprites:
+    - {fileID: 21300000, guid: 3443dd5163f174dc082a2a3ec1abeb36, type: 3}
+    - {fileID: 21300000, guid: 1fececd3bf1c94a79a156c6509aae9fe, type: 3}
+    - {fileID: 21300000, guid: b7f7d8f0b996543d7b91dddde6fafac0, type: 3}
+    - {fileID: 21300000, guid: 1b98c6e14093d4c9cbca5f8b3729b6b3, type: 3}
+    - {fileID: 21300000, guid: cf01262c53d5849c68be301ae55097a8, type: 3}
+  - type: 7
+    name: Red
+    color: {r: 0.8867924, g: 0.5774027, b: 0.15477037, a: 1}
+    sprites:
+    - {fileID: 21300000, guid: 382b8ee8cf85c4f3b9780b0c8afb9270, type: 3}
+    - {fileID: 21300000, guid: ed781c5bb301d49dc8f5b4feabf622a9, type: 3}
+    - {fileID: 21300000, guid: a879071defce54dd2a5952e0cf77e41e, type: 3}
+    - {fileID: 21300000, guid: d1f7a5cd0aeb0419c9bb6ad55deb7528, type: 3}
+    - {fileID: 21300000, guid: db92eea5158184ea5bf936ee6d0c188b, type: 3}
+  - type: 8
+    name: Red
+    color: {r: 0.3820755, g: 1, b: 0.80542266, a: 1}
+    sprites:
+    - {fileID: 21300000, guid: feb23980c41f641f0b462979b47e81bd, type: 3}
+    - {fileID: 21300000, guid: eb2205ae667c049919e83f507552d86a, type: 3}
+    - {fileID: 21300000, guid: 2d01dc17911d24ea58383196ffe1a007, type: 3}
+    - {fileID: 21300000, guid: f0ae46eb5ae9c49a09cd44206af438cd, type: 3}
+    - {fileID: 21300000, guid: 31e858f08351c4d13997761618fca692, type: 3}
+  - type: 9
+    name: Red
+    color: {r: 0.2264151, g: 0.2264151, b: 0.2264151, a: 1}
+    sprites:
+    - {fileID: 21300000, guid: 569159982f40d4abea2f85f9aa77eac3, type: 3}
+    - {fileID: 21300000, guid: 7389839ac180d4e46a588a6b71610cdd, type: 3}
+    - {fileID: 21300000, guid: 12614d92861be4ddf86951d9b959c1a1, type: 3}
+    - {fileID: 21300000, guid: 5b14c35307324475fb3b7e6aad967167, type: 3}
+    - {fileID: 21300000, guid: bcfa91a8535574a1482740f0aab281be, type: 3}
+  - type: 10
+    name: Red
+    color: {r: 1, g: 0.99448687, b: 0.8537736, a: 1}
+    sprites:
+    - {fileID: 21300000, guid: bc1bf16eaeded4323a4eeda120d8e893, type: 3}
+    - {fileID: 21300000, guid: 3d6089b15e1734fb0ad18fa1d3eb0c2c, type: 3}
+    - {fileID: 21300000, guid: 351c8440b002a4f1abba51e5fd410303, type: 3}
+    - {fileID: 21300000, guid: 9c20ee9ed609e46e99ceea41040625ee, type: 3}
+    - {fileID: 21300000, guid: 05f417078dffd4495b101b6734cffc49, type: 3}
+--- !u!114 &1590299903
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1590299898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba3bc5bf1c0544ecc9da466de3524741, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::OilmateTypeDataBase
+  _oilmatePrefab: {fileID: 1057803999592222665, guid: 1d0134dcca3b440448d0caf1c7aa97eb, type: 3}
+  _allTypesData:
+  - type: 1
+    sprites:
+    - {fileID: 21300000, guid: 6775c3c6a01e1452996c1623dace913c, type: 3}
+  - type: 2
+    sprites:
+    - {fileID: 21300000, guid: 8a833a854f9cf4e2eb2326482ebea00f, type: 3}
+  - type: 3
+    sprites:
+    - {fileID: 21300000, guid: f1000b9e3760d4baa890bc966fd22cf0, type: 3}
+  - type: 4
+    sprites:
+    - {fileID: 21300000, guid: 2e8e391ccc8b34cf4a3c5f33e6d79f6a, type: 3}
+  - type: 5
+    sprites:
+    - {fileID: 21300000, guid: c7b4bbaf1e959481faee9892ad776ac1, type: 3}
+  - type: 6
+    sprites:
+    - {fileID: 21300000, guid: 1210458a70dc142e3ba19c3a65ff7c05, type: 3}
+  - type: 7
+    sprites:
+    - {fileID: 21300000, guid: c9efaffc978424ce8b81de44f1ec2f25, type: 3}
+  - type: 8
+    sprites:
+    - {fileID: 21300000, guid: 6d1ede3823d09495ebf97d99fd919acc, type: 3}
+  - type: 9
+    sprites:
+    - {fileID: 21300000, guid: 95061461b83cc4a28bb9e881eb61e1f4, type: 3}
+  - type: 10
+    sprites:
+    - {fileID: 21300000, guid: 2f0fa4380f8804d36ad36cf646c7176c, type: 3}
 --- !u!1 &1641165034
 GameObject:
   m_ObjectHideFlags: 0

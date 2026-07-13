@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEngine;
 
 /// <summary>
-/// システム関連の定数データベース
+/// スピナーの種類ごとの設定データベース
 /// </summary>
 public class SpinnerTypeDataBase : MonoBehaviour
 {

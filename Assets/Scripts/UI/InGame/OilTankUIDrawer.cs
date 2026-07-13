@@ -22,7 +22,7 @@ public class OilTankUIDrawer : MonoBehaviour
             _oilGaugeImage = transform.GetChild(1).GetComponent<Image>();
             _oilCountText = transform.GetChild(3).GetComponent<TextMeshProUGUI>();
 
-            spinnerViewer.sprite = SpinnerTypeDataBase.Data.AllTypesData[PlayerSettingClientData.Players[_showingPlayersNumber].type].sprites[(int)SpinnerState.Stop];
+            spinnerViewer.sprite = SpinnerTypeDataBase.Data.AllTypesData[PlayerSettingClientData.Players[_showingPlayersNumber - 1].type].sprites[(int)SpinnerState.Stop];
         }
         else
         {

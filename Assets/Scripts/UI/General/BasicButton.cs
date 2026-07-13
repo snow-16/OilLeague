@@ -26,5 +26,11 @@ public abstract class BasicButton : ButtonBase
                 _buttonImage.color = targetedColor[isTargeting ? 1 : 0];
             }
         );
+
+        this.ObserveEveryValueChanged(_ => _canPush).Subscribe(canPush =>
+            {
+                _buttonImage.color = targetedColor[canPush ? 0 : 1];
+            }
+        );
     }
 }

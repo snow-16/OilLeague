@@ -15,6 +15,8 @@ public abstract class ButtonBase : MonoBehaviour, IPointerClickHandler, IPointer
     protected bool _isTargeting = false;
     /// <summary> 初期地点 </summary>
     protected Vector2 _basePos;
+    /// <summary> ボタンを押せるか </summary>
+    protected bool _canPush = true;
 
     protected virtual void Awake()
     {
@@ -24,32 +26,47 @@ public abstract class ButtonBase : MonoBehaviour, IPointerClickHandler, IPointer
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        ClickAction();
+        if(_canPush)
+        {
+            ClickAction();
+        }
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        _isPressing = true;
-        PointerUpDown();
+        if(_canPush)
+        {
+            _isPressing = true;
+            PointerUpDown();
+        }
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        _isPressing = false;
-        PointerUpDown();
+        if(_canPush)
+        {
+            _isPressing = false;
+            PointerUpDown();
+        }
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        _isTargeting = true;
-        PointerInOut();
+        if(_canPush)
+        {
+            _isTargeting = true;
+            PointerInOut();
+        }
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        _isTargeting = false;
-        _isPressing = false;
-        PointerInOut();
+        if(_canPush)
+        {
+            _isTargeting = false;
+            _isPressing = false;
+            PointerInOut();
+        }
     }
 
     protected virtual void ClickAction()
