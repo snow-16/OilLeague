@@ -32,7 +32,7 @@ public class OilTankUIDrawer : MonoBehaviour
 
     void FixedUpdate()
     {
-        if(_isShow)
+        if(SceneProcessor.State == SceneState.Exist && _isShow)
         {
             var amount = InGameServerData.Instance.OilTanks[_showingPlayersNumber - 1].oilAmount;
             var surplus = amount % 1000;

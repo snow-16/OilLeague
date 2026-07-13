@@ -22,63 +22,66 @@ public class SpinnerDrawer : MonoBehaviour
 
     void FixedUpdate()
     {
-        if(_spinnerInstanceData.Type == SpinnerLocalData.Type)
+        if(SceneProcessor.State == SceneState.Exist)
         {
-            //回転
-            if(SpinnerLocalData.Torque > 0 && SpinnerLocalData.State != SpinnerState.Brake)
+            if(_spinnerInstanceData.Type == SpinnerLocalData.Type)
             {
-                if(_spinnerInstanceData.Type == SpinnerLocalData.Type)
+                //回転
+                if(SpinnerLocalData.Torque > 0 && SpinnerLocalData.State != SpinnerState.Brake)
                 {
-                    transform.eulerAngles += new Vector3(0, 0, SpinnerLocalData.Torque);
-                }
+                    if(_spinnerInstanceData.Type == SpinnerLocalData.Type)
+                    {
+                        transform.eulerAngles += new Vector3(0, 0, SpinnerLocalData.Torque);
+                    }
 
-                _coreRenderer.transform.eulerAngles = Vector3.zero;
-            }
-            else if(transform.eulerAngles != Vector3.zero)
-            {
-                if(_spinnerInstanceData.Type == SpinnerLocalData.Type)
-                {
-                    transform.eulerAngles = Vector3.zero;
+                    _coreRenderer.transform.eulerAngles = Vector3.zero;
                 }
-            }
-        }
-
-        //方向
-        if(_spinnerInstanceData.Forword.x < 0)
-        {
-            _spinnerRenderer.flipX = false;
-            _coreRenderer.flipX = false;
-        }
-        else
-        {
-            _spinnerRenderer.flipX = true;
-            _coreRenderer.flipX = true;
-        }
-
-        this.ObserveEveryValueChanged(_ => _spinnerInstanceData.State).Subscribe(state =>
-            {
-                if(state == SpinnerState.Strike)
+                else if(transform.eulerAngles != Vector3.zero)
                 {
-                    _spinnerRenderer.sprite = SpinnerTypeDataBase.Data.AllTypesData[_spinnerInstanceData.Type].sprites[(int)SpinnerState.Spin];
-                }
-                else if(state == SpinnerState.Brake && SpinnerLocalData.Torque == 0)
-                {
-                    _spinnerRenderer.sprite = SpinnerTypeDataBase.Data.AllTypesData[_spinnerInstanceData.Type].sprites[4];
-                }
-                else
-                {
-                    _spinnerRenderer.sprite = SpinnerTypeDataBase.Data.AllTypesData[_spinnerInstanceData.Type].sprites[(int)state];
-                }
-
-                if(state == SpinnerState.Spin || state == SpinnerState.Strike)
-                {
-                    _coreRenderer.gameObject.SetActive(true);
-                }
-                else
-                {
-                    _coreRenderer.gameObject.SetActive(false);
+                    if(_spinnerInstanceData.Type == SpinnerLocalData.Type)
+                    {
+                        transform.eulerAngles = Vector3.zero;
+                    }
                 }
             }
-        ).AddTo(this);
+
+            //方向
+            if(_spinnerInstanceData.Forword.x < 0)
+            {
+                _spinnerRenderer.flipX = false;
+                _coreRenderer.flipX = false;
+            }
+            else
+            {
+                _spinnerRenderer.flipX = true;
+                _coreRenderer.flipX = true;
+            }
+
+            this.ObserveEveryValueChanged(_ => _spinnerInstanceData.State).TakeUntil(Observable.EveryUpdate().Where(_ => SceneProcessor.State == SceneState.Exist)).Subscribe(state =>
+                {
+                    if(state == SpinnerState.Strike)
+                    {
+                        _spinnerRenderer.sprite = SpinnerTypeDataBase.Data.AllTypesData[_spinnerInstanceData.Type].sprites[(int)SpinnerState.Spin];
+                    }
+                    else if(state == SpinnerState.Brake && SpinnerLocalData.Torque == 0)
+                    {
+                        _spinnerRenderer.sprite = SpinnerTypeDataBase.Data.AllTypesData[_spinnerInstanceData.Type].sprites[4];
+                    }
+                    else
+                    {
+                        _spinnerRenderer.sprite = SpinnerTypeDataBase.Data.AllTypesData[_spinnerInstanceData.Type].sprites[(int)state];
+                    }
+
+                    if(state == SpinnerState.Spin || state == SpinnerState.Strike)
+                    {
+                        _coreRenderer.gameObject.SetActive(true);
+                    }
+                    else
+                    {
+                        _coreRenderer.gameObject.SetActive(false);
+                    }
+                }
+            ).AddTo(this);
+        }
     }
 }

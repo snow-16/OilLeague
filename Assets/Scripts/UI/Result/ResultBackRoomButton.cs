@@ -1,7 +1,7 @@
 public class ResultBackRoomButton : BasicButton
 {
-    protected override async void ClickAction()
+    protected override void ClickAction()
     {
-        await SceneProcessor.TransitionToRoom();
+        SceneProcessor.TransitionToRoom();
     }
 }

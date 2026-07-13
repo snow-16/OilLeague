@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using UniRx;
 using UnityEngine.SceneManagement;
@@ -11,7 +12,7 @@ public class SceneProcessor
         State = state;
     }
 
-    private static async Task TransitionScene(string sceneName)
+    public static async Task TransitionScene(string sceneName)
     {
         await NetworkingLocalData.NetworkRunner.LoadScene(sceneName);
     }
@@ -26,18 +27,43 @@ public class SceneProcessor
         );
     }
 
-    public static async Task TransitionToRoom()
+    public static void TransitionToRoom()
     {
-        await TransitionScene("WaitingRoom");
+        RPCSendSystem.Instance.RPC_PlayTransition();
+        Observable.EveryUpdate().Where(_ => State == SceneState.Loading).First().Subscribe(async _ =>
+            {
+                await TransitionScene("WaitingRoom");
+            }
+        );
     }
 
-    public static async Task TransitionToInGame()
+    public static void TransitionToInGame()
     {
-        await TransitionScene("InGame");
+        RPCSendSystem.Instance.RPC_PlayTransition();
+        Observable.EveryUpdate().Where(_ => State == SceneState.Loading).First().Subscribe(async _ =>
+            {
+                await TransitionScene("InGame");
+            }
+        );
     }
 
-    public static async Task TransitionToResult()
+    public static void TransitionToResult()
     {
-        await TransitionScene("Result");
+        RPCSendSystem.Instance.RPC_PlayTransition();
+        Observable.EveryUpdate().Where(_ => State == SceneState.Loading).First().Subscribe(async _ =>
+            {
+                await TransitionScene("Result");
+            }
+        );
+    }
+
+    public static void PlayTransition(Action endAcion)
+    {
+        ChangeState(SceneState.TransitionStart);
+        Observable.EveryUpdate().Where(_ => State == SceneState.Loading).First().Subscribe(_ =>
+            {
+                endAcion();
+            }
+        );
     }
 }

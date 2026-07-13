@@ -25,6 +25,8 @@ public class InGameServerData : NetworkBehaviour
                 OilTanks.Set(i, copy);
             }
         }
+
+        FindAnyObjectByType<SceneLoadedAnker>().OnGenerated();
     }
 
     [Rpc(RpcSources.All, RpcTargets.StateAuthority)]
@@ -49,9 +51,9 @@ public class InGameServerData : NetworkBehaviour
         catchTimeOver.First().Subscribe(_ =>
             {
                 RPC_SaveData();
-                this.ObserveEveryValueChanged(_ => Instance).Where(_ => Instance == null).Subscribe(async _ => 
+                this.ObserveEveryValueChanged(_ => Instance).Where(_ => Instance == null).Subscribe(_ => 
                     {
-                        await SceneProcessor.TransitionToResult();
+                        SceneProcessor.TransitionToResult();
                     }
                 );
             }

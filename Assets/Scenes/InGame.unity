@@ -405,6 +405,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   _networkedPrefabs:
   - {fileID: 2550959905895564534, guid: a02f3aaa923af4f66ba3502bf4daf223, type: 3}
+  - {fileID: 6176657107050012632, guid: 34217b700f6784b6c9bcf4139b131c04, type: 3}
 --- !u!1 &141685741
 GameObject:
   m_ObjectHideFlags: 0

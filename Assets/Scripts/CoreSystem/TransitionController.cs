@@ -11,27 +11,27 @@ public class TransitionController : MonoBehaviour
     private GameObject _transitionUI;
     private Image _blackOutCircle;
     private GameObject _loadingText;
-    private Vector2 _underPosition;
-    private Vector2 _topPosition;
+    private Transform _underPosition;
+    private Transform _topPosition;
 
     void Awake()
     {
         _transitionUI = transform.GetChild(0).gameObject;
         _blackOutCircle = _transitionUI.transform.GetChild(1).GetComponent<Image>();
         _loadingText = _transitionUI.transform.GetChild(2).gameObject;
-        _underPosition = transform.GetChild(1).position;
-        _topPosition = transform.GetChild(2).position;
+        _underPosition = transform.GetChild(1);
+        _topPosition = transform.GetChild(2);
         DontDestroyOnLoad(gameObject);
 
         this.ObserveEveryValueChanged(_ => SceneProcessor.State).Subscribe(state =>
             {
                 if(state == SceneState.TransitionStart)
                 {
-                    StartTransition(_underPosition, Vector2.zero, 0.5f, () => _blackOutCircle.fillAmount >= 1, 1, SceneState.Loading);
+                    StartTransition(_underPosition.position, Vector2.zero, 0.5f, () => _blackOutCircle.fillAmount >= 1, 1, SceneState.Loading);
                 }
                 else if(state == SceneState.TransitionEnd)
                 {
-                    StartTransition(_topPosition, new Vector3(0, 0, 180), 1, () => _blackOutCircle.fillAmount <= 0.5f, -1, SceneState.Exist);
+                    StartTransition(_topPosition.position, new Vector3(0, 0, 180), 1, () => _blackOutCircle.fillAmount <= 0.5f, -1, SceneState.Exist);
                 }
             }
         );

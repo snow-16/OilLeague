@@ -2,9 +2,9 @@ using UniRx;
 
 
 /// <summary>
-/// ルームシーンが読み込まれたことを検知するクラス
+/// リザルトシーンが読み込まれたことを検知するクラス
 /// </summary>
-public class WaitingRoomLoadedAnker : SceneLoadedAnker
+public class ResultLoadedAnker : SceneLoadedAnker
 {
     protected override void WhenLoaded()
     {

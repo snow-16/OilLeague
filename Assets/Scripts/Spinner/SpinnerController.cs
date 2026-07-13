@@ -48,6 +48,7 @@ public class SpinnerController : NetworkBehaviour, IWriteSpinnerLocal, IReceiveP
         }
 
         MapUIDrawer.CreateSpinnerMarker(transform, _spinnerInstanceData.Type);
+        FindAnyObjectByType<SceneLoadedAnker>().OnGenerated();
     }
 
     public void OnPress(Vector2 pressPosition)

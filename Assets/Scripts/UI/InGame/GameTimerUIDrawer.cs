@@ -12,6 +12,9 @@ public class GameTimerUIDrawer : MonoBehaviour
 
     void FixedUpdate()
     {
-        _remainingTimeText.text = InGameServerData.Instance.ProgressTime.ToString("000.00");
+        if(SceneProcessor.State == SceneState.Exist)
+        {
+            _remainingTimeText.text = InGameServerData.Instance.ProgressTime.ToString("000.00");
+        }
     }
 }

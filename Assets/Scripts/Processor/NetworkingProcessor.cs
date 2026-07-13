@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using Fusion;
 using UniRx;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class NetworkingProcessor : IWriteNetworkingLocal
 {
@@ -23,8 +22,7 @@ public class NetworkingProcessor : IWriteNetworkingLocal
             {
                 GameMode = GameMode.Shared,
                 SessionName = sessionCode,
-                PlayerCount = playerCount,
-                Scene = SceneRef.FromIndex(SceneManager.GetSceneByName("Lobby").buildIndex)
+                PlayerCount = playerCount
             }
         );
     }
@@ -51,21 +49,23 @@ public class NetworkingProcessor : IWriteNetworkingLocal
         await StartSession("Lobby", GeneralDataBase.Data.MaxConnectablePlayerCount);
     }
 
-    public static async Task CreateRoom(string sessionCode)
+    public static void CreateRoom(string sessionCode)
     {
-        await NetworkingLocalData.NetworkRunner.Shutdown();
-        CreateNetworkRunner();  
-        await StartSession($"Close:{sessionCode}:NewRoom:Wait", GeneralDataBase.Data.RoomCapacity);
-        new NetworkingProcessor().SetPlayerNumber();
-        if(NetworkingLocalData.PlayerNumber == 1)
-        {
-            await SceneProcessor.TransitionToRoom();
-        }
+        SceneProcessor.ChangeState(SceneState.TransitionStart);
+        Observable.EveryUpdate().Where(_ => SceneProcessor.State == SceneState.Loading).First().Subscribe(async _ =>
+            {
+                await NetworkingLocalData.NetworkRunner.Shutdown();
+                CreateNetworkRunner();  
+                await StartSession($"Close:{sessionCode}:NewRoom:Wait", GeneralDataBase.Data.RoomCapacity);
+                new NetworkingProcessor().SetPlayerNumber();
+                await SceneProcessor.TransitionScene("WaitingRoom");
+            }
+        );
     }
 
-    public static async Task StartGame()
+    public static void StartGame()
     {
-        await SceneProcessor.TransitionToInGame();
+        RPCSendSystem.Instance.RPC_PlayTransition();
     }
 
     public static async Task SpawnObject(GameObject prefab)

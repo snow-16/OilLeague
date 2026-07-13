@@ -1,7 +1,7 @@
 public class JoinRoomButton : BasicButton
 {
-    protected override async void ClickAction()
+    protected override void ClickAction()
     {
-        await NetworkingProcessor.CreateRoom("AAAAAA");
+        NetworkingProcessor.CreateRoom("AAAAAA");
     }
 }

@@ -9,7 +9,9 @@ public class SceneLoadedAnker : MonoBehaviour
 {
     /// <summary> 読み込み時に生成されるネットワークオブジェクト群 </summary>
     [SerializeField]
-    private List<NetworkBehaviour> _networkedPrefabs = new();
+    protected List<NetworkBehaviour> _networkedPrefabs = new();
+
+    public int Generated { get; private set; }
 
     public void Awake()
     {
@@ -24,5 +26,10 @@ public class SceneLoadedAnker : MonoBehaviour
     protected virtual void WhenLoaded()
     {
         
+    }
+
+    public void OnGenerated()
+    {
+        Generated++;
     }
 }

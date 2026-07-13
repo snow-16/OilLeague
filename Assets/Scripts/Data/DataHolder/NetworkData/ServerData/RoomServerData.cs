@@ -11,6 +11,7 @@ public class RoomServerData : NetworkBehaviour
     public override void Spawned()
     {
         Instance = this;
+        FindAnyObjectByType<SceneLoadedAnker>().OnGenerated();
     }
 
     [Rpc(RpcSources.All, RpcTargets.StateAuthority)]
