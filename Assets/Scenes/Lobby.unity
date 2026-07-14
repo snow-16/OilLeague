@@ -704,7 +704,7 @@ MonoBehaviour:
   - {r: 1, g: 1, b: 1, a: 1}
   - {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 1}
   pressingOffset: {x: 10, y: -10}
-  _codeInputField: {fileID: 0}
+  _codeInputField: {fileID: 162783467}
 --- !u!1 &1488604457
 GameObject:
   m_ObjectHideFlags: 0

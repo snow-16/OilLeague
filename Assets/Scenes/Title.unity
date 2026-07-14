@@ -847,15 +847,15 @@ MonoBehaviour:
   _strikePower: 300
   _strikeDampingMultiplier: 5
   _strikeSpeed: 6
-  _baseImpact: 1.5
+  _baseImpact: 3
   _impactTorqueMultiplier: 0.1
-  _impactArc: 90
+  _impactArc: 120
   _turnImpactPower: 3
   _impactRayCount: 180
   _impactWaveSpeed: 4
   _impactWaveRatio: 0.1
   _impactWavePrefab: {fileID: 4225061727191482983, guid: 764fb89a03dad4a7bb9368a4bcac28f8, type: 3}
-  _stanTime: 1
+  _stanTime: 5
 --- !u!114 &1590299901
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -870,7 +870,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GeneralDataBase
   _sceneTransitionSpeed: 0.03
   _fieldRadius: 100
-  _defaultTimeLimit: 120
+  _defaultTimeLimit: 180
   _maxTimeLimit: 0
   _timeLimitsUnit: 0
   _maxNoticeCount: 0

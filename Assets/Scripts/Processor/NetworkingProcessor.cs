@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Fusion;
 using UniRx;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class NetworkingProcessor : IWriteNetworkingLocal
 {
@@ -22,7 +23,8 @@ public class NetworkingProcessor : IWriteNetworkingLocal
             {
                 GameMode = GameMode.Shared,
                 SessionName = sessionCode,
-                PlayerCount = playerCount
+                PlayerCount = playerCount,
+                SceneManager = NetworkingLocalData.NetworkRunner.GetComponent<NetworkSceneManagerDefault>()
             }
         );
     }
