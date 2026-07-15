@@ -57,10 +57,17 @@ public class NetworkingProcessor : IWriteNetworkingLocal
         Observable.EveryUpdate().Where(_ => SceneProcessor.State == SceneState.Loading).First().Subscribe(async _ =>
             {
                 await NetworkingLocalData.NetworkRunner.Shutdown();
-                CreateNetworkRunner();  
-                await StartSession($"Close:{sessionCode}:NewRoom:Wait", GeneralDataBase.Data.RoomCapacity);
-                new NetworkingProcessor().SetPlayerNumber();
-                await SceneProcessor.TransitionScene("WaitingRoom");
+                CreateNetworkRunner();
+                try
+                {
+                    await StartSession($"Close:{sessionCode}:NewRoom:Wait", GeneralDataBase.Data.RoomCapacity);
+                    new NetworkingProcessor().SetPlayerNumber();
+                    await SceneProcessor.TransitionScene("WaitingRoom");
+                }
+                catch
+                {
+                    SceneProcessor.ChangeState(SceneState.TransitionEnd);
+                }
             }
         );
     }
