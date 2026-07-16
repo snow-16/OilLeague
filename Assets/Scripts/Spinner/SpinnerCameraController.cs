@@ -4,32 +4,50 @@ using UnityEngine;
 /// <summary>
 /// カメラの後追いを操作するクラス
 /// </summary>
-public class SpinnerCameraController : MonoBehaviour, IReceiveFlick
+public class SpinnerCameraController : MonoBehaviour, IReceiveFlick, IReceiveHold
 {
+    [SerializeField]
+    private Vector3 _baseCameraOffset;
+
     private CinemachineFollow _cinemachineCamera;
+    private float _lookingDistance = 0;
 
     void Awake()
     {
         _cinemachineCamera = GetComponent<CinemachineFollow>();
-        InputListDataWriter.Access(this).AddFlickList(this);
+        InputListDataWriter.Access(this).AddFlickList(this).AddHoldList(this);
     }
 
     void FixedUpdate()
     {
-        if(_cinemachineCamera.TrackerSettings.PositionDamping.x > 0)
+        if(_lookingDistance > 0)
         {
-            _cinemachineCamera.TrackerSettings.PositionDamping *= 1 / GeneralDataBase.Data.CameraFollowSpeed;
-
-            if(_cinemachineCamera.TrackerSettings.PositionDamping.x < 0.01f)
+            if(SpinnerLocalData.State != SpinnerState.Brake)
             {
-                _cinemachineCamera.TrackerSettings.PositionDamping = Vector3.zero;
+                _lookingDistance += GeneralDataBase.Data.CameraFollowSpeed;
+
+                if(_lookingDistance >= GeneralDataBase.Data.CameraFollowMaxOffset)
+                {
+                    _lookingDistance = GeneralDataBase.Data.CameraFollowMaxOffset;
+                }
+
+                if(SpinnerLocalData.State == SpinnerState.Stop || SpinnerLocalData.State == SpinnerState.Stan)
+                {
+                    _lookingDistance = 0;
+                }
             }
+
+            _cinemachineCamera.FollowOffset = _baseCameraOffset + (Vector3)(SpinnerLocalData.Forword * _lookingDistance);
         }
     }
 
     public void OnFlick(Vector2 pointerMoveVector)
     {
-        var initialVelocity = GeneralDataBase.Data.CameraFollowInitialVelocity;
-        _cinemachineCamera.TrackerSettings.PositionDamping = new Vector3(initialVelocity, initialVelocity, initialVelocity);
+        _lookingDistance = 0.1f;
+    }
+
+    public void OnHold()
+    {
+        _lookingDistance = Mathf.Lerp(_lookingDistance, 0, GeneralDataBase.Data.CameraInBrakeResetSpeed);
     }
 }

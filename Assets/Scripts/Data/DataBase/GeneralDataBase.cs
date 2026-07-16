@@ -29,9 +29,12 @@ public class GeneralDataBase : MonoBehaviour
     /// <summary> カメラ追従速度 </summary>
     [SerializeField]
     private float _cameraFollowSpeed;
-    /// <summary> カメラ追従初速 </summary>
+    /// <summary> カメラ追従時の最大追い越し距離 </summary>
     [SerializeField]
-    private float _cameraFollowInitialVelocity;
+    private float _cameraFollowMaxOffset;
+    /// <summary> ブレーキ中のカメラ帰還速度 </summary>
+    [SerializeField]
+    private float _cameraInBrakeResetSpeed;
     /// <summary> 最大サーバー接続可能プレイヤー数 </summary>
     [SerializeField]
     private int _maxConnectablePlayerCount;
@@ -58,8 +61,10 @@ public class GeneralDataBase : MonoBehaviour
     public float FlickSensitivity { get => _flickSensitivity; }
     /// <summary> カメラ追従速度 </summary>
     public float CameraFollowSpeed { get => _cameraFollowSpeed; }
-    /// <summary> カメラ追従初速 </summary>
-    public float CameraFollowInitialVelocity { get => _cameraFollowInitialVelocity; }
+    /// <summary> カメラ追従時の最大追い越し距離 </summary>
+    public float CameraFollowMaxOffset { get => _cameraFollowMaxOffset; }
+    /// <summary> ブレーキ中のカメラ帰還速度 </summary>
+    public float CameraInBrakeResetSpeed { get => _cameraInBrakeResetSpeed; }
     /// <summary> 最大サーバー接続可能プレイヤー数 </summary>
     public int MaxConnectablePlayerCount { get => _maxConnectablePlayerCount; }
     /// <summary> 部屋の最大人数 </summary>

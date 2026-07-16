@@ -1,5 +1,3 @@
-using System.Diagnostics;
-
 using Debug = UnityEngine.Debug;
 
 /// <summary>
@@ -46,43 +44,47 @@ public class InputListDataWriter
     /// 押下受け取り可能リスト追加
     /// </summary>
     /// <param name="addItem">追加インスタンス</param>
-    public void AddPressList(IReceivePress addItem)
+    public InputListDataWriter AddPressList(IReceivePress addItem)
     {
         var list = InputListLocalData.CanPresses;
         list.Add(addItem);
         Data.SetPressList(list);
+        return this;
     }
 
     /// <summary>
     /// タップ受け取り可能リスト追加
     /// </summary>
     /// <param name="addItem">追加インスタンス</param>
-    public void AddTapList(IReceiveTap addItem)
+    public InputListDataWriter AddTapList(IReceiveTap addItem)
     {
         var list = InputListLocalData.CanTaps;
         list.Add(addItem);
         Data.SetTapList(list);
+        return this;
     }
 
     /// <summary>
     /// フリック受け取り可能リスト追加
     /// </summary>
     /// <param name="addItem">追加インスタンス</param>
-    public void AddFlickList(IReceiveFlick addItem)
+    public InputListDataWriter AddFlickList(IReceiveFlick addItem)
     {
         var list = InputListLocalData.CanFlicks;
         list.Add(addItem);
         Data.SetFlickList(list);
+        return this;
     }
 
     /// <summary>
     /// 長押し受け取り可能リスト追加
     /// </summary>
     /// <param name="addItem">追加インスタンス</param>
-    public void AddHoldList(IReceiveHold addItem)
+    public InputListDataWriter AddHoldList(IReceiveHold addItem)
     {
         var list = InputListLocalData.CanHolds;
         list.Add(addItem);
         Data.SetHoldList(list);
+        return this;
     }
 }

@@ -847,10 +847,10 @@ MonoBehaviour:
   _strikePower: 300
   _strikeDampingMultiplier: 5
   _strikeSpeed: 6
-  _baseImpact: 3
-  _impactTorqueMultiplier: 0.1
+  _baseImpact: 5
+  _impactTorqueMultiplier: 0.15
   _impactArc: 120
-  _turnImpactPower: 3
+  _turnImpactPower: 5
   _impactRayCount: 180
   _impactWaveSpeed: 4
   _impactWaveRatio: 0.1
@@ -870,13 +870,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GeneralDataBase
   _sceneTransitionSpeed: 0.03
   _fieldRadius: 100
-  _defaultTimeLimit: 180
+  _defaultTimeLimit: 120
   _maxTimeLimit: 0
   _timeLimitsUnit: 0
   _maxNoticeCount: 0
   _flickSensitivity: 0.05
-  _cameraFollowSpeed: 1.03
-  _cameraFollowInitialVelocity: 0.7
+  _cameraFollowSpeed: 0.25
+  _cameraFollowMaxOffset: 5
+  _cameraInBrakeResetSpeed: 0.2
   _maxConnectablePlayerCount: 18
   _roomCapacity: 5
   _networkRunnerPrefab: {fileID: 5763866096887942709, guid: 5dd46d69aa5a3429d8e50f26a485aa3f, type: 3}
