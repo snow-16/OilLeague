@@ -6,6 +6,8 @@ public class RoomServerData : NetworkBehaviour
 {
     public static RoomServerData Instance { get; private set; } = null;
 
+    [Networked]
+    public int SaveFinished { get; private set; }
     [Networked, Capacity(5)]
     public NetworkArray<PlayerSettings> Players => default;
 
@@ -27,7 +29,13 @@ public class RoomServerData : NetworkBehaviour
     public void RPC_SaveData()
     {
         PlayerSettingClientData.ReceiveFromServer(Players.ToList());
-        Instance = null;
+        RPC_SaveFinished();
+    }
+
+    [Rpc(RpcSources.All, RpcTargets.StateAuthority)]
+    public void RPC_SaveFinished()
+    {
+        SaveFinished++;
     }
 
     public struct PlayerSettings : INetworkStruct

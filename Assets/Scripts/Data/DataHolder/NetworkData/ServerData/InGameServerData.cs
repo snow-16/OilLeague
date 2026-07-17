@@ -7,6 +7,8 @@ public class InGameServerData : NetworkBehaviour
 {
     public static InGameServerData Instance { get; private set; } = null;
 
+    [Networked]
+    public int SaveFinished { get; private set; }
     [Networked, Capacity(5)]
     public NetworkArray<OilTank> OilTanks => default;
     [Networked]
@@ -51,7 +53,7 @@ public class InGameServerData : NetworkBehaviour
         catchTimeOver.First().Subscribe(_ =>
             {
                 RPC_SaveData();
-                this.ObserveEveryValueChanged(_ => Instance).Where(_ => Instance == null).Subscribe(_ => 
+                Observable.EveryUpdate().Where(_ => SaveFinished == NetworkingLocalData.NetworkRunner.SessionInfo.PlayerCount).First().Subscribe(_ => 
                     {
                         SceneProcessor.TransitionToResult();
                     }
@@ -64,7 +66,13 @@ public class InGameServerData : NetworkBehaviour
     public void RPC_SaveData()
     {
         OilResultClientData.ReceiveFromServer(OilTanks.ToList());
-        Instance = null;
+        RPC_SaveFinished();
+    }
+
+    [Rpc(RpcSources.All, RpcTargets.StateAuthority)]
+    public void RPC_SaveFinished()
+    {
+        SaveFinished++;
     }
 
     public struct OilTank : INetworkStruct

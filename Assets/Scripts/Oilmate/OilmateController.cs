@@ -13,6 +13,11 @@ public class OilmateController : NetworkBehaviour, IDamageable, IWriteOilmateIns
     public override void Spawned()
     {
         MapUIDrawer.CreateOilmateMarker(transform, _oilmateInstanceData.Parent);
+        GetComponent<SpriteRenderer>().sprite = OilmateTypeDataBase.Data.AllTypesData[_oilmateInstanceData.Parent].sprites[(int)_oilmateInstanceData.Level];
+        if(_oilmateInstanceData.Parent == SpinnerLocalData.Type)
+        {
+            transform.GetChild(0).gameObject.SetActive(false);
+        }
     }
 
     /// <summary>
@@ -22,8 +27,6 @@ public class OilmateController : NetworkBehaviour, IDamageable, IWriteOilmateIns
     /// <param name="parent">生成元のスピナー</param>
     public void SetSettings(OilmateType level, SpinnerType parent)
     {
-        GetComponent<SpriteRenderer>().sprite = OilmateTypeDataBase.Data.AllTypesData[parent].sprites[(int)level];
-
         this.ObserveEveryValueChanged(_ => _oilmateInstanceData).Where(data => data != null).First().Subscribe(data =>
             {
                 data.RPC_SetLevel(level);

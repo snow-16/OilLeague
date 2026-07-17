@@ -29,7 +29,7 @@ public class RoomStartButton : BasicButton
         this.ObserveEveryValueChanged(_ => SceneProcessor.State).Where(state => state == SceneState.Loading).Subscribe( _ =>
             {
                 RoomServerData.Instance.RPC_SaveData();
-                this.ObserveEveryValueChanged(_ => RoomServerData.Instance).Subscribe(async _ => 
+                Observable.EveryUpdate().Where(_ => RoomServerData.Instance.SaveFinished == NetworkingLocalData.NetworkRunner.SessionInfo.PlayerCount).First().Subscribe(async _ => 
                     {
                         await SceneProcessor.TransitionScene("InGame");
                     }
