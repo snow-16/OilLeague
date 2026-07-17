@@ -1,4 +1,5 @@
 using UniRx;
+using UnityEngine;
 
 
 /// <summary>
@@ -6,8 +7,13 @@ using UniRx;
 /// </summary>
 public class ResultLoadedAnker : SceneLoadedAnker
 {
-    protected override void WhenLoaded()
+    [SerializeField]
+    private GameObject _playerExistDataPrefab;
+    
+    protected override async void WhenLoaded()
     {
+        await ObjectSpawner.Instance.SpawnNetwork(_playerExistDataPrefab, (runner, obj) => obj.GetComponent<PlayerExistServerData>().SetNumber(NetworkingLocalData.PlayerNumber));
+
         Observable.EveryUpdate().Where(_ => Generated == _networkedPrefabs.Count).First().Subscribe(_ =>
             {
                 SceneProcessor.ChangeState(SceneState.TransitionEnd);

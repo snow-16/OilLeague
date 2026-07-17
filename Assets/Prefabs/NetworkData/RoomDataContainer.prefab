@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 86848db000f464219b726397c845c5ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RoomServerData
+  _SaveFinished: 0
 --- !u!114 &2660754938596198883
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -59,7 +60,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Fusion.Runtime.dll::Fusion.NetworkObject
   SortKey: 2474901130
   ObjectInterest: 1
-  Flags: 786433
+  Flags: 524289
   NestedObjects: []
   NetworkedBehaviours:
   - {fileID: 1604410477155146289}

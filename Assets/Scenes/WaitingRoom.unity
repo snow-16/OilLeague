@@ -306,10 +306,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d6734e3ce23f46a6a1a3ecdbedafe99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RoomSelectSpinnerButton
-  targetedColor:
+  _targetedColor:
   - {r: 1, g: 1, b: 1, a: 1}
-  - {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 1}
-  pressingOffset: {x: 10, y: -10}
+  - {r: 0.5377358, g: 0.5377358, b: 0.5377358, a: 1}
+  _pressingOffset: {x: 10, y: -10}
   _selectableType: 6
 --- !u!114 &265174034
 MonoBehaviour:
@@ -934,10 +934,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40e3c69a171584460a9ffc00cb7727c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RoomStartButton
-  targetedColor:
+  _targetedColor:
   - {r: 1, g: 1, b: 1, a: 1}
-  - {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 1}
-  pressingOffset: {x: 10, y: -10}
+  - {r: 0.5377358, g: 0.5377358, b: 0.5377358, a: 1}
+  _pressingOffset: {x: 10, y: -10}
 --- !u!1 &771078441
 GameObject:
   m_ObjectHideFlags: 0
@@ -989,10 +989,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d6734e3ce23f46a6a1a3ecdbedafe99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RoomSelectSpinnerButton
-  targetedColor:
+  _targetedColor:
   - {r: 1, g: 1, b: 1, a: 1}
-  - {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 1}
-  pressingOffset: {x: 10, y: -10}
+  - {r: 0.5377358, g: 0.5377358, b: 0.5377358, a: 1}
+  _pressingOffset: {x: 10, y: -10}
   _selectableType: 7
 --- !u!114 &771078444
 MonoBehaviour:
@@ -1631,10 +1631,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d6734e3ce23f46a6a1a3ecdbedafe99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RoomSelectSpinnerButton
-  targetedColor:
+  _targetedColor:
   - {r: 1, g: 1, b: 1, a: 1}
-  - {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 1}
-  pressingOffset: {x: 10, y: -10}
+  - {r: 0.5377358, g: 0.5377358, b: 0.5377358, a: 1}
+  _pressingOffset: {x: 10, y: -10}
   _selectableType: 8
 --- !u!114 &1110313090
 MonoBehaviour:
@@ -1725,10 +1725,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d6734e3ce23f46a6a1a3ecdbedafe99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RoomSelectSpinnerButton
-  targetedColor:
+  _targetedColor:
   - {r: 1, g: 1, b: 1, a: 1}
-  - {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 1}
-  pressingOffset: {x: 10, y: -10}
+  - {r: 0.5377358, g: 0.5377358, b: 0.5377358, a: 1}
+  _pressingOffset: {x: 10, y: -10}
   _selectableType: 9
 --- !u!114 &1122406634
 MonoBehaviour:
@@ -1857,10 +1857,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d6734e3ce23f46a6a1a3ecdbedafe99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RoomSelectSpinnerButton
-  targetedColor:
+  _targetedColor:
   - {r: 1, g: 1, b: 1, a: 1}
-  - {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 1}
-  pressingOffset: {x: 10, y: -10}
+  - {r: 0.5377358, g: 0.5377358, b: 0.5377358, a: 1}
+  _pressingOffset: {x: 10, y: -10}
   _selectableType: 1
 --- !u!1 &1166295391
 GameObject:
@@ -2045,6 +2045,7 @@ MonoBehaviour:
   _networkedPrefabs:
   - {fileID: 1604410477155146289, guid: 3eb00226b26564e2cbb4f549950e78ab, type: 3}
   - {fileID: 6176657107050012632, guid: 34217b700f6784b6c9bcf4139b131c04, type: 3}
+  _playerExistDataPrefab: {fileID: 2760139717588748248, guid: 39920065cbf1b457b8ff29d0f4c7c806, type: 3}
 --- !u!1 &1217251116
 GameObject:
   m_ObjectHideFlags: 0
@@ -2175,10 +2176,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d6734e3ce23f46a6a1a3ecdbedafe99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RoomSelectSpinnerButton
-  targetedColor:
+  _targetedColor:
   - {r: 1, g: 1, b: 1, a: 1}
-  - {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 1}
-  pressingOffset: {x: 10, y: -10}
+  - {r: 0.5377358, g: 0.5377358, b: 0.5377358, a: 1}
+  _pressingOffset: {x: 10, y: -10}
   _selectableType: 5
 --- !u!114 &1243431240
 MonoBehaviour:
@@ -2269,10 +2270,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d6734e3ce23f46a6a1a3ecdbedafe99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RoomSelectSpinnerButton
-  targetedColor:
+  _targetedColor:
   - {r: 1, g: 1, b: 1, a: 1}
-  - {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 1}
-  pressingOffset: {x: 10, y: -10}
+  - {r: 0.5377358, g: 0.5377358, b: 0.5377358, a: 1}
+  _pressingOffset: {x: 10, y: -10}
   _selectableType: 4
 --- !u!114 &1301762249
 MonoBehaviour:
@@ -2499,10 +2500,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d6734e3ce23f46a6a1a3ecdbedafe99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RoomSelectSpinnerButton
-  targetedColor:
+  _targetedColor:
   - {r: 1, g: 1, b: 1, a: 1}
-  - {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 1}
-  pressingOffset: {x: 10, y: -10}
+  - {r: 0.5377358, g: 0.5377358, b: 0.5377358, a: 1}
+  _pressingOffset: {x: 10, y: -10}
   _selectableType: 10
 --- !u!114 &1491302800
 MonoBehaviour:
@@ -2818,10 +2819,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d6734e3ce23f46a6a1a3ecdbedafe99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RoomSelectSpinnerButton
-  targetedColor:
+  _targetedColor:
   - {r: 1, g: 1, b: 1, a: 1}
-  - {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 1}
-  pressingOffset: {x: 10, y: -10}
+  - {r: 0.5377358, g: 0.5377358, b: 0.5377358, a: 1}
+  _pressingOffset: {x: 10, y: -10}
   _selectableType: 3
 --- !u!114 &1706244038
 MonoBehaviour:
@@ -3349,10 +3350,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d6734e3ce23f46a6a1a3ecdbedafe99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RoomSelectSpinnerButton
-  targetedColor:
+  _targetedColor:
   - {r: 1, g: 1, b: 1, a: 1}
-  - {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 1}
-  pressingOffset: {x: 10, y: -10}
+  - {r: 0.5377358, g: 0.5377358, b: 0.5377358, a: 1}
+  _pressingOffset: {x: 10, y: -10}
   _selectableType: 2
 --- !u!114 &1968262668
 MonoBehaviour:

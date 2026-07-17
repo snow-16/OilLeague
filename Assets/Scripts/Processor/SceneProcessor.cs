@@ -73,5 +73,6 @@ public class SceneProcessor : IWriteSingletonsLocal
     private void ResetSingletons()
     {
         SingletonsDataWriter.Access(this).Reset();
+        PlayerExistServerData.ResetData();
     }
 }

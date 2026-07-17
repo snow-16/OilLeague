@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &741335283965137207
+--- !u!1 &2760139717588748248
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,61 +8,59 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5079885443096333618}
-  - component: {fileID: 2550959905895564534}
-  - component: {fileID: 7957418808261847068}
+  - component: {fileID: 1071165294910290895}
+  - component: {fileID: 4367364826203081827}
+  - component: {fileID: 5676111323737401455}
   m_Layer: 0
-  m_Name: InGameDataContainer
+  m_Name: PlayerExistDataContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5079885443096333618
+--- !u!4 &1071165294910290895
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 741335283965137207}
+  m_GameObject: {fileID: 2760139717588748248}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12.22037, y: 0.82317, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2550959905895564534
+--- !u!114 &4367364826203081827
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 741335283965137207}
+  m_GameObject: {fileID: 2760139717588748248}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01b6e278cb85c410ea01437a435eb0d8, type: 3}
+  m_Script: {fileID: 11500000, guid: 22ceeeeb8f55c4665a5bf0a843942d00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  _SaveFinished: 0
-  _ProgressTime: 0
---- !u!114 &7957418808261847068
+--- !u!114 &5676111323737401455
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 741335283965137207}
+  m_GameObject: {fileID: 2760139717588748248}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Fusion.Runtime.dll::Fusion.NetworkObject
-  SortKey: 1104238963
+  SortKey: 1514193562
   ObjectInterest: 1
-  Flags: 524289
+  Flags: 262145
   NestedObjects: []
   NetworkedBehaviours:
-  - {fileID: 2550959905895564534}
+  - {fileID: 4367364826203081827}
   ForceRemoteRenderTimeframe: 0

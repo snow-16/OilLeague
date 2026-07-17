@@ -7,9 +7,13 @@ using UnityEngine;
 /// </summary>
 public class InGameLoadedAnker : SceneLoadedAnker
 {
+    [SerializeField]
+    private GameObject _playerExistDataPrefab;
+
     protected override async void WhenLoaded()
     {
         await NetworkingProcessor.SpawnObjectAtPosition(SpinnerTypeDataBase.Data.SpinnerPrefab, Quaternion.Euler(0, 0, 360 / NetworkingLocalData.PlayerNumber / NetworkingLocalData.NetworkRunner.SessionInfo.PlayerCount) * Vector2.up * GeneralDataBase.Data.FieldRadius * 0.8f, (runner, obj) => obj.GetComponent<SpinnerInstanceData>().RPC_SetType(SpinnerLocalData.Type));
+        await ObjectSpawner.Instance.SpawnNetwork(_playerExistDataPrefab, (runner, obj) => obj.GetComponent<PlayerExistServerData>().SetNumber(NetworkingLocalData.PlayerNumber));
 
         Observable.EveryUpdate().Where(_ => Generated == _networkedPrefabs.Count + NetworkingLocalData.NetworkRunner.SessionInfo.PlayerCount).First().Subscribe(_ =>
             {

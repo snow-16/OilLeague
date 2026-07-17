@@ -23,7 +23,6 @@ public class NetworkCallbacksReceiver : MonoBehaviour, INetworkRunnerCallbacks, 
     {
         if(NetworkingLocalData.PlayerNumber > 0)
         {
-            RPCSendSystem.Instance.RPC_DownPlayerNumber();
             _networkingDataWriter.Data.SetPlayerNumber(0);
         }
     }

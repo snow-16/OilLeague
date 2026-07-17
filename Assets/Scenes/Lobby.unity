@@ -700,10 +700,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0650d99b7e00a4e02953ac6139d886f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::JoinRoomButton
-  targetedColor:
+  _targetedColor:
   - {r: 1, g: 1, b: 1, a: 1}
-  - {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 1}
-  pressingOffset: {x: 10, y: -10}
+  - {r: 0.5377358, g: 0.5377358, b: 0.5377358, a: 1}
+  _pressingOffset: {x: 10, y: -10}
   _codeInputField: {fileID: 162783467}
 --- !u!1 &1488604457
 GameObject:
