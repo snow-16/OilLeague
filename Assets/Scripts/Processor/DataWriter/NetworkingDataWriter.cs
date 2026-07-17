@@ -1,4 +1,3 @@
-using System.Diagnostics;
 using Debug = UnityEngine.Debug;
 
 /// <summary>
@@ -44,5 +43,10 @@ public class NetworkingDataWriter
     public void AssignPlayerNumber()
     {
         Data.SetPlayerNumber(NetworkingLocalData.NetworkRunner.SessionInfo.PlayerCount);
+    }
+
+    public void DownPlayerNumber()
+    {
+        Data.SetPlayerNumber(NetworkingLocalData.PlayerNumber - 1);
     }
 }

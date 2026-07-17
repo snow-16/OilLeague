@@ -2,7 +2,7 @@ using System.Linq;
 using Fusion;
 using UniRx;
 
-public class RoomServerData : NetworkBehaviour
+public class RoomServerData : NetworkBehaviour, IWriteSingletonsLocal
 {
     public static RoomServerData Instance { get; private set; } = null;
 
@@ -14,6 +14,7 @@ public class RoomServerData : NetworkBehaviour
     public override void Spawned()
     {
         Instance = this;
+        SingletonsDataWriter.Access(this).Add(this);
         FindAnyObjectByType<SceneLoadedAnker>().OnGenerated();
     }
 
@@ -36,6 +37,20 @@ public class RoomServerData : NetworkBehaviour
     public void RPC_SaveFinished()
     {
         SaveFinished++;
+    }
+
+    [Rpc(RpcSources.All, RpcTargets.StateAuthority)]
+    public void RPC_DownPlayerNumber(int leftedPlayerNumber)
+    {
+        if(leftedPlayerNumber < NetworkingLocalData.NetworkRunner.SessionInfo.PlayerCount)
+        {
+            RPC_UpdateType(leftedPlayerNumber, Players[leftedPlayerNumber].type);
+            RPC_DownPlayerNumber(leftedPlayerNumber + 1);
+        }
+        else
+        {
+            RPC_UpdateType(leftedPlayerNumber, SpinnerType.None);
+        }
     }
 
     public struct PlayerSettings : INetworkStruct

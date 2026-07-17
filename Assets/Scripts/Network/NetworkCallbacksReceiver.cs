@@ -2,9 +2,8 @@ using System;
 using System.Collections.Generic;
 using Fusion;
 using Fusion.Sockets;
-using UnityEngine;
 
-public class NetworkCallbacksReceiver : MonoBehaviour, INetworkRunnerCallbacks, IWriteNetworkingLocal
+public class NetworkCallbacksReceiver : NetworkBehaviour, INetworkRunnerCallbacks
 {
     private NetworkingDataWriter _networkingDataWriter;
 
@@ -17,6 +16,31 @@ public class NetworkCallbacksReceiver : MonoBehaviour, INetworkRunnerCallbacks, 
     {
         _networkingDataWriter.Data.SetAllSessions(sessionList);
         await NetworkingProcessor.JoinLobby();
+    }
+
+    public void OnShutdown(NetworkRunner runner, ShutdownReason shutdownReason)
+    {
+        RPC_DownPlayerNumber();
+    }
+
+    [Rpc(RpcSources.All, RpcTargets.All)]
+    public void RPC_DownPlayerNumber()
+    {
+        if(NetworkingLocalData.PlayerNumber == 2)
+        {
+            SingletonsLocalData.Singletons.ForEach(singleton => singleton.Object.RequestStateAuthority());
+            
+            if(TryGetComponent<RoomServerData>(out var roomData))
+            {
+                roomData.RPC_DownPlayerNumber(NetworkingLocalData.PlayerNumber);
+            }
+            if(TryGetComponent<InGameServerData>(out var inGameData))
+            {
+                inGameData.RPC_DownPlayerNumber(NetworkingLocalData.PlayerNumber);
+            }
+            
+            RPCSendSystem.Instance.RPC_DownPlayerNumber(NetworkingLocalData.PlayerNumber);
+        }
     }
 
     //以下不要
@@ -52,8 +76,6 @@ public class NetworkCallbacksReceiver : MonoBehaviour, INetworkRunnerCallbacks, 
     public void OnSceneLoadDone(NetworkRunner runner){}
 
     public void OnSceneLoadStart(NetworkRunner runner){}
-
-    public void OnShutdown(NetworkRunner runner, ShutdownReason shutdownReason){}
 
     public void OnUserSimulationMessage(NetworkRunner runner, SimulationMessagePtr message){}
 }

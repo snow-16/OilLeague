@@ -3,7 +3,7 @@ using Fusion;
 using UniRx;
 using UnityEngine;
 
-public class InGameServerData : NetworkBehaviour
+public class InGameServerData : NetworkBehaviour, IWriteSingletonsLocal
 {
     public static InGameServerData Instance { get; private set; } = null;
 
@@ -17,6 +17,7 @@ public class InGameServerData : NetworkBehaviour
     public override void Spawned()
     {
         Instance = this;
+        SingletonsDataWriter.Access(this).Add(this);
 
         if(NetworkingLocalData.PlayerNumber == 1)
         {
@@ -73,6 +74,20 @@ public class InGameServerData : NetworkBehaviour
     public void RPC_SaveFinished()
     {
         SaveFinished++;
+    }
+
+    [Rpc(RpcSources.All, RpcTargets.StateAuthority)]
+    public void RPC_DownPlayerNumber(int leftedPlayerNumber)
+    {
+        if(leftedPlayerNumber < NetworkingLocalData.NetworkRunner.SessionInfo.PlayerCount)
+        {
+            OilTanks.Set(leftedPlayerNumber - 1, OilTanks[leftedPlayerNumber]);
+            RPC_DownPlayerNumber(leftedPlayerNumber + 1);
+        }
+        else
+        {
+            OilTanks.Set(leftedPlayerNumber - 1, new());
+        }
     }
 
     public struct OilTank : INetworkStruct

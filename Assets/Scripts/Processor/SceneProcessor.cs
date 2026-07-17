@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using UniRx;
 using UnityEngine.SceneManagement;
 
-public class SceneProcessor
+public class SceneProcessor : IWriteSingletonsLocal
 {
     public static SceneState State { get; private set;}
 
@@ -14,6 +14,7 @@ public class SceneProcessor
 
     public static async Task TransitionScene(string sceneName)
     {
+        new SceneProcessor().ResetSingletons();
         await NetworkingLocalData.NetworkRunner.LoadScene(sceneName);
     }
 
@@ -22,6 +23,7 @@ public class SceneProcessor
         ChangeState(SceneState.TransitionStart);
         Observable.EveryUpdate().Where(_ => State == SceneState.Loading).First().Subscribe(_ =>
             {
+                new SceneProcessor().ResetSingletons();
                 SceneManager.LoadScene("Lobby");
             }
         );
@@ -62,8 +64,14 @@ public class SceneProcessor
         ChangeState(SceneState.TransitionStart);
         Observable.EveryUpdate().Where(_ => State == SceneState.Loading).First().Subscribe(_ =>
             {
+                new SceneProcessor().ResetSingletons();
                 endAcion();
             }
         );
+    }
+
+    private void ResetSingletons()
+    {
+        SingletonsDataWriter.Access(this).Reset();
     }
 }
