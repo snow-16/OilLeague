@@ -60,7 +60,7 @@ public class NetworkingProcessor : IWriteNetworkingLocal
                 CreateNetworkRunner();
                 try
                 {
-                    await StartSession($"Close:{sessionCode}:NewRoom:Wait", GeneralDataBase.Data.RoomCapacity);
+                    await StartSession(sessionCode, GeneralDataBase.Data.RoomCapacity);
                     new NetworkingProcessor().SetPlayerNumber();
                     await SceneProcessor.TransitionScene("WaitingRoom");
                 }

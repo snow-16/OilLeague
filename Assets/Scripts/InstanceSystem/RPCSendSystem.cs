@@ -18,9 +18,23 @@ public class RPCSendSystem : NetworkBehaviour, IWriteNetworkingLocal, IWriteSing
     }
 
     [Rpc(RpcSources.All, RpcTargets.All)]
-    public void RPC_DownPlayerNumber(int leftedPlayerNumber)
+    public void RPC_DownPlayerNumber()
     {
-        NetworkingDataWriter.Access(this).DownPlayerNumber();
-        PlayerSettingClientData.DownPlayerNumber(leftedPlayerNumber);
+        if(NetworkingLocalData.PlayerNumber == 2)
+        {
+            SingletonsLocalData.Singletons.ForEach(singleton => singleton.Object.RequestStateAuthority());
+            
+            if(TryGetComponent<RoomServerData>(out var roomData))
+            {
+                roomData.RPC_DownPlayerNumber(NetworkingLocalData.PlayerNumber);
+            }
+            if(TryGetComponent<InGameServerData>(out var inGameData))
+            {
+                inGameData.RPC_DownPlayerNumber(NetworkingLocalData.PlayerNumber);
+            }
+            
+            NetworkingDataWriter.Access(this).DownPlayerNumber();
+            PlayerSettingClientData.DownPlayerNumber(NetworkingLocalData.PlayerNumber);
+        }
     }
 }

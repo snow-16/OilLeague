@@ -2,8 +2,9 @@ using System;
 using System.Collections.Generic;
 using Fusion;
 using Fusion.Sockets;
+using UnityEngine;
 
-public class NetworkCallbacksReceiver : NetworkBehaviour, INetworkRunnerCallbacks
+public class NetworkCallbacksReceiver : MonoBehaviour, INetworkRunnerCallbacks, IWriteNetworkingLocal
 {
     private NetworkingDataWriter _networkingDataWriter;
 
@@ -20,26 +21,10 @@ public class NetworkCallbacksReceiver : NetworkBehaviour, INetworkRunnerCallback
 
     public void OnShutdown(NetworkRunner runner, ShutdownReason shutdownReason)
     {
-        RPC_DownPlayerNumber();
-    }
-
-    [Rpc(RpcSources.All, RpcTargets.All)]
-    public void RPC_DownPlayerNumber()
-    {
-        if(NetworkingLocalData.PlayerNumber == 2)
+        if(NetworkingLocalData.PlayerNumber > 0)
         {
-            SingletonsLocalData.Singletons.ForEach(singleton => singleton.Object.RequestStateAuthority());
-            
-            if(TryGetComponent<RoomServerData>(out var roomData))
-            {
-                roomData.RPC_DownPlayerNumber(NetworkingLocalData.PlayerNumber);
-            }
-            if(TryGetComponent<InGameServerData>(out var inGameData))
-            {
-                inGameData.RPC_DownPlayerNumber(NetworkingLocalData.PlayerNumber);
-            }
-            
-            RPCSendSystem.Instance.RPC_DownPlayerNumber(NetworkingLocalData.PlayerNumber);
+            RPCSendSystem.Instance.RPC_DownPlayerNumber();
+            _networkingDataWriter.Data.SetPlayerNumber(0);
         }
     }
 
