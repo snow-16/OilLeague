@@ -10,12 +10,11 @@ public class WaitingRoomLoadedAnker : SceneLoadedAnker
     [SerializeField]
     private GameObject _playerExistDataPrefab;
     
-    protected override async void WhenLoaded()
+    protected override void WhenLoaded()
     {
-        await ObjectSpawner.Instance.SpawnNetwork(_playerExistDataPrefab, (runner, obj) => obj.GetComponent<PlayerExistServerData>().SetNumber(NetworkingLocalData.PlayerNumber));
-
-        Observable.EveryUpdate().Where(_ => Generated == _networkedPrefabs.Count).First().Subscribe(_ =>
+        Observable.EveryUpdate().Where(_ => Generated == _networkedPrefabs.Count).First().Subscribe(async _ =>
             {
+                await ObjectSpawner.Instance.SpawnNetwork(_playerExistDataPrefab, (runner, obj) => obj.GetComponent<PlayerExistServerData>().SetNumber(NetworkingLocalData.PlayerNumber));
                 SceneProcessor.ChangeState(SceneState.TransitionEnd);
             }
         );

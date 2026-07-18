@@ -6,21 +6,40 @@ public class PlayerExistServerData : NetworkBehaviour
 {
     public static PlayerExistServerData[] Players { get; private set; } = new PlayerExistServerData[5];
 
+    [Networked]
+    public int Number { get; private set; }
+
+    public override void Spawned()
+    {
+        Players[Number - 1] = this;
+    }
+
+    public override void Despawned(NetworkRunner runner, bool hasState)
+    {  
+        if(NetworkingLocalData.NetworkRunner.IsInSession && SceneProcessor.State == SceneState.Exist && NetworkingLocalData.PlayerNumber == (Number > 1 ? 1 : 2))
+        {
+            Players[Number > 1 ? 0 : 1].RPC_DownPlayerNumber(Number);
+        }
+    }
+
     public void SetNumber(int number)
     {
-        Players[number - 1] = this;
+        Number = number;
+    }
 
-        if(number == 2)
+    [Rpc(RpcSources.All, RpcTargets.StateAuthority)]
+    public void RPC_DownPlayerNumber(int leftedPlayerNumber)
+    {
+        if(!RPCSendSystem.Instance.Object.HasStateAuthority)
         {
-            Observable.EveryUpdate().Where(_ => Players.Take(NetworkingLocalData.NetworkRunner.SessionInfo.PlayerCount).Contains(null))
-            .TakeUntil(Observable.EveryUpdate().Where(_ => SceneProcessor.State != SceneState.Exist))
-            .Subscribe(_ =>
-                {
-                    RPCSendSystem.Instance.Object.RequestStateAuthority();
-                    RPCSendSystem.Instance.RPC_DownPlayerNumber();
-                }
-            );
+            RPCSendSystem.Instance.Object.RequestStateAuthority();
         }
+
+        Observable.EveryUpdate().Where(_ => RPCSendSystem.Instance.Object.HasStateAuthority).First().Subscribe(_ =>
+            {
+                RPCSendSystem.Instance.RPC_DownPlayerNumber(leftedPlayerNumber);
+            }
+        );
     }
 
     public static void ResetData()

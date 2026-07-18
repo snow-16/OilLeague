@@ -34,6 +34,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
+            SceneProcessor.ChangeState(SceneState.TransitionEnd);
             Destroy(gameObject);
         }
     }

@@ -18,6 +18,17 @@ public class SceneProcessor : IWriteSingletonsLocal
         await NetworkingLocalData.NetworkRunner.LoadScene(sceneName);
     }
 
+    public static void TransitionToTitle()
+    {
+        ChangeState(SceneState.TransitionStart);
+        Observable.EveryUpdate().Where(_ => State == SceneState.Loading).First().Subscribe(_ =>
+            {
+                new SceneProcessor().ResetSingletons();
+                SceneManager.LoadScene("Title");
+            }
+        );
+    }
+
     public static void TransitionToLobby()
     {
         ChangeState(SceneState.TransitionStart);

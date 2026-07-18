@@ -18,31 +18,24 @@ public class RPCSendSystem : NetworkBehaviour, IWriteNetworkingLocal, IWriteSing
     }
 
     [Rpc(RpcSources.All, RpcTargets.StateAuthority)]
-    public void RPC_DownPlayerNumber()
+    public void RPC_DownPlayerNumber(int leftedPlayerNumber)
     {
-        int leftedPlayerNumber = default;
-        for(int i = 0; i < NetworkingLocalData.NetworkRunner.SessionInfo.PlayerCount; i++)
+        if(leftedPlayerNumber <= NetworkingLocalData.NetworkRunner.SessionInfo.PlayerCount)
         {
-            if(PlayerExistServerData.Players[i])
+            SingletonsLocalData.Singletons.ForEach(singleton => singleton.Object.RequestStateAuthority());
+            PlayerExistServerData.DownNumber(leftedPlayerNumber);
+            
+            if(TryGetComponent<RoomServerData>(out var roomData))
             {
-                leftedPlayerNumber = i + 1;
-                break;
+                roomData.RPC_DownPlayerNumber(leftedPlayerNumber);
             }
+            if(TryGetComponent<InGameServerData>(out var inGameData))
+            {
+                inGameData.RPC_DownPlayerNumber(leftedPlayerNumber);
+                PlayerSettingClientData.DownPlayerNumber(leftedPlayerNumber);
+            }
+            
+            NetworkingDataWriter.Access(this).DownPlayerNumber();
         }
-
-        SingletonsLocalData.Singletons.ForEach(singleton => singleton.Object.RequestStateAuthority());
-        PlayerExistServerData.DownNumber(leftedPlayerNumber);
-        
-        if(TryGetComponent<RoomServerData>(out var roomData))
-        {
-            roomData.RPC_DownPlayerNumber(leftedPlayerNumber);
-        }
-        if(TryGetComponent<InGameServerData>(out var inGameData))
-        {
-            inGameData.RPC_DownPlayerNumber(leftedPlayerNumber);
-        }
-        
-        NetworkingDataWriter.Access(this).DownPlayerNumber();
-        PlayerSettingClientData.DownPlayerNumber(leftedPlayerNumber);
     }
 }

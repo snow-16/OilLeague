@@ -24,6 +24,7 @@ public class NetworkCallbacksReceiver : MonoBehaviour, INetworkRunnerCallbacks, 
         if(NetworkingLocalData.PlayerNumber > 0)
         {
             _networkingDataWriter.Data.SetPlayerNumber(0);
+            SceneProcessor.TransitionToTitle();
         }
     }
 
