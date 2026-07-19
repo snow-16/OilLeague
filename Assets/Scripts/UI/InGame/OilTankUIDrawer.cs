@@ -2,14 +2,21 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+/// <summary>
+/// オイル貯蔵タンクUI
+/// </summary>
 public class OilTankUIDrawer : MonoBehaviour
 {
+    /// <summary> データを表示するプレイヤーの番号 </summary>
     [SerializeField]
     private int _showingPlayersNumber;
 
+    /// <summary> ゲージのイメージ </summary>
     private Image _oilGaugeImage;
+    /// <summary> リットル表示のテキスト </summary>
     private TextMeshProUGUI _oilCountText;
 
+    /// <summary> データ表示を行うか </summary>
     private bool _isShow = false;
 
     void Awake()

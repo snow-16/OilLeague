@@ -2,8 +2,12 @@ using UnityEngine;
 using TMPro;
 using System.Linq;
 
+/// <summary>
+/// 陣営選択済みプレイヤーカウンターUI
+/// </summary>
 public class RoomSelectedCounterDrawer : MonoBehaviour
 {
+    /// <summary> カウンター表記テキスト </summary>
     private TextMeshProUGUI _counterText;
 
     void Awake()

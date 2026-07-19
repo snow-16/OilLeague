@@ -1,5 +1,6 @@
 using UniRx;
 
+/// <summary> リザルト画面から部屋へ戻るボタン </summary>
 public class ResultBackRoomButton : BasicButton
 {
     protected override void Awake()

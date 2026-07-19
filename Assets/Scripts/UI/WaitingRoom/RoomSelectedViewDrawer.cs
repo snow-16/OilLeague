@@ -1,8 +1,12 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// 選択した陣営のスピナーを表示するUI
+/// </summary>
 public class RoomSelectedViewDrawer : MonoBehaviour
 {
+    /// <summary> 表示用イメージ </summary>
     private Image _selectedImage;
     
     void Awake()

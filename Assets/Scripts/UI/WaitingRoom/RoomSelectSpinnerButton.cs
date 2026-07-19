@@ -2,8 +2,12 @@ using System.Linq;
 using UniRx;
 using UnityEngine;
 
+/// <summary>
+/// 陣営選択ボタン
+/// </summary>
 public class RoomSelectSpinnerButton : BasicButton, IWriteSpinnerLocal
 {
+    /// <summary> 選択される陣営 </summary>
     [SerializeField]
     private SpinnerType _selectableType;
 
@@ -13,6 +17,7 @@ public class RoomSelectSpinnerButton : BasicButton, IWriteSpinnerLocal
 
         this.ObserveEveryValueChanged(_ => SceneProcessor.State).Where(state => state == SceneState.Exist).First().Subscribe(_ =>
             {
+                //選択された陣営は押せないようにする
                 Observable.EveryUpdate().Select(_ => RoomServerData.Instance.Players).TakeUntil(Observable.EveryUpdate().Where(_ => SceneProcessor.State != SceneState.Exist)).Subscribe(players =>
                     {
                         _canPush = !players.Select(player => player.type).Contains(_selectableType);

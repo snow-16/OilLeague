@@ -2,6 +2,9 @@ using UnityEngine;
 using TMPro;
 using System.Linq;
 
+/// <summary>
+/// リザルト表示UI
+/// </summary>
 public class ResultViewDrawer : MonoBehaviour
 {
     void Awake()
