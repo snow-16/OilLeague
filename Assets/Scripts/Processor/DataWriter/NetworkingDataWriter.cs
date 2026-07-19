@@ -45,6 +45,9 @@ public class NetworkingDataWriter
         Data.SetPlayerNumber(NetworkingLocalData.NetworkRunner.SessionInfo.PlayerCount);
     }
 
+    /// <summary>
+    /// プレイヤー番号を1つ下げる
+    /// </summary>
     public void DownPlayerNumber()
     {
         Data.SetPlayerNumber(NetworkingLocalData.PlayerNumber - 1);

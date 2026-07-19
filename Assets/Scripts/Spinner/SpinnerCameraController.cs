@@ -6,10 +6,13 @@ using UnityEngine;
 /// </summary>
 public class SpinnerCameraController : MonoBehaviour, IReceiveFlick, IReceiveHold
 {
+    /// <summary> 中心からの位置補正 </summary>
     [SerializeField]
     private Vector3 _baseCameraOffset;
 
+    /// <summary> シネマシーンカメラのインスタンス </summary>
     private CinemachineFollow _cinemachineCamera;
+    /// <summary> カメラの先行距離 </summary>
     private float _lookingDistance = 0;
 
     void Awake()
@@ -20,6 +23,8 @@ public class SpinnerCameraController : MonoBehaviour, IReceiveFlick, IReceiveHol
 
     void FixedUpdate()
     {
+        //移動中は前方方向にカメラを移動させる
+        //ブレーキを開始すると徐々に中心に戻る
         if(_lookingDistance > 0)
         {
             if(SpinnerLocalData.State != SpinnerState.Brake)

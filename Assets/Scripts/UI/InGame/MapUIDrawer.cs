@@ -1,14 +1,21 @@
 using UnityEngine;
 
+/// <summary>
+/// マップ本体UI
+/// </summary>
 public class MapUIDrawer : MonoBehaviour
 {
+    /// <summary> スピナー用のマーカープレハブ </summary>
     [SerializeField]
     private GameObject _spinnerMarkerPrefab;
+    /// <summary> オイルメイト用のマーカープレハブ </summary>
     [SerializeField]
     private GameObject _oilmateMarkerPrefab;
 
+    /// <summary> マップとフィールドの大きさ比 </summary>
     private float _mapRadiusRatio;
 
+    /// <summary> マップUIのインスタンス </summary>
     public static MapUIDrawer Instatnce { get; private set; }
 
     void Awake()

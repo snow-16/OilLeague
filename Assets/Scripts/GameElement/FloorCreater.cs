@@ -1,5 +1,6 @@
 using UnityEngine;
 
+/// <summary> フィールドの床サイズを設定するクラス </summary>
 public class FloorCreater : MonoBehaviour
 {
     void Awake()

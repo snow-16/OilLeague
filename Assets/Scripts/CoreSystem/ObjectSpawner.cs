@@ -38,13 +38,33 @@ public class ObjectSpawner : MonoBehaviour
     }
 
     /// <summary>
-    /// 通常の生成処理
+    /// ネットワークオブジェクトの生成処理
     /// </summary>
     /// <param name="spawnObject">プレハブ</param>
-    /// <returns></returns>
+    /// <returns>生成オブジェクト</returns>
+    public async Task<NetworkObject> SpawnNetwork(GameObject spawnObject)
+    {
+        return await NetworkingLocalData.NetworkRunner.SpawnAsync(spawnObject);
+    }
+
+    /// <summary>
+    /// ネットワークオブジェクトの生成処理
+    /// </summary>
+    /// <param name="spawnObject">プレハブ</param>
+    /// <returns>生成オブジェクト</returns>
     public async Task<NetworkObject> SpawnNetwork(GameObject spawnObject, NetworkRunner.OnBeforeSpawned initializeSetting)
     {
         return await NetworkingLocalData.NetworkRunner.SpawnAsync(spawnObject, spawnObject.transform.position, spawnObject.transform.rotation, PlayerRef.None, initializeSetting);
+    }
+
+    /// <summary>
+    /// 位置指定済みのネットワークオブジェクトの生成処理
+    /// </summary>
+    /// <param name="spawnObject">プレハブ</param>
+    /// <returns>生成オブジェクト</returns>
+    public async Task<NetworkObject> SpawnNetworkAtPosition(GameObject spawnObject, Vector2 position, NetworkRunner.OnBeforeSpawned initializeSetting)
+    {
+        return await NetworkingLocalData.NetworkRunner.SpawnAsync(spawnObject, position, spawnObject.transform.rotation, PlayerRef.None, initializeSetting);
     }
 
     /// <summary>

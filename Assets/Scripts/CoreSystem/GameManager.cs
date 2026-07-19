@@ -8,7 +8,9 @@ using UnityEngine;
 [DefaultExecutionOrder(-100)]
 public class GameManager : MonoBehaviour
 {
+    /// <summary> ゲームマネージャーのインスタンス </summary>
     public static GameManager Instance { get; private set; }
+
     void Awake() {
         if(FindObjectsByType<GameManager>(FindObjectsSortMode.None).Length == 1)
         {

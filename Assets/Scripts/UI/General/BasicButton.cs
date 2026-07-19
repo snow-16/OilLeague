@@ -6,11 +6,14 @@ using UnityEngine;
 /// </summary>
 public abstract class BasicButton : ButtonBase
 {
+    /// <summary> 通常時・フォーカス時の色 </summary>
     [SerializeField]
     private Color[] _targetedColor = new Color[2];
+    /// <summary> 押し込み中のボタン移動量 </summary>
     [SerializeField]
     private Vector2 _pressingOffset;
 
+    /// <summary> ボタンの基礎色 </summary>
     private Color _baseColor;
 
     protected override void Awake()

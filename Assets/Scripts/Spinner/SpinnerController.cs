@@ -22,6 +22,7 @@ public class SpinnerController : NetworkBehaviour, IWriteSpinnerLocal, IReceiveP
 
         if(SpinnerLocalData.Type == _spinnerInstanceData.Type)
         {
+            //入力検知を設定
             var inputListDataWriter = InputListDataWriter.Access(this);
             inputListDataWriter.AddPressList(this);
             inputListDataWriter.AddTapList(this);
@@ -32,6 +33,7 @@ public class SpinnerController : NetworkBehaviour, IWriteSpinnerLocal, IReceiveP
             _spinnerDataWriter.SavePosition(transform);
             FindAnyObjectByType<CinemachineCamera>().Target.TrackingTarget = transform;
 
+            //状態変更をネットワーク同期
             _spinnerInstanceData.RPC_SetState(SpinnerLocalData.State);
             this.ObserveEveryValueChanged(_ => SpinnerLocalData.State).Subscribe(state =>
                 {
@@ -39,6 +41,7 @@ public class SpinnerController : NetworkBehaviour, IWriteSpinnerLocal, IReceiveP
                 }
             ).AddTo(this);
 
+            //進行方向をネットワーク同期
             _spinnerInstanceData.RPC_SetForword(SpinnerLocalData.Forword);
             this.ObserveEveryValueChanged(_ => SpinnerLocalData.Forword).Subscribe(forword =>
                 {

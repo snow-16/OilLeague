@@ -1,6 +1,5 @@
 using UniRx;
 
-
 /// <summary>
 /// ロビーシーンが読み込まれたことを検知するクラス
 /// </summary>

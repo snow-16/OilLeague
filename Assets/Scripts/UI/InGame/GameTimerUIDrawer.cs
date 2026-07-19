@@ -1,8 +1,12 @@
 using UnityEngine;
 using TMPro;
 
+/// <summary>
+/// 制限時間表示UI
+/// </summary>
 public class GameTimerUIDrawer : MonoBehaviour
 {
+    /// <summary> 時間表示テキスト </summary>
     private TextMeshProUGUI _remainingTimeText;
 
     void Awake()

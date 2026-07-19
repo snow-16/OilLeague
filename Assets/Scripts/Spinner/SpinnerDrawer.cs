@@ -65,6 +65,10 @@ public class SpinnerDrawer : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// スピナーのスプライトを状態に合わせて変更
+    /// </summary>
+    /// <param name="state">状態</param>
     private void ChangeImage(SpinnerState state)
     {
         if(state == SpinnerState.Strike)

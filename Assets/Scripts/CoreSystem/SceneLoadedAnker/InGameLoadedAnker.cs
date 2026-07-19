@@ -1,33 +1,31 @@
 using UniRx;
 using UnityEngine;
 
-
 /// <summary>
 /// インゲームシーンが読み込まれたことを検知するクラス
 /// </summary>
 public class InGameLoadedAnker : SceneLoadedAnker
 {
-    [SerializeField]
-    private GameObject _playerExistDataPrefab;
-
     protected override async void WhenLoaded()
     {
-        await NetworkingProcessor.SpawnObjectAtPosition(SpinnerTypeDataBase.Data.SpinnerPrefab, Quaternion.Euler(0, 0, 360 / NetworkingLocalData.PlayerNumber / NetworkingLocalData.NetworkRunner.SessionInfo.PlayerCount) * Vector2.up * GeneralDataBase.Data.FieldRadius * 0.8f, (runner, obj) => obj.GetComponent<SpinnerInstanceData>().RPC_SetType(SpinnerLocalData.Type));
-        await ObjectSpawner.Instance.SpawnNetwork(_playerExistDataPrefab, (runner, obj) => obj.GetComponent<PlayerExistServerData>().SetNumber(NetworkingLocalData.PlayerNumber));
+        //スピナーをフィールドの外周に等間隔でスポーンさせる
+        await ObjectSpawner.Instance.SpawnNetworkAtPosition(SpinnerTypeDataBase.Data.SpinnerPrefab, Quaternion.Euler(0, 0, 360 / NetworkingLocalData.PlayerNumber / NetworkingLocalData.NetworkRunner.SessionInfo.PlayerCount) * Vector2.up * GeneralDataBase.Data.FieldRadius * 0.8f, (runner, obj) => obj.GetComponent<SpinnerInstanceData>().RPC_SetType(SpinnerLocalData.Type));
 
-        Observable.EveryUpdate().Where(_ => Generated == _networkedPrefabs.Count + NetworkingLocalData.NetworkRunner.SessionInfo.PlayerCount).First().Subscribe(_ =>
-            {
-                SceneProcessor.ChangeState(SceneState.TransitionEnd);
+        SetGenerateEndTrigger(() => GeneratedCount == _networkedPrefabs.Count + NetworkingLocalData.NetworkRunner.SessionInfo.PlayerCount, StartTimer);
+    }
 
-                if(NetworkingLocalData.PlayerNumber == 1)
+    /// <summary>
+    /// 暗転が明けた後、ホストがタイマーを開始させる
+    /// </summary>
+    private void StartTimer()
+    {
+        if(NetworkingLocalData.PlayerNumber == 1)
+        {
+            this.ObserveEveryValueChanged(_ => SceneProcessor.State).Where(state => state == SceneState.Exist).Subscribe(_ =>
                 {
-                    this.ObserveEveryValueChanged(_ => SceneProcessor.State).Where(state => state == SceneState.Exist).Subscribe(_ =>
-                        {
-                            InGameServerData.Instance.RPC_StartTimer(GeneralDataBase.Data.DefaultTimeLimit);
-                        }
-                    );
+                    InGameServerData.Instance.RPC_StartTimer(GeneralDataBase.Data.DefaultTimeLimit);
                 }
-            }
-        );
+            );
+        }
     }
 }

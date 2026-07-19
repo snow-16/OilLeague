@@ -8,10 +8,15 @@ using UnityEngine.UI;
 /// </summary>
 public class TransitionController : MonoBehaviour
 {
+    /// <summary> 暗転用UIとテキストUIを含む親オブジェクト </summary>
     private GameObject _transitionUI;
+    /// <summary> 暗転用UI </summary>
     private Image _blackOutCircle;
+    /// <summary> ローディング表示テキストUI </summary>
     private GameObject _loadingText;
+    /// <summary> 画面上端の位置を示すトランスフォーム </summary>
     private Transform _underPosition;
+    /// <summary> 画面下端の位置を示すトランスフォーム </summary>
     private Transform _topPosition;
 
     void Awake()
@@ -23,6 +28,7 @@ public class TransitionController : MonoBehaviour
         _topPosition = transform.GetChild(2);
         DontDestroyOnLoad(gameObject);
 
+        //シーンが遷移開始・終了状態になったら対応する演出を再生する
         this.ObserveEveryValueChanged(_ => SceneProcessor.State).Subscribe(state =>
             {
                 if(state == SceneState.TransitionStart)
@@ -37,6 +43,15 @@ public class TransitionController : MonoBehaviour
         );
     }
 
+    /// <summary>
+    /// シーン遷移演出を再生する
+    /// </summary>
+    /// <param name="centorPosition">暗転用オブジェクトの中心座標</param>
+    /// <param name="angle">暗転用オブジェクトの角度</param>
+    /// <param name="startFillAmount">開始時点での暗転率</param>
+    /// <param name="transitionEndChecker">演出終了を検知する条件</param>
+    /// <param name="fillOrDig">暗転させるか明転させるか</param>
+    /// <param name="resultState">演出終了後のシーン状態</param>
     private void StartTransition(Vector2 centorPosition, Vector3 angle, float startFillAmount, Func<bool> transitionEndChecker, int fillOrDig, SceneState resultState)
     {
         _transitionUI.SetActive(true);

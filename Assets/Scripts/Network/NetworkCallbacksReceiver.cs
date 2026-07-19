@@ -4,6 +4,9 @@ using Fusion;
 using Fusion.Sockets;
 using UnityEngine;
 
+/// <summary>
+/// ネットワーク関連のコールバックを受け取るクラス
+/// </summary>
 public class NetworkCallbacksReceiver : MonoBehaviour, INetworkRunnerCallbacks, IWriteNetworkingLocal
 {
     private NetworkingDataWriter _networkingDataWriter;

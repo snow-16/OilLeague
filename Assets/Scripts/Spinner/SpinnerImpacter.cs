@@ -8,7 +8,7 @@ using UnityEngine;
 public class SpinnerImpacter
 {
     /// <summary>
-    /// 衝撃波生成関数
+    /// 衝撃波生成
     /// </summary>
     /// <param name="fireVector">衝撃波の角度</param>
     public static void FireImpact(Vector2 fireVector, bool isTurn)
@@ -18,6 +18,8 @@ public class SpinnerImpacter
         var baseRayAngle = fireAngle - SpinnerParameterDataBase.Data.ImpactArc / 2;
         var waveSpawnInterval = SpinnerParameterDataBase.Data.ImpactRayCount / Mathf.FloorToInt(SpinnerParameterDataBase.Data.ImpactRayCount * SpinnerParameterDataBase.Data.ImpactWaveRatio);
 
+        //レイを円形に射出
+        //当たった対象を全てリストにする
         for(int i = 0; i < SpinnerParameterDataBase.Data.ImpactRayCount; i++)
         {
             var rayAngle = baseRayAngle + 360 / SpinnerParameterDataBase.Data.ImpactRayCount * i;
@@ -41,6 +43,7 @@ public class SpinnerImpacter
             }
         }
 
+        //リストを整理した後、相手陣営にのみ攻撃判定を発生させる
         var attackPower = SpinnerParameterDataBase.Data.BaseAttack * SpinnerParameterDataBase.Data.AttackTorqueMultiplier * SpinnerLocalData.Torque;
         hited.GroupBy(hitData => hitData.obj).Select(hitData => hitData.First())
             .Where(hitData => hitData.obj.TryGetComponent(out IDamageable damageable) && damageable.GetCamp() != SpinnerLocalData.Type)

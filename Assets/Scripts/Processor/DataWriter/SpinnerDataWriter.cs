@@ -1,6 +1,3 @@
-using System;
-using System.Diagnostics;
-using UniRx;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
 

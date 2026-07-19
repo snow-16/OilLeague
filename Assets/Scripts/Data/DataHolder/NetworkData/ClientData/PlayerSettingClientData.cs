@@ -1,14 +1,26 @@
 using System.Collections.Generic;
 
+/// <summary>
+/// 各プレイヤーの設定情報データ
+/// </summary>
 public class PlayerSettingClientData
 {
+    /// <summary> 各プレイヤーの設定情報 </summary>
     public static List<RoomServerData.PlayerSettings> Players { get; private set; }
 
+    /// <summary>
+    /// ネットワーク同期されたデータをローカルデータとして受け取る
+    /// </summary>
+    /// <param name="players">各プレイヤーの設定情報</param>
     public static void ReceiveFromServer(List<RoomServerData.PlayerSettings> players)
     {
         Players = new(players);
     }
 
+    /// <summary>
+    /// プレイヤー退室時にデータを並べ替える
+    /// </summary>
+    /// <param name="leftedPlayerNumber">退室したプレイヤーの番号</param>
     public static void DownPlayerNumber(int leftedPlayerNumber)
     {
         if(leftedPlayerNumber < NetworkingLocalData.NetworkRunner.SessionInfo.PlayerCount)

@@ -3,6 +3,7 @@
 /// </summary>
 public enum SpinnerType
 {
+    /// <summary> 未設定 </summary>
     None,
     Red,
     Blue,

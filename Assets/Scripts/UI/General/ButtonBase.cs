@@ -69,16 +69,25 @@ public abstract class ButtonBase : MonoBehaviour, IPointerClickHandler, IPointer
         }
     }
 
+    /// <summary>
+    /// ボタンクリック時の処理
+    /// </summary>
     protected virtual void ClickAction()
     {
         
     }
 
+    /// <summary>
+    /// ボタンフォーカスの処理
+    /// </summary>
     protected virtual void PointerInOut()
     {
         
     }
 
+    /// <summary>
+    /// ボタンを押した・離した処理
+    /// </summary>
     protected virtual void PointerUpDown()
     {
         
