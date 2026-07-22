@@ -670,7 +670,13 @@ MonoBehaviour:
     audioFile: {fileID: 8300000, guid: cbba35f66c9b447be932a46b42dd367f, type: 3}
   - type: 2
     audioFile: {fileID: 8300000, guid: 1b66cd26fe3604410a2e1c5f5870b93d, type: 3}
-  _allSEData: []
+  _allSEData:
+  - type: 0
+    audioFile: {fileID: 8300000, guid: 2b30edc675b5a4199bcec29d294ab834, type: 3}
+  - type: 1
+    audioFile: {fileID: 8300000, guid: 03758a555623343a58c50777cb9c7484, type: 3}
+  - type: 2
+    audioFile: {fileID: 8300000, guid: 69d82eb27210041deb024e8b0fa5dd7e, type: 3}
 --- !u!1 &1490157538
 GameObject:
   m_ObjectHideFlags: 0

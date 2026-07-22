@@ -3,5 +3,7 @@
 /// </summary>
 public enum AudioSEType
 {
-    
+    Charge,
+    Bound,
+    Dash
 }

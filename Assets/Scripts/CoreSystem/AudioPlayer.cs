@@ -1,3 +1,5 @@
+using System;
+using UniRx;
 using UnityEngine;
 
 public class AudioPlayer : MonoBehaviour
@@ -26,5 +28,18 @@ public class AudioPlayer : MonoBehaviour
     public void StopBGM()
     {
         _bgmSource.Stop();
+    }
+
+    public void PlaySE(AudioSEType seType, Func<bool> seStopTrigger = null)
+    {
+        var sePlayer = new GameObject("SE").AddComponent<AudioSource>();
+        sePlayer.outputAudioMixerGroup = _seSource.outputAudioMixerGroup;
+        sePlayer.clip = AudioDataBase.Data.AllSEData[seType].audioFile;
+        sePlayer.Play();
+
+        if(seStopTrigger != null)
+        {
+            Observable.EveryUpdate().Where(_ => seStopTrigger != null ? seStopTrigger() : !sePlayer.isPlaying).First().Subscribe(_ => Destroy(sePlayer.gameObject));
+        }
     }
 }

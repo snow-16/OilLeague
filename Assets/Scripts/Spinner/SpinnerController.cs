@@ -59,6 +59,7 @@ public class SpinnerController : NetworkBehaviour, IWriteSpinnerLocal, IReceiveP
         if(SpinnerLocalData.State != SpinnerState.Stan && SpinnerLocalData.State != SpinnerState.Strike)
         {
             _spinnerDataWriter.Brake();
+            AudioPlayer.Instance.PlaySE(AudioSEType.Charge, () => SpinnerLocalData.State != SpinnerState.Brake);
         }
     }
 
@@ -68,6 +69,7 @@ public class SpinnerController : NetworkBehaviour, IWriteSpinnerLocal, IReceiveP
         {
             SpinnerImpacter.FireImpact(SpinnerLocalData.Forword, false);
             _spinnerDataWriter.Stan();
+            AudioPlayer.Instance.PlaySE(AudioSEType.Bound);
         }
         else
         {
@@ -92,6 +94,7 @@ public class SpinnerController : NetworkBehaviour, IWriteSpinnerLocal, IReceiveP
             _spinnerDataWriter.Turn();
             _spinnerDataWriter.UpdateForword(turnVelocity);
             SpinnerImpacter.FireImpact(-turnVelocity, true);
+            AudioPlayer.Instance.PlaySE(AudioSEType.Dash);
         }
     }
 

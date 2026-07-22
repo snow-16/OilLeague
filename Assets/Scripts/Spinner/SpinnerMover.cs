@@ -52,6 +52,7 @@ public class SpinnerMover : MonoBehaviour, IWriteSpinnerLocal
                     _spinnerDataWriter.UpdateForword(reflectVector);
                     _spinnerDataWriter.SavePosition(transform);
                     SpinnerImpacter.FireImpact(-transform.position.normalized, true);
+                    AudioPlayer.Instance.PlaySE(AudioSEType.Bound);
                 }
 
                 _spinnerDataWriter.DampingTorque();

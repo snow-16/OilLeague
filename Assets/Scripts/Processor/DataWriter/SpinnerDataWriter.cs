@@ -124,6 +124,7 @@ public class SpinnerDataWriter
         Data.SetTorque(0);
         Data.SetChargeTorque(0);
         Data.SetTurnCount(0);
+        Data.SetState(SpinnerState.Stop);
     }
 
     /// <summary>
