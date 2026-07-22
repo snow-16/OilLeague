@@ -26,6 +26,8 @@ public abstract class SceneLoadedAnker : MonoBehaviour
         {
             _networkedPrefabs.ForEach(async prefab => await ObjectSpawner.Instance.SpawnNetwork(prefab.gameObject));
         }
+
+        WhenLoaded();
     }
 
     /// <summary>
@@ -44,7 +46,7 @@ public abstract class SceneLoadedAnker : MonoBehaviour
                 //プレイヤー退室検知用オブジェクト生成
                 await ObjectSpawner.Instance.SpawnNetwork(_playerExistDataPrefab, (runner, obj) => obj.GetComponent<PlayerExistServerData>().SetNumber(NetworkingLocalData.PlayerNumber));
 
-                whenGenerated();
+                whenGenerated?.Invoke();
             }
         );
     }

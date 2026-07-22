@@ -1,16 +1,25 @@
-using UnityEngine;
+using Fusion;
 
-public class AudioSystem : MonoBehaviour
+public class AudioSystem : NetworkBehaviour, IWriteSingletonsLocal
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public static AudioSystem Instance { get; private set; }
+
+    public override void Spawned()
     {
-        
+        Instance = this;
+        SingletonsDataWriter.Access(this).Add(this);
+        FindAnyObjectByType<SceneLoadedAnker>().OnGenerated();
     }
 
-    // Update is called once per frame
-    void Update()
+    [Rpc(RpcSources.All, RpcTargets.All)]
+    public void RPC_PlayBGM(AudioBGMType bgmType)
     {
-        
+        AudioPlayer.Instance.PlayBGM(bgmType);
+    }
+
+    [Rpc(RpcSources.All, RpcTargets.All)]
+    public void RPC_StopBGM()
+    {
+        AudioPlayer.Instance.StopBGM();
     }
 }

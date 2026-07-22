@@ -13,5 +13,6 @@ public class JoinRoomButton : BasicButton
     protected override void ClickAction()
     {
         NetworkingProcessor.CreateRoom(_codeInputField.text);
+        AudioPlayer.Instance.StopBGM();
     }
 }

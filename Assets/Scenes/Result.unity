@@ -761,6 +761,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::ResultLoadedAnker
   _networkedPrefabs:
   - {fileID: 6176657107050012632, guid: 34217b700f6784b6c9bcf4139b131c04, type: 3}
+  - {fileID: 6760403355931169327, guid: 099fff81b1bf240e5a9947766a7432ba, type: 3}
   _playerExistDataPrefab: {fileID: 2760139717588748248, guid: 39920065cbf1b457b8ff29d0f4c7c806, type: 3}
 --- !u!1 &1966894388
 GameObject:

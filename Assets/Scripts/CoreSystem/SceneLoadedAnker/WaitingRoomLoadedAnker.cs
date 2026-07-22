@@ -5,6 +5,6 @@ public class WaitingRoomLoadedAnker : SceneLoadedAnker
 {
     protected override void WhenLoaded()
     {
-        SetGenerateEndTrigger(() => GeneratedCount == _networkedPrefabs.Count);
+        SetGenerateEndTrigger(() => GeneratedCount == _networkedPrefabs.Count, () => AudioSystem.Instance.RPC_PlayBGM(AudioBGMType.Waiting));
     }
 }

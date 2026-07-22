@@ -51,6 +51,7 @@ public class SceneProcessor : IWriteSingletonsLocal
     public static void TransitionToLobby()
     {
         ChangeState(SceneState.TransitionStart);
+        AudioPlayer.Instance.StopBGM();
         Observable.EveryUpdate().Where(_ => State == SceneState.Loading).First().Subscribe(_ =>
             {
                 new SceneProcessor().ResetSingletons();
@@ -65,6 +66,7 @@ public class SceneProcessor : IWriteSingletonsLocal
     public static void TransitionToRoom()
     {
         RPCSendSystem.Instance.RPC_PlayTransition();
+        AudioSystem.Instance.RPC_StopBGM();
         Observable.EveryUpdate().Where(_ => State == SceneState.Loading).First().Subscribe(async _ =>
             {
                 await TransitionScene("WaitingRoom");
@@ -78,6 +80,7 @@ public class SceneProcessor : IWriteSingletonsLocal
     public static void TransitionToInGame()
     {
         RPCSendSystem.Instance.RPC_PlayTransition();
+        AudioSystem.Instance.RPC_StopBGM();
         Observable.EveryUpdate().Where(_ => State == SceneState.Loading).First().Subscribe(async _ =>
             {
                 await TransitionScene("InGame");
@@ -91,6 +94,7 @@ public class SceneProcessor : IWriteSingletonsLocal
     public static void TransitionToResult()
     {
         RPCSendSystem.Instance.RPC_PlayTransition();
+        AudioSystem.Instance.RPC_StopBGM();
         Observable.EveryUpdate().Where(_ => State == SceneState.Loading).First().Subscribe(async _ =>
             {
                 await TransitionScene("Result");

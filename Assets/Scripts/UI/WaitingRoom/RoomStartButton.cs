@@ -32,6 +32,7 @@ public class RoomStartButton : BasicButton
                 RoomServerData.Instance.RPC_SaveData();
                 Observable.EveryUpdate().Where(_ => RoomServerData.Instance.SaveFinished == NetworkingLocalData.NetworkRunner.SessionInfo.PlayerCount).First().Subscribe(async _ => 
                     {
+                        AudioSystem.Instance.RPC_StopBGM();
                         await SceneProcessor.TransitionScene("InGame");
                     }
                 );

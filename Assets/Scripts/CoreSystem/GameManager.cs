@@ -23,6 +23,8 @@ public class GameManager : MonoBehaviour
             dataBase.GetComponent<SpinnerParameterDataBase>().SetData();
             dataBase.GetComponent<SpinnerTypeDataBase>().SetData();
             dataBase.GetComponent<OilmateTypeDataBase>().SetData();
+            var resourceDataBase = transform.GetChild(1);
+            resourceDataBase.GetComponent<AudioDataBase>().SetData();
 
             //データホルダーの初期化
             InputListDataWriter.Access(this).Reset();
