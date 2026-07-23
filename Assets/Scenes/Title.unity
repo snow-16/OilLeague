@@ -929,8 +929,9 @@ MonoBehaviour:
   _sceneTransitionSpeed: 0.03
   _fieldRadius: 100
   _defaultTimeLimit: 120
-  _maxTimeLimit: 0
-  _timeLimitsUnit: 0
+  _maxTimeLimit: 300
+  _minTimeLimit: 30
+  _timeLimitsUnit: 30
   _maxNoticeCount: 0
   _flickSensitivity: 0.05
   _cameraFollowSpeed: 0.25

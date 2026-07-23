@@ -11,12 +11,15 @@ public class GeneralDataBase : MonoBehaviour
     /// <summary> ゲームフィールドの半径 </summary>
     [SerializeField]
     private float _fieldRadius;
-    /// <summary> 制限時間の規定値 〜分 </summary>
+    /// <summary> 制限時間の規定値 〜秒 </summary>
     [SerializeField]
     private int _defaultTimeLimit;
-    /// <summary> 制限時間の最大値 〜分 </summary>
+    /// <summary> 制限時間の最大値 〜秒 </summary>
     [SerializeField]
     private int _maxTimeLimit;
+    /// <summary> 制限時間の最少値 〜秒 </summary>
+    [SerializeField]
+    private int _minTimeLimit;
     /// <summary> 制限時間の設定間隔 </summary>
     [SerializeField]
     private int _timeLimitsUnit;
@@ -49,10 +52,12 @@ public class GeneralDataBase : MonoBehaviour
     public float SceneTransitionSpeed { get => _sceneTransitionSpeed; }
     /// <summary> ゲームフィールドの半径 </summary>
     public float FieldRadius { get => _fieldRadius; }
-    /// <summary> 制限時間の規定値 〜分 </summary>
+    /// <summary> 制限時間の規定値 〜秒 </summary>
     public int DefaultTimeLimit { get => _defaultTimeLimit; }
-    /// <summary> 制限時間の最大値 〜分 </summary>
+    /// <summary> 制限時間の最大値 〜秒 </summary>
     public int MaxTimeLimit { get => _maxTimeLimit; }
+    /// <summary> 制限時間の最少値 〜秒 </summary>
+    public int MinTimeLimit { get => _maxTimeLimit; }
     /// <summary> 制限時間の設定間隔 </summary>
     public int TimeLimitsUnit { get => _timeLimitsUnit; }
     /// <summary> アナウンスの最大掲示数 </summary>

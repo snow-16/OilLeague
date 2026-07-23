@@ -28,7 +28,7 @@ public class InGameLoadedAnker : SceneLoadedAnker
         {
             this.ObserveEveryValueChanged(_ => SceneProcessor.State).Where(state => state == SceneState.Exist).Subscribe(_ =>
                 {
-                    InGameServerData.Instance.RPC_StartTimer(GeneralDataBase.Data.DefaultTimeLimit);
+                    InGameServerData.Instance.RPC_StartTimer(PlayerSettingClientData.TimeLimit);
                 }
             );
         }

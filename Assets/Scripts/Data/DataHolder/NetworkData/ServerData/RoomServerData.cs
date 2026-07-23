@@ -1,11 +1,12 @@
 using System.Linq;
 using Fusion;
 using UniRx;
+using UnityEngine;
 
 /// <summary>
 /// ウェイティングルームシーン内でネットワーク同期するデータ
 /// </summary>
-public class RoomServerData : NetworkBehaviour, IWriteSingletonsLocal
+public class RoomServerData : NetworkBehaviour, IWriteSingletonsLocal, IWriteNetworkingLocal
 {
     /// <summary> データのインスタンス </summary>
     public static RoomServerData Instance { get; private set; } = null;
@@ -16,6 +17,9 @@ public class RoomServerData : NetworkBehaviour, IWriteSingletonsLocal
     /// <summary> 各プレイヤーの設定情報 </summary>
     [Networked, Capacity(5)]
     public NetworkArray<PlayerSettings> Players => default;
+    /// <summary> 時間制限 </summary>
+    [Networked]
+    public int TimeLimit { get; private set; }
 
     public override void Spawned()
     {
@@ -38,12 +42,33 @@ public class RoomServerData : NetworkBehaviour, IWriteSingletonsLocal
     }
 
     /// <summary>
+    /// プレイヤーの陣営を変更する
+    /// </summary>
+    /// <param name="playerNumber">変更するプレイヤーの番号</param>
+    /// <param name="type">変更先の陣営</param>
+    [Rpc(RpcSources.All, RpcTargets.StateAuthority)]
+    public void RPC_UpdateTimeLimit(int changeDirection)
+    {
+        TimeLimit = (int)(TimeLimit * Mathf.Pow(changeDirection, 2)) + GeneralDataBase.Data.TimeLimitsUnit * changeDirection;
+
+        if(TimeLimit == 0)
+        {
+            TimeLimit = GeneralDataBase.Data.DefaultTimeLimit;
+        }
+        else
+        {
+            TimeLimit = Mathf.Min(TimeLimit, GeneralDataBase.Data.MaxTimeLimit);
+            TimeLimit = Mathf.Max(TimeLimit, GeneralDataBase.Data.MinTimeLimit);
+        }
+    }
+
+    /// <summary>
     /// データをクライアント側で保存する
     /// </summary>
     [Rpc(RpcSources.All, RpcTargets.All)]
     public void RPC_SaveData()
     {
-        PlayerSettingClientData.ReceiveFromServer(Players.ToList());
+        PlayerSettingClientData.ReceiveFromServer(Players.ToList(), TimeLimit);
         RPC_SaveFinished();
     }
 

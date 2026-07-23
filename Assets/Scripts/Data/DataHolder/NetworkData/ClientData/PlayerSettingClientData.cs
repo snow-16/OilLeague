@@ -7,14 +7,17 @@ public class PlayerSettingClientData
 {
     /// <summary> 各プレイヤーの設定情報 </summary>
     public static List<RoomServerData.PlayerSettings> Players { get; private set; }
+    /// <summary> 時間制限 </summary>
+    public static int TimeLimit { get; private set; }
 
     /// <summary>
     /// ネットワーク同期されたデータをローカルデータとして受け取る
     /// </summary>
     /// <param name="players">各プレイヤーの設定情報</param>
-    public static void ReceiveFromServer(List<RoomServerData.PlayerSettings> players)
+    public static void ReceiveFromServer(List<RoomServerData.PlayerSettings> players, int timeLimit)
     {
         Players = new(players);
+        TimeLimit = timeLimit;
     }
 
     /// <summary>
