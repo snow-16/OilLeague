@@ -57,7 +57,7 @@ public class GeneralDataBase : MonoBehaviour
     /// <summary> 制限時間の最大値 〜秒 </summary>
     public int MaxTimeLimit { get => _maxTimeLimit; }
     /// <summary> 制限時間の最少値 〜秒 </summary>
-    public int MinTimeLimit { get => _maxTimeLimit; }
+    public int MinTimeLimit { get => _minTimeLimit; }
     /// <summary> 制限時間の設定間隔 </summary>
     public int TimeLimitsUnit { get => _timeLimitsUnit; }
     /// <summary> アナウンスの最大掲示数 </summary>

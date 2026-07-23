@@ -26,6 +26,11 @@ public class RoomServerData : NetworkBehaviour, IWriteSingletonsLocal, IWriteNet
         Instance = this;
         SingletonsDataWriter.Access(this).Add(this);
         FindAnyObjectByType<SceneLoadedAnker>().OnGenerated();
+
+        if(NetworkingLocalData.PlayerNumber == 1)
+        {
+            TimeLimit = GeneralDataBase.Data.DefaultTimeLimit;
+        }
     }
 
     /// <summary>
@@ -42,24 +47,15 @@ public class RoomServerData : NetworkBehaviour, IWriteSingletonsLocal, IWriteNet
     }
 
     /// <summary>
-    /// プレイヤーの陣営を変更する
+    /// 時間制限を変更する
     /// </summary>
-    /// <param name="playerNumber">変更するプレイヤーの番号</param>
-    /// <param name="type">変更先の陣営</param>
+    /// <param name="changeDirection">時間制限の変更方向。0ならリセット</param>
     [Rpc(RpcSources.All, RpcTargets.StateAuthority)]
     public void RPC_UpdateTimeLimit(int changeDirection)
     {
-        TimeLimit = (int)(TimeLimit * Mathf.Pow(changeDirection, 2)) + GeneralDataBase.Data.TimeLimitsUnit * changeDirection;
-
-        if(TimeLimit == 0)
-        {
-            TimeLimit = GeneralDataBase.Data.DefaultTimeLimit;
-        }
-        else
-        {
-            TimeLimit = Mathf.Min(TimeLimit, GeneralDataBase.Data.MaxTimeLimit);
-            TimeLimit = Mathf.Max(TimeLimit, GeneralDataBase.Data.MinTimeLimit);
-        }
+        TimeLimit = GeneralDataBase.Data.DefaultTimeLimit + (TimeLimit - GeneralDataBase.Data.DefaultTimeLimit + GeneralDataBase.Data.TimeLimitsUnit * changeDirection) * (int)Mathf.Pow(changeDirection, 2);
+        TimeLimit = Mathf.Min(TimeLimit, GeneralDataBase.Data.MaxTimeLimit);
+        TimeLimit = Mathf.Max(TimeLimit, GeneralDataBase.Data.MinTimeLimit);
     }
 
     /// <summary>
